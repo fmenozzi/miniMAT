@@ -14,19 +14,7 @@ namespace miniMAT {
             if (is_done)
                 return Token(TokenKind::TOK_EOF, "__EOF__");
 
-            /*
-            // Identify identifiers ([a-zA-Z][a-zA-Z0-9_]*)
-            if (std::isalpha(current_char)) {
-                std::string word = "";
-                while (std::isalnum(current_char) || current_char == '_') {
-                    word += current_char;
-                    TakeIt();
-                }
-                return Token(TokenKind::TOK_IDEN, word);
-            }
-            */
-
-            // All others
+            // Non-identifiers
             char temp;
             std::string numstr;
             switch (current_char) {
@@ -103,11 +91,7 @@ namespace miniMAT {
                     } else {
                         return Token(TokenKind::TOK_DOT, ".");
                     }
-                /*
-                case ';':
-                    TakeIt();
-                    return Token(TokenKind::TOK_SEMICOL, ";");
-                */
+   
                 default:
                     temp = current_char;
                     TakeIt();
