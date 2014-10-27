@@ -22,6 +22,7 @@ namespace miniMAT {
                 case '-':
                 case '*':
                 case '/':
+                case '^':
                 //case '%':
                     temp = current_char;
                     TakeIt();
@@ -91,7 +92,7 @@ namespace miniMAT {
                     } else {
                         return Token(TokenKind::TOK_DOT, ".");
                     }
-   
+
                 default:
                     temp = current_char;
                     TakeIt();
