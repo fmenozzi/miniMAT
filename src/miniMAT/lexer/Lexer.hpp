@@ -1,6 +1,8 @@
 #ifndef LEXER_HPP
 #define LEXER_HPP
 
+#include <string>
+
 #include <Token.hpp>
 
 namespace miniMAT {
@@ -13,11 +15,8 @@ namespace miniMAT {
             bool                  is_done;
 
         public:
-            Lexer(const std::string& input_line) : input_line(input_line) {
-                current_char = ' ';
-                iterator     = this->input_line.begin();
-                is_done      = false;
-            }
+            Lexer() {};
+            Lexer(const std::string& input_line);
 
             Token GetToken();
 

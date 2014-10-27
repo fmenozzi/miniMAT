@@ -10,12 +10,11 @@ namespace miniMAT {
         class Token {
 
         private:
-            TokenKind kind;
-            std::string      spelling;
+            TokenKind   kind;
+            std::string spelling;
 
         public:
-            Token(TokenKind kind, std::string spelling)
-                    : kind(kind), spelling(spelling) {}
+            Token(TokenKind kind, const std::string& spelling);
 
             TokenKind   GetKind();
             std::string GetSpelling();

@@ -5,6 +5,13 @@
 
 namespace miniMAT {
     namespace lexer {
+        Lexer::Lexer(const std::string& input_line) {
+            this->input_line   = input_line;
+            this->current_char = ' ';
+            this->iterator     = this->input_line.begin();
+            this->is_done      = false;
+        }
+
         Token Lexer::GetToken() {
            // Pass through whitespace
             while (current_char == ' ' || current_char == '\t' || current_char == '\n')
@@ -23,7 +30,6 @@ namespace miniMAT {
                 case '*':
                 case '/':
                 case '^':
-                //case '%':
                     temp = current_char;
                     TakeIt();
 
@@ -35,11 +41,7 @@ namespace miniMAT {
                     }
 
                     return Token(TokenKind::TOK_ARITHOP, std::string(1, temp));
-                /*
-                case '=':
-                    TakeIt();
-                    return Token(TokenKind::TOK_ASSIGN, "=");
-                */
+
                 case '(':
                     TakeIt();
                     return Token(TokenKind::TOK_LPAREN, "(");
