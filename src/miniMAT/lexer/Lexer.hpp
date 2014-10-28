@@ -12,13 +12,14 @@ namespace miniMAT {
         private:
             std::string           input_line;
             char                  current_char;
-            //std::string::iterator iterator;
             std::stringstream     stream;
             bool                  is_done;
 
         public:
             Lexer() {}
             Lexer(const std::string& input_line);
+
+            Lexer& operator=(const Lexer& lexer);
 
             Token GetToken();
 

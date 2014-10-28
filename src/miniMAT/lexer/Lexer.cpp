@@ -5,14 +5,26 @@
 
 namespace miniMAT {
     namespace lexer {
-        Lexer::Lexer(const std::string& input_line) {
-            this->input_line   = input_line;
-            this->current_char = ' ';
-            //this->iterator     = this->input_line.begin();
-            this->is_done      = false;
+        Lexer& Lexer::operator=(const Lexer& lexer) {
+            this->input_line   = lexer.input_line;
+            this->current_char = lexer.current_char;
 
             this->stream.str(input_line);
             this->stream >> std::noskipws;
+
+            this->is_done = false;
+
+            return *this;
+        }
+
+        Lexer::Lexer(const std::string& input_line) {
+            this->input_line   = input_line;
+            this->current_char = ' ';
+
+            this->stream.str(input_line);
+            this->stream >> std::noskipws;
+
+            this->is_done = false;
         }
 
         Token Lexer::GetToken() {
