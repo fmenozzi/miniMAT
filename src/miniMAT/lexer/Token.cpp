@@ -13,8 +13,8 @@ namespace miniMAT {
             return kind;
         }
 
-        std::string Token::GetSpelling() {
-            return spelling;
+        std::string Token::GetSpelling() const {
+            return std::string(spelling);
         }
     }
 }

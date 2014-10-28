@@ -8,8 +8,11 @@ namespace miniMAT {
         Lexer::Lexer(const std::string& input_line) {
             this->input_line   = input_line;
             this->current_char = ' ';
-            this->iterator     = this->input_line.begin();
+            //this->iterator     = this->input_line.begin();
             this->is_done      = false;
+
+            this->stream.str(input_line);
+            this->stream >> std::noskipws;
         }
 
         Token Lexer::GetToken() {
@@ -107,6 +110,7 @@ namespace miniMAT {
          * Get next character from input stream
          */
         void Lexer::NextChar() {
+            /*
             if (iterator == input_line.end()) {
                 is_done = true;
                 current_char = '\0';
@@ -114,6 +118,14 @@ namespace miniMAT {
             } else {
                 current_char = *iterator;
                 iterator++;
+            }
+            */
+            char temp;
+            if (stream >> temp) {
+                current_char = temp;
+            } else {
+                is_done = true;
+                current_char = '\0';
             }
         }
 

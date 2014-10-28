@@ -18,7 +18,7 @@ namespace miniMAT {
             Token(TokenKind kind, const std::string& spelling);
 
             TokenKind   GetKind();
-            std::string GetSpelling();
+            std::string GetSpelling() const;
         };
     }
 }
