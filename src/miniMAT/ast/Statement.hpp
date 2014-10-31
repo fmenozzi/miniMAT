@@ -3,9 +3,8 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
         class Statement {
-            
+
         };
     }
 }
