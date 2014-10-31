@@ -8,7 +8,7 @@ namespace miniMAT {
     namespace ast {
         class Type : public AST {
         public:
-            Type(ast::TokenKind kind) {};
+            Type(ast::TokenKind kind);
             virtual ~Type() {}
 
             ast::TypeKind GetKind();
