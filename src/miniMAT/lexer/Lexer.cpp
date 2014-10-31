@@ -6,13 +6,15 @@
 namespace miniMAT {
     namespace lexer {
         Lexer& Lexer::operator=(const Lexer& lexer) {
-            this->input_line   = lexer.input_line;
-            this->current_char = lexer.current_char;
+            if (this != &lexer) {
+                this->input_line   = lexer.input_line;
+                this->current_char = lexer.current_char;
 
-            this->stream.str(input_line);
-            this->stream >> std::noskipws;
+                this->stream.str(input_line);
+                this->stream >> std::noskipws;
 
-            this->is_done = false;
+                this->is_done = false;
+            }
 
             return *this;
         }
