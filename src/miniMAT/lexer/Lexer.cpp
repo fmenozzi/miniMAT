@@ -107,7 +107,8 @@ namespace miniMAT {
                         }
                         return Token(TokenKind::TOK_FLOATLIT, numstr);
                     } else {
-                        return Token(TokenKind::TOK_DOT, ".");
+                        //return Token(TokenKind::TOK_DOT, ".");
+                        return Token(TokenKind::TOK_ERROR, "Single . not allowed!");
                     }
 
                 default:
