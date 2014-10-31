@@ -6,7 +6,8 @@
 namespace miniMAT {
     namespace ast {
         class Expression : public AST {
-
+        public:
+            virtual ~Expression() {}
         };
     }
 }

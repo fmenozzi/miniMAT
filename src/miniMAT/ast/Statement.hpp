@@ -4,7 +4,8 @@
 namespace miniMAT {
     namespace ast {
         class Statement {
-
+        public:
+            virtual ~Statement() {}
         };
     }
 }
