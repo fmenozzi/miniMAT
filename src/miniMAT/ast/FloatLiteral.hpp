@@ -10,7 +10,6 @@ namespace miniMAT {
         class FloatLiteral : public Literal {
         public:
             FloatLiteral(const std::string& spelling) : Literal(spelling);
-            virtual ~FloatLiteral() {}
 
             ResultType visit(const Visitor<ArgType, ResultType>& v, ArgType arg);
 
