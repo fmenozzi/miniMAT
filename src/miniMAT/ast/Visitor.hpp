@@ -3,10 +3,21 @@
 
 #include <memory>
 
+#include <ScalarType.hpp>
+
+#include <ExprStmt.hpp>
+
+#include <UnaryExpr.hpp>
+#include <BinaryExpr.hpp>
+#include <LiteralExpr.hpp>
+
+#include <FloatLiteral.hpp>
+#include <Operator.hpp>
+
 namespace miniMAT {
     namespace ast {
         using std::unique_ptr;
-        
+
         template<typename ArgType, typename ResultType>
         class Visitor {
         public:
