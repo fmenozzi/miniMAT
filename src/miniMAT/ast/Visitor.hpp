@@ -1,16 +1,16 @@
 #ifndef VISITOR_HPP
 #define VISITOR_HPP
 
-#include <ScalarType.hpp>
+class ScalarType;
 
-#include <ExprStmt.hpp>
+class ExprStmt;
 
-#include <UnaryExpr.hpp>
-#include <BinaryExpr.hpp>
-#include <LiteralExpr.hpp>
+class UnaryExpr;
+class BinaryExpr;
+class LiteralExpr;
 
-#include <FloatLiteral.hpp>
-#include <Operator.hpp>
+class FloatLiteral;
+class Operator;
 
 namespace miniMAT {
     namespace ast {
