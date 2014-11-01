@@ -15,12 +15,13 @@ namespace miniMAT {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
-                // TODO Augment output with TokenKind
+                // TODO: Augment output with TokenKind
                 std::cout << "ERROR: Expecting " << exp_spelling
                           << " but found " << token.GetSpelling()
                           << std::endl;
-            } else {
-                std::cout << "Accepting " << token.GetSpelling() << std::endl;
+
+                // TODO: Come up with a better way of handling this
+                exit(-1);
             }
 
             // Advance token
@@ -39,8 +40,9 @@ namespace miniMAT {
                           << std::endl;
                 */
                 std::cout << "ERROR: Incorrect TokenKind" << std::endl;
-            } else {
-                std::cout << "Accepting " << token.GetSpelling() << std::endl;
+
+                // TODO: Come up with a better way of handling this
+                exit(-1);
             }
 
             // Advance token
