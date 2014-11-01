@@ -7,6 +7,6 @@ compiler:
 before_script:
     - mkdir build
     - cd build
-    - cmake ..
+    - cmake ../src
 
 script: make
