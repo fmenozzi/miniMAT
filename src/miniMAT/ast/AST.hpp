@@ -11,8 +11,6 @@ namespace miniMAT {
             virtual ~AST() {}
 
             virtual ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg) = 0;
-
-            virtual std::ostream& operator<<(std::ostream& os, const AST& ast) = 0;
         };
     }
 }

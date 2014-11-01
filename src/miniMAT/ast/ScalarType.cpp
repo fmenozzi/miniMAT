@@ -2,12 +2,14 @@
 
 namespace miniMAT {
     namespace ast {
-        ScalarType::ScalarType(TypeKind kind) {
+        template <typename ArgType, typename ResultType>
+        ScalarType<ArgType, ResultType>::ScalarType(TypeKind kind) {
             this->kind = kind;
         }
 
         template<typename ArgType, typename ResultType>
-        ResultType ScalarType::visit(Visitor<ArgType, ResultType> v, ArgType arg) {
+        ResultType ScalarType<ArgType, ResultType>::visit(
+                                Visitor<ArgType, ResultType> v, ArgType arg) {
             return v.VisitScalarType(*this, arg);
         }
     }

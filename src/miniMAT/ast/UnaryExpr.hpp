@@ -7,16 +7,17 @@
 namespace miniMAT {
     namespace ast {
         template<typename ArgType, typename ResultType>
-        class UnaryExpr : public Expression {
+        class UnaryExpr : public Expression<ArgType, ResultType> {
         public:
-            UnaryExpr(const Operator& op, const Expression& expr);
+            UnaryExpr(const Operator<ArgType, ResultType>& op,
+                      const Expression<ArgType, ResultType>& expr);
 
             ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
 
         private:
             // TODO Change this to use some kind of pointer
-            Operator   op;
-            Expression expr;
+            Operator<ArgType, ResultType>   op;
+            Expression<ArgType, ResultType> expr;
         };
     }
 }

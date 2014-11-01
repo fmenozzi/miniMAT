@@ -6,15 +6,16 @@
 
 namespace miniMAT {
     namespace ast {
-        class Type : public AST {
+        template<typename ArgType, typename ResultType>
+        class Type : public AST<ArgType, ResultType> {
         public:
-            Type(ast::TokenKind kind);
+            Type(TypeKind kind);
             virtual ~Type() {}
 
-            ast::TypeKind GetKind();
+            TypeKind GetKind();
 
         private:
-            lexer::TypeKind kind;
+            TypeKind kind;
         };
     }
 }

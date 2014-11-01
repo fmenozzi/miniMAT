@@ -2,11 +2,13 @@
 
 namespace miniMAT {
     namespace ast {
-        Type::Type(lexer::TokenKind kind) {
+        template<typename ArgType, typename ResultType>
+        Type<ArgType, ResultType>::Type(TypeKind kind) {
             this->kind = kind;
         }
 
-        TypeKind GetKind() {
+        template<typename ArgType, typename ResultType>
+        TypeKind Type<ArgType, ResultType>::GetKind() {
             return this->kind;
         }
     }

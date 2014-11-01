@@ -7,10 +7,13 @@
 
 namespace miniMAT {
     namespace ast {
-        class Terminal : public AST {
+        template<typename ArgType, typename ResultType>
+        class Terminal : public AST<ArgType, ResultType> {
         public:
             Terminal(const std::string& spelling);
             virtual ~Terminal() {}
+
+            std::string GetSpelling();
 
         private:
             std::string spelling;

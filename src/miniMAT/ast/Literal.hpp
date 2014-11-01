@@ -7,9 +7,11 @@
 
 namespace miniMAT {
     namespace ast {
-        class Literal : public Terminal {
+        template<typename ArgType, typename ResultType>
+        class Literal : public Terminal<ArgType, ResultType> {
         public:
-            Literal(const std::string& spelling) : Terminal(spelling) {}
+            Literal(const std::string& spelling)
+                        : Terminal<ArgType, ResultType>(spelling) {}
             virtual ~Literal() {}
         };
     }

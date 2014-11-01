@@ -1,9 +1,12 @@
 #ifndef STATEMENT_HPP
 #define STATEMENT_HPP
 
+#include <AST.hpp>
+
 namespace miniMAT {
     namespace ast {
-        class Statement {
+        template<typename ArgType, typename ResultType>
+        class Statement : public AST<ArgType, ResultType> {
         public:
             virtual ~Statement() {}
         };

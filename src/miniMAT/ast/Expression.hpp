@@ -5,7 +5,8 @@
 
 namespace miniMAT {
     namespace ast {
-        class Expression : public AST {
+        template<typename ArgType, typename ResultType>
+        class Expression : public AST<ArgType, ResultType> {
         public:
             virtual ~Expression() {}
         };
