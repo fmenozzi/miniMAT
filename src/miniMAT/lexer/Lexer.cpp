@@ -36,7 +36,7 @@ namespace miniMAT {
 
             // Check for end of line
             if (is_done)
-                return Token(TokenKind::TOK_EOF, "__EOF__");
+                return Token(TokenKind::TOK_EOF, "EOF");
 
             // Non-identifiers
             char temp;
