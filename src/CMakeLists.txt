@@ -19,7 +19,7 @@ set(SOURCES miniMAT/miniMAT.cpp
 			miniMAT/lexer/Token.cpp
 			miniMAT/lexer/TokenKind.cpp
 
-			miniMAT/parser/ParserTest.cpp
+			miniMAT/parser/Parser.cpp
 
 			miniMAT/ast/BinaryExpr.cpp
 			miniMAT/ast/ExprStmt.cpp

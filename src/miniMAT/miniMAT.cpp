@@ -1,17 +1,15 @@
 #include <iostream>
-#include <vector>
 #include <string>
 
 #include <Lexer.hpp>
+#include <Parser.hpp>
 
 int main() {
-
     std::string input_line;
 
     while (true) {
         std::cout << ">>> ";
-
-        // Get input line and check for exit
+        
         std::getline(std::cin, input_line);
         if (input_line == "quit" || input_line == "exit")
             break;
@@ -20,14 +18,10 @@ int main() {
 			break;
 		}
 
-		// Print all tokens received
-        miniMAT::lexer::Lexer lexer(input_line);
-        miniMAT::lexer::Token token = lexer.GetToken();
-        while (token.GetKind() != miniMAT::lexer::TokenKind::TOK_EOF) {
-            std::cout << token.GetSpelling() << std::endl;
+        miniMAT::lexer::Lexer   lexer(input_line);
+        miniMAT::parser::Parser parser(lexer);
 
-            token = lexer.GetToken();
-        }
+        parser.Parse();
     }
 
     return 0;
