@@ -9,7 +9,7 @@ namespace miniMAT {
         public:
             virtual ~AST() {}
 
-            virtual void visit(const Visitor& v) = 0;
+            virtual void visit(Visitor& v) = 0;
         };
     }
 }

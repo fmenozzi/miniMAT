@@ -10,14 +10,14 @@ namespace miniMAT {
     namespace ast {
         class Operator : public Terminal {
         public:
-            Operator(std::unique_ptr<lexer::Token> token) : Terminal(token->GetSpelling()) {
-                this->token = std::move(token);
+            Operator(std::shared_ptr<lexer::Token> token) : Terminal(token->GetSpelling()) {
+                this->token = token;
             }
 
             void visit(Visitor& v);
 
         private:
-            std::unique_ptr<lexer::Token> token;
+            std::shared_ptr<lexer::Token> token;
         };
     }
 }

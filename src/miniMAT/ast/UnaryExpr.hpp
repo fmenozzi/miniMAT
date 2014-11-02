@@ -10,14 +10,14 @@ namespace miniMAT {
     namespace ast {
         class UnaryExpr : public Expression {
         public:
-            UnaryExpr(std::unique_ptr<Operator> op,
-                      std::unique_ptr<Expression> expr);
+            UnaryExpr(std::shared_ptr<Operator> op,
+                      std::shared_ptr<Expression> expr);
 
             void visit(Visitor& v);
 
         private:
-            std::unique_ptr<Operator>   op;
-            std::unique_ptr<Expression> expr;
+            std::shared_ptr<Operator>   op;
+            std::shared_ptr<Expression> expr;
         };
     }
 }

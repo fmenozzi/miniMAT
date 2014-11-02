@@ -2,8 +2,8 @@
 
 namespace miniMAT {
     namespace ast {
-        ExprStmt::ExprStmt(std::unique_ptr<Expression> expr) {
-            this->expr = std::move(expr);
+        ExprStmt::ExprStmt(std::shared_ptr<Expression> expr) {
+            this->expr = expr;
         }
 
         void ExprStmt::visit(Visitor& v) {
