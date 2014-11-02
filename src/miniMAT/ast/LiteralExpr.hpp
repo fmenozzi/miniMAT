@@ -6,16 +6,15 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class LiteralExpr : public Expression<ArgType, ResultType> {
+        class LiteralExpr : public Expression {
         public:
-            LiteralExpr(const Literal<ArgType, ResultType>& literal);
+            LiteralExpr(const Literal& literal);
 
-            ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
+            void visit(const Visitor& v);
 
         private:
             // TODO Change this to use some kind of pointer
-            Literal<ArgType, ResultType> literal;
+            Literal literal;
         };
     }
 }

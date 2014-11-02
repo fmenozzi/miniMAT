@@ -6,8 +6,7 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class Type : public AST<ArgType, ResultType> {
+        class Type : public AST {
         public:
             Type(TypeKind kind);
             virtual ~Type() {}

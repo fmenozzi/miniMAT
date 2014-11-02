@@ -10,7 +10,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 #include_directories(${EIGEN3_INCLUDE_DIR})
 
 include_directories(src/miniMAT/lexer)
-include_directories(src/miniMAT/parser)
+#include_directories(src/miniMAT/parser)
 include_directories(src/miniMAT/ast)
 
 set(SOURCES src/miniMAT/miniMAT.cpp
@@ -19,7 +19,7 @@ set(SOURCES src/miniMAT/miniMAT.cpp
 			src/miniMAT/lexer/Token.cpp
 			src/miniMAT/lexer/TokenKind.cpp
 
-			src/miniMAT/parser/Parser.cpp
+			#src/miniMAT/parser/Parser.cpp
 
 			src/miniMAT/ast/BinaryExpr.cpp
 			src/miniMAT/ast/ExprStmt.cpp

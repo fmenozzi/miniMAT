@@ -6,12 +6,11 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class Operator : public Terminal<ArgType, ResultType> {
+        class Operator : public Terminal {
         public:
             Operator(const lexer::Token& token);
 
-            ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
+            void visit(const Visitor& v);
 
         private:
             // TODO Change this to use some kind of pointer

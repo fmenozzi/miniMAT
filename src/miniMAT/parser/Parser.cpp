@@ -4,14 +4,22 @@
 #include <Parser.hpp>
 #include <Lexer.hpp>
 
+#include <Operator.hpp>
+#include <FloatLiteral.hpp>
+#include <BinaryExpr.hpp>
+#include <UnaryExpr.hpp>
+#include <LiteralExpr.hpp>
+
 namespace miniMAT {
     namespace parser {
-        Parser::Parser(const lexer::Lexer& lexer) {
+        template <typename ArgType, typename ResultType>
+        Parser<ArgType, ResultType>::Parser(const lexer::Lexer& lexer) {
             this->lexer  = lexer;
             this->tokens = std::deque<lexer::Token>();
         }
 
-        void Parser::Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling) {
+        template <typename ArgType, typename ResultType>
+        void Parser<ArgType, ResultType>::Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling) {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
@@ -28,7 +36,8 @@ namespace miniMAT {
             tokens.pop_front();
         }
 
-        void Parser::Accept(lexer::TokenKind exp_kind) {
+        template <typename ArgType, typename ResultType>
+        void Parser<ArgType, ResultType>::Accept(lexer::TokenKind exp_kind) {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind) { // || token.GetSpelling() != exp_spelling) {
@@ -49,19 +58,23 @@ namespace miniMAT {
             tokens.pop_front();
         }
 
-        void Parser::AcceptIt() {
+        template <typename ArgType, typename ResultType>
+        void Parser<ArgType, ResultType>::AcceptIt() {
             Accept(GetCurrentToken().GetKind(), GetCurrentToken().GetSpelling());
         }
 
-        lexer::Token Parser::GetCurrentToken() {
+        template <typename ArgType, typename ResultType>
+        lexer::Token Parser<ArgType, ResultType>::GetCurrentToken() {
             return tokens.front();
         }
 
-        void Parser::PutBack(const lexer::Token& t) {
+        template <typename ArgType, typename ResultType>
+        void Parser<ArgType, ResultType>::PutBack(const lexer::Token& t) {
             tokens.push_front(t);
         }
 
-        void Parser::Parse() {
+        template <typename ArgType, typename ResultType>
+        std::unique_ptr<ast::AST<ArgType, ResultType>> Parser<ArgType, ResultType>::Parse() {
             // Fill up token buffer
             auto token = lexer.GetToken();
             while (token.GetKind() != lexer::TokenKind::TOK_EOF) {
@@ -70,56 +83,72 @@ namespace miniMAT {
             }
             tokens.push_back(token);
 
-            ParseStatement();
+            return ParseStatement();
         }
 
-        void Parser::ParseStatement() {
-            ParseExprStmt();
+        template <typename ArgType, typename ResultType>
+        std::unique_ptr<ast::Statement<ArgType, ResultType>> Parser<ArgType, ResultType>::ParseStatement() {
+            return ParseExprStmt();
         }
 
-        void Parser::ParseExprStmt() {
-            ParseExpression();
+        template <typename ArgType, typename ResultType>
+        std::unique_ptr<ast::ExprStmt<ArgType, ResultType>> Parser<ArgType, ResultType>::ParseExprStmt() {
+            auto expr = ParseExpression();
             Accept(lexer::TokenKind::TOK_EOF);
+
+            return std::unique_ptr<ExprStmt>(new ExprStmt(expr));
         }
 
-        void Parser::ParseExpression() {
-            ParseA();
+        template <typename ArgType, typename ResultType>
+        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseExpression() {
+            auto expr = ParseA();
             while (GetCurrentToken().GetSpelling() == "+" ||
                    GetCurrentToken().GetSpelling() == "-") {
-
+                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
                 AcceptIt();
-                ParseA();
+                expr = ast::BinaryExpr<ArgType, ResultType>(expr, op, ParseA());
             }
+            return expr;
         }
 
-        void Parser::ParseA() {
-            ParseB();
+        template <typename ArgType, typename ResultType>
+        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseA() {
+            auto expr = ParseB();
             while (GetCurrentToken().GetSpelling() == "*" ||
                    GetCurrentToken().GetSpelling() == "/") {
-
+                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
                 AcceptIt();
-                ParseB();
+                expr = ast::BinaryExpr<ArgType, ResultType>(expr, op, ParseB());
             }
+            return expr;
         }
 
-        void Parser::ParseB() {
-            ParseC();
+        template <typename ArgType, typename ResultType>
+        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseB() {
+            auto expr = ParseC();
             while (GetCurrentToken().GetSpelling() == "^") {
+                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
                 AcceptIt();
-                ParseC();
+                expr = ast::BinaryExpr<ArgType, ResultType>(expr, op, ParseC());
             }
+            return expr;
         }
 
-        void Parser::ParseC() {
+        template <typename ArgType, typename ResultType>
+        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseC() {
             if (GetCurrentToken().GetSpelling() == "-") {
+                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
                 AcceptIt();
-                ParseC();
+                return ast::UnaryExpr<ArgType, ResultType>(op, ParseC());
             } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_LPAREN) {
                 AcceptIt();
-                ParseExpression();
+                auto expr = ParseExpression();
                 Accept(lexer::TokenKind::TOK_RPAREN);
+                return expr;
             } else {
+                auto floatlit = ast::FloatLiteral<ArgType, ResultType>(GetCurrentToken().GetSpelling());
                 Accept(lexer::TokenKind::TOK_FLOATLIT);
+                return ast::LiteralExpr<ArgType, ResultType>(floatlit);
             }
         }
     }

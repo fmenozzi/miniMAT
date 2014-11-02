@@ -5,13 +5,11 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class FloatLiteral : public Literal<ArgType, ResultType> {
+        class FloatLiteral : public Literal {
         public:
-            FloatLiteral(const std::string& spelling)
-                : Literal<ArgType, ResultType>(spelling) {}
+            FloatLiteral(const std::string& spelling) : Literal(spelling) {}
 
-            ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
+            void visit(const Visitor& v);
         };
     }
 }

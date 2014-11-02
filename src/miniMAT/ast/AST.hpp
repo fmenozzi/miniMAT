@@ -5,12 +5,11 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
         class AST {
         public:
             virtual ~AST() {}
 
-            virtual ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg) = 0;
+            virtual void visit(const Visitor& v) = 0;
         };
     }
 }

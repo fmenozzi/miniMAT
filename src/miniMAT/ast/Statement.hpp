@@ -5,8 +5,7 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class Statement : public AST<ArgType, ResultType> {
+        class Statement : public AST {
         public:
             virtual ~Statement() {}
         };

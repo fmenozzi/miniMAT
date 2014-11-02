@@ -6,20 +6,19 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class BinaryExpr : public Expression<ArgType, ResultType> {
+        class BinaryExpr : public Expression {
         public:
-            BinaryExpr(const Expression<ArgType, ResultType>& left,
-                       const Operator<ArgType, ResultType>& op,
-                       const Expression<ArgType, ResultType>& right);
+            BinaryExpr(const Expression& left,
+                       const Operator& op,
+                       const Expression& right);
 
-            ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
+            void visit(const Visitor& v);
 
         private:
             // TODO Change this to use some kind of pointer
-            Expression<ArgType, ResultType> left;
-            Operator<ArgType, ResultType>   op;
-            Expression<ArgType, ResultType> right;
+            Expression left;
+            Operator   op;
+            Expression right;
         };
     }
 }

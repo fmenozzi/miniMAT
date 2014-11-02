@@ -6,16 +6,15 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class ExprStmt : public Statement<ArgType, ResultType> {
+        class ExprStmt : public Statement {
         public:
-            ExprStmt(const Expression<ArgType, ResultType>& expr);
+            ExprStmt(const Expression& expr);
 
-            ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
+            void visit(const Visitor& v);
 
         private:
             // TODO Change this to use some kind of pointer
-            Expression<ArgType, ResultType> expr;
+            Expression expr;
         };
     }
 }

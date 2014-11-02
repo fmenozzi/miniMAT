@@ -6,12 +6,11 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        class ScalarType : public Type<ArgType, ResultType> {
+        class ScalarType : public Type {
         public:
             ScalarType(TypeKind kind);
 
-            ResultType visit(Visitor<ArgType, ResultType> v, ArgType arg);
+            void visit(const Visitor& v);
 
         private:
             TypeKind kind;

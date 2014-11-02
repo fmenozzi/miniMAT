@@ -2,13 +2,11 @@
 
 namespace miniMAT {
     namespace ast {
-        template<typename ArgType, typename ResultType>
-        Type<ArgType, ResultType>::Type(TypeKind kind) {
+        Type::Type(TypeKind kind) {
             this->kind = kind;
         }
 
-        template<typename ArgType, typename ResultType>
-        TypeKind Type<ArgType, ResultType>::GetKind() {
+        TypeKind Type::GetKind() {
             return this->kind;
         }
     }
