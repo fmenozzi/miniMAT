@@ -10,16 +10,16 @@ namespace miniMAT {
     namespace ast {
         class BinaryExpr : public Expression {
         public:
-            BinaryExpr(std::shared_ptr<Expression> left,
-                       std::shared_ptr<Operator> op,
-                       std::shared_ptr<Expression> right);
+            BinaryExpr(std::unique_ptr<Expression> left,
+                       std::unique_ptr<Operator> op,
+                       std::unique_ptr<Expression> right);
 
             void visit(Visitor& v);
 
         private:
-            std::shared_ptr<Expression> left;
-            std::shared_ptr<Operator>   op;
-            std::shared_ptr<Expression> right;
+            std::unique_ptr<Expression> left;
+            std::unique_ptr<Operator>   op;
+            std::unique_ptr<Expression> right;
         };
     }
 }

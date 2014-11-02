@@ -2,8 +2,8 @@
 
 namespace miniMAT {
     namespace ast {
-        LiteralExpr::LiteralExpr(std::shared_ptr<Literal> literal) {
-            this->literal = literal;
+        LiteralExpr::LiteralExpr(std::unique_ptr<Literal> literal) {
+            this->literal = std::move(literal);
         }
 
         void LiteralExpr::visit(Visitor& v) {

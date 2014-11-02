@@ -10,12 +10,12 @@ namespace miniMAT {
     namespace ast {
         class LiteralExpr : public Expression {
         public:
-            LiteralExpr(std::shared_ptr<Literal> literal);
+            LiteralExpr(std::unique_ptr<Literal> literal);
 
             void visit(Visitor& v);
 
         private:
-            std::shared_ptr<Literal> literal;
+            std::unique_ptr<Literal> literal;
         };
     }
 }

@@ -10,12 +10,12 @@ namespace miniMAT {
     namespace ast {
         class ExprStmt : public Statement {
         public:
-            ExprStmt(std::shared_ptr<Expression> expr);
+            ExprStmt(std::unique_ptr<Expression> expr);
 
             void visit(Visitor& v);
 
         private:
-            std::shared_ptr<Expression> expr;
+            std::unique_ptr<Expression> expr;
         };
     }
 }

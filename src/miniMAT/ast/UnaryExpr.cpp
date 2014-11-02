@@ -2,10 +2,10 @@
 
 namespace miniMAT {
     namespace ast {
-        UnaryExpr::UnaryExpr(std::shared_ptr<Operator> op,
-                             std::shared_ptr<Expression> expr) {
-            this->op   = op;
-            this->expr = expr;
+        UnaryExpr::UnaryExpr(std::unique_ptr<Operator> op,
+                             std::unique_ptr<Expression> expr) {
+            this->op   = std::move(op);
+            this->expr = std::move(expr);
         }
 
         void UnaryExpr::visit(Visitor& v) {
