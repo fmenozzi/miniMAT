@@ -13,7 +13,6 @@
 
 namespace miniMAT {
     namespace parser {
-        template<typename ArgType, typename ResultType>
         class Parser {
         private:
                 lexer::Lexer             lexer;
@@ -31,16 +30,16 @@ namespace miniMAT {
 
                 lexer::Token GetCurrentToken();
 
-                std::unique_ptr<ast::AST<ArgType, ResultType>> Parse();
+                std::shared_ptr<ast::AST> Parse();
 
-                std::unique_ptr<ast::Statement<ArgType, ResultType>> ParseStatement();
+                std::shared_ptr<ast::Statement> ParseStatement();
 
-                std::unique_ptr<ast::ExprStmt<ArgType, ResultType>>  ParseExprStmt();
+                std::shared_ptr<ast::ExprStmt>  ParseExprStmt();
 
-                ast::Expression<ArgType, ResultType> ParseExpression();
-                ast::Expression<ArgType, ResultType> ParseA();
-                ast::Expression<ArgType, ResultType> ParseB();
-                ast::Expression<ArgType, ResultType> ParseC();
+                std::shared_ptr<ast::Expression> ParseExpression();
+                std::shared_ptr<ast::Expression> ParseA();
+                std::shared_ptr<ast::Expression> ParseB();
+                std::shared_ptr<ast::Expression> ParseC();
         };
     }
 }

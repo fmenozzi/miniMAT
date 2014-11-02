@@ -12,14 +12,12 @@
 
 namespace miniMAT {
     namespace parser {
-        template <typename ArgType, typename ResultType>
-        Parser<ArgType, ResultType>::Parser(const lexer::Lexer& lexer) {
+        Parser::Parser(const lexer::Lexer& lexer) {
             this->lexer  = lexer;
             this->tokens = std::deque<lexer::Token>();
         }
 
-        template <typename ArgType, typename ResultType>
-        void Parser<ArgType, ResultType>::Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling) {
+        void Parser::Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling) {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
@@ -36,18 +34,13 @@ namespace miniMAT {
             tokens.pop_front();
         }
 
-        template <typename ArgType, typename ResultType>
-        void Parser<ArgType, ResultType>::Accept(lexer::TokenKind exp_kind) {
+        void Parser::Accept(lexer::TokenKind exp_kind) {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind) { // || token.GetSpelling() != exp_spelling) {
                 // TODO: Once we fix that linker bug in TokenKind.hpp, we can
                 //       get a better error diagnostic here
-                /*
-                std::cout << "ERROR: Expecting " << exp_spelling
-                          << " but found " << token.GetSpelling()
-                          << std::endl;
-                */
+
                 std::cout << "ERROR: Incorrect TokenKind" << std::endl;
 
                 // TODO: Come up with a better way of handling this
@@ -58,23 +51,19 @@ namespace miniMAT {
             tokens.pop_front();
         }
 
-        template <typename ArgType, typename ResultType>
-        void Parser<ArgType, ResultType>::AcceptIt() {
+        void Parser::AcceptIt() {
             Accept(GetCurrentToken().GetKind(), GetCurrentToken().GetSpelling());
         }
 
-        template <typename ArgType, typename ResultType>
-        lexer::Token Parser<ArgType, ResultType>::GetCurrentToken() {
+        lexer::Token Parser::GetCurrentToken() {
             return tokens.front();
         }
 
-        template <typename ArgType, typename ResultType>
-        void Parser<ArgType, ResultType>::PutBack(const lexer::Token& t) {
+        void Parser::PutBack(const lexer::Token& t) {
             tokens.push_front(t);
         }
 
-        template <typename ArgType, typename ResultType>
-        std::unique_ptr<ast::AST<ArgType, ResultType>> Parser<ArgType, ResultType>::Parse() {
+        std::shared_ptr<ast::AST> Parser::Parse() {
             // Fill up token buffer
             auto token = lexer.GetToken();
             while (token.GetKind() != lexer::TokenKind::TOK_EOF) {
@@ -86,69 +75,63 @@ namespace miniMAT {
             return ParseStatement();
         }
 
-        template <typename ArgType, typename ResultType>
-        std::unique_ptr<ast::Statement<ArgType, ResultType>> Parser<ArgType, ResultType>::ParseStatement() {
+        std::shared_ptr<ast::Statement> Parser::ParseStatement() {
             return ParseExprStmt();
         }
 
-        template <typename ArgType, typename ResultType>
-        std::unique_ptr<ast::ExprStmt<ArgType, ResultType>> Parser<ArgType, ResultType>::ParseExprStmt() {
+        std::shared_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
             auto expr = ParseExpression();
             Accept(lexer::TokenKind::TOK_EOF);
 
-            return std::unique_ptr<ExprStmt>(new ExprStmt(expr));
+            return std::make_shared<ast::ExprStmt>(expr);
         }
 
-        template <typename ArgType, typename ResultType>
-        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseExpression() {
+        std::shared_ptr<ast::Expression> Parser::ParseExpression() {
             auto expr = ParseA();
             while (GetCurrentToken().GetSpelling() == "+" ||
                    GetCurrentToken().GetSpelling() == "-") {
-                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
+                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                expr = ast::BinaryExpr<ArgType, ResultType>(expr, op, ParseA());
+                expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseA());
             }
             return expr;
         }
 
-        template <typename ArgType, typename ResultType>
-        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseA() {
+        std::shared_ptr<ast::Expression> Parser::ParseA() {
             auto expr = ParseB();
             while (GetCurrentToken().GetSpelling() == "*" ||
                    GetCurrentToken().GetSpelling() == "/") {
-                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
+                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                expr = ast::BinaryExpr<ArgType, ResultType>(expr, op, ParseB());
+                expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseB());
             }
             return expr;
         }
 
-        template <typename ArgType, typename ResultType>
-        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseB() {
+        std::shared_ptr<ast::Expression> Parser::ParseB() {
             auto expr = ParseC();
             while (GetCurrentToken().GetSpelling() == "^") {
-                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
+                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                expr = ast::BinaryExpr<ArgType, ResultType>(expr, op, ParseC());
+                expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseB());
             }
             return expr;
         }
 
-        template <typename ArgType, typename ResultType>
-        ast::Expression<ArgType, ResultType> Parser<ArgType, ResultType>::ParseC() {
+        std::shared_ptr<ast::Expression> Parser::ParseC() {
             if (GetCurrentToken().GetSpelling() == "-") {
-                auto op = ast::Operator<ArgType, ResultType>(GetCurrentToken());
+                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                return ast::UnaryExpr<ArgType, ResultType>(op, ParseC());
+                return std::make_shared<ast::UnaryExpr>(op, ParseC());
             } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_LPAREN) {
                 AcceptIt();
                 auto expr = ParseExpression();
                 Accept(lexer::TokenKind::TOK_RPAREN);
                 return expr;
             } else {
-                auto floatlit = ast::FloatLiteral<ArgType, ResultType>(GetCurrentToken().GetSpelling());
+                auto floatlit = std::make_shared<ast::FloatLiteral>(GetCurrentToken().GetSpelling());
                 Accept(lexer::TokenKind::TOK_FLOATLIT);
-                return ast::LiteralExpr<ArgType, ResultType>(floatlit);
+                return std::make_shared<ast::LiteralExpr>(floatlit);
             }
         }
     }
