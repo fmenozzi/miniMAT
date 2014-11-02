@@ -8,9 +8,9 @@ namespace miniMAT {
     namespace ast {
         class ScalarType : public Type {
         public:
-            ScalarType(TypeKind kind);
+            ScalarType(TypeKind kind) : Type(kind) {}
 
-            void visit(const Visitor& v);
+            void visit(Visitor& v);
 
         private:
             TypeKind kind;

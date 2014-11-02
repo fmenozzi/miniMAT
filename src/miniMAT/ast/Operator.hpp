@@ -1,6 +1,8 @@
 #ifndef OPERATOR_HPP
 #define OPERATOR_HPP
 
+#include <memory>
+
 #include <Terminal.hpp>
 #include <Token.hpp>
 
@@ -8,13 +10,14 @@ namespace miniMAT {
     namespace ast {
         class Operator : public Terminal {
         public:
-            Operator(const lexer::Token& token);
+            Operator(std::unique_ptr<lexer::Token> token) : Terminal(token->GetSpelling()) {
+                this->token = std::move(token);
+            }
 
-            void visit(const Visitor& v);
+            void visit(Visitor& v);
 
         private:
-            // TODO Change this to use some kind of pointer
-            lexer::Token token;
+            std::unique_ptr<lexer::Token> token;
         };
     }
 }

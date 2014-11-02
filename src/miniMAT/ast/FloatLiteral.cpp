@@ -2,7 +2,7 @@
 
 namespace miniMAT {
     namespace ast {
-        void FloatLiteral::visit(const Visitor& v) {
+        void FloatLiteral::visit(Visitor& v) {
             v.VisitFloatLiteral(*this);
         }
     }

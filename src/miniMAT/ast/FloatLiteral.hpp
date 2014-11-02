@@ -9,7 +9,7 @@ namespace miniMAT {
         public:
             FloatLiteral(const std::string& spelling) : Literal(spelling) {}
 
-            void visit(const Visitor& v);
+            void visit(Visitor& v);
         };
     }
 }

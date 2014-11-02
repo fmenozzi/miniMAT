@@ -2,12 +2,11 @@
 
 namespace miniMAT {
     namespace ast {
-        LiteralExpr::LiteralExpr(const Literal& literal) {
-            // TODO Change this to use some kind of pointer
-            this->literal = literal;
+        LiteralExpr::LiteralExpr(std::unique_ptr<Literal> literal) {
+            this->literal = std::move(literal);
         }
 
-        void LiteralExpr::visit(const Visitor& v) {
+        void LiteralExpr::visit(Visitor& v) {
             v.VisitLiteralExpr(*this);
         }
     }

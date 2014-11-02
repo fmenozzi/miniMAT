@@ -1,6 +1,8 @@
 #ifndef LITERAL_EXPR_HPP
 #define LITERAL_EXPR_HPP
 
+#include <memory>
+
 #include <Expression.hpp>
 #include <Literal.hpp>
 
@@ -8,13 +10,12 @@ namespace miniMAT {
     namespace ast {
         class LiteralExpr : public Expression {
         public:
-            LiteralExpr(const Literal& literal);
+            LiteralExpr(std::unique_ptr<Literal> literal);
 
-            void visit(const Visitor& v);
+            void visit(Visitor& v);
 
         private:
-            // TODO Change this to use some kind of pointer
-            Literal literal;
+            std::unique_ptr<Literal> literal;
         };
     }
 }

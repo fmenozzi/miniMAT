@@ -2,11 +2,13 @@
 
 namespace miniMAT {
     namespace ast {
-        Operator::Operator(const lexer::Token& token) {
-            this->token = token;
+        /*
+        Operator::Operator(std::unique_ptr<lexer::Token> token) {
+            this->token = std::move(token);
         }
+        */
 
-        void Operator::visit(const Visitor& v) {
+        void Operator::visit(Visitor& v) {
             v.VisitOperator(*this);
         }
     }

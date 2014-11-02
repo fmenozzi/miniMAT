@@ -2,16 +2,15 @@
 
 namespace miniMAT {
     namespace ast {
-        BinaryExpr::BinaryExpr(const Expression& left,
-                               const Operator& op,
-                               const Expression& right) {
-            // TODO Change this to use some kind of pointer
-            this->left  = left;
-            this->op    = op;
-            this->right = right;
+        BinaryExpr::BinaryExpr(std::unique_ptr<Expression> left,
+                               std::unique_ptr<Operator> op,
+                               std::unique_ptr<Expression> right) {
+            this->left  = std::move(left);
+            this->op    = std::move(op);
+            this->right = std::move(right);
         }
 
-        void BinaryExpr::visit(const Visitor& v) {
+        void BinaryExpr::visit(Visitor& v) {
             v.VisitBinaryExpr(*this);
         }
     }

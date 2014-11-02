@@ -2,12 +2,11 @@
 
 namespace miniMAT {
     namespace ast {
-        ExprStmt::ExprStmt(const Expression& expr) {
-            // TODO Change this to use some kind of pointer
-            this->expr = expr;
+        ExprStmt::ExprStmt(std::unique_ptr<Expression> expr) {
+            this->expr = std::move(expr);
         }
 
-        void ExprStmt::visit(const Visitor& v) {
+        void ExprStmt::visit(Visitor& v) {
             v.VisitExprStmt(*this);
         }
     }

@@ -2,11 +2,13 @@
 
 namespace miniMAT {
     namespace ast {
+        /*
         ScalarType::ScalarType(TypeKind kind) {
             this->kind = kind;
         }
+        */
 
-        ResultType ScalarType::visit(const Visitor& v) {
+        void ScalarType::visit(Visitor& v) {
             v.VisitScalarType(*this);
         }
     }

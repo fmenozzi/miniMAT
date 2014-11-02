@@ -2,13 +2,13 @@
 
 namespace miniMAT {
     namespace ast {
-        UnaryExpr::UnaryExpr(const Operator& op, const Expression& expr) {
-            // TODO Change this to use some kind of pointer
-            this->op   = op;
-            this->expr = expr;
+        UnaryExpr::UnaryExpr(std::unique_ptr<Operator> op,
+                             std::unique_ptr<Expression> expr) {
+            this->op   = std::move(op);
+            this->expr = std::move(expr);
         }
 
-        void UnaryExpr::visit(const Visitor& v) {
+        void UnaryExpr::visit(Visitor& v) {
             v.VisitUnaryExpr(*this);
         }
     }
