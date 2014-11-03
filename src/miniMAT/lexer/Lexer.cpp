@@ -8,6 +8,7 @@ namespace miniMAT {
         Lexer& Lexer::operator=(const Lexer& lexer) {
             if (this != &lexer) {
                 this->input_line   = lexer.input_line;
+                this->reporter     = lexer.reporter;
                 this->current_char = lexer.current_char;
 
                 this->stream.str(input_line);
@@ -19,8 +20,9 @@ namespace miniMAT {
             return *this;
         }
 
-        Lexer::Lexer(const std::string& input_line) {
+        Lexer::Lexer(const std::string& input_line, reporter::ErrorReporter* reporter) {
             this->input_line   = input_line;
+            this->reporter     = reporter;
             this->current_char = ' ';
 
             this->stream.str(input_line);
@@ -54,7 +56,8 @@ namespace miniMAT {
                     if ((temp == '+' && current_char == '+') || (temp == '-' && current_char == '-')) {
                         TakeIt();
                         std::string wrong_tok = std::string(1, temp) + std::string(1, temp);
-                        return Token(TokenKind::TOK_ERROR, wrong_tok + " not allowed in miniMat!");
+                        LexerError(wrong_tok + " not allowed in miniMAT!");
+                        return Token(TokenKind::TOK_ERROR, wrong_tok + " not allowed in miniMAT!");
                     }
 
                     return Token(TokenKind::TOK_ARITHOP, std::string(1, temp));
@@ -110,6 +113,7 @@ namespace miniMAT {
                         return Token(TokenKind::TOK_FLOATLIT, numstr);
                     } else {
                         //return Token(TokenKind::TOK_DOT, ".");
+                        LexerError("Single . not allowed!");
                         return Token(TokenKind::TOK_ERROR, "Single . not allowed!");
                     }
 
@@ -117,6 +121,7 @@ namespace miniMAT {
                     temp = current_char;
                     TakeIt();
                     std::string unknownChar = std::string(1, temp);
+                    LexerError("Unrecognized character '" + unknownChar + "' in input");
                     return Token(TokenKind::TOK_ERROR, "Unrecognized character '" + unknownChar + "' in input");
             }
         }
@@ -125,16 +130,6 @@ namespace miniMAT {
          * Get next character from input stream
          */
         void Lexer::NextChar() {
-            /*
-            if (iterator == input_line.end()) {
-                is_done = true;
-                current_char = '\0';
-                iterator++;
-            } else {
-                current_char = *iterator;
-                iterator++;
-            }
-            */
             char temp;
             if (stream >> temp) {
                 current_char = temp;
@@ -146,6 +141,10 @@ namespace miniMAT {
 
         void Lexer::TakeIt() {
             NextChar();
+        }
+
+        void Lexer::LexerError(const std::string& error) {
+            reporter->AddLexerError(error);
         }
     }
 }

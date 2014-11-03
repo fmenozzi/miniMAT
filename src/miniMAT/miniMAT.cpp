@@ -18,10 +18,14 @@ int main() {
 			break;
 		}
 
-        miniMAT::lexer::Lexer   lexer(input_line);
-        miniMAT::parser::Parser parser(lexer);
+        miniMAT::reporter::ErrorReporter reporter;
+        miniMAT::lexer::Lexer   lexer(input_line, &reporter);
+        miniMAT::parser::Parser parser(lexer, &reporter);
 
-        parser.Parse();
+        auto ast = parser.Parse();
+
+        if (reporter.HasErrors())
+            reporter.ReportErrors();
     }
 
     return 0;

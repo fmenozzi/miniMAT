@@ -15,11 +15,13 @@ namespace miniMAT {
     namespace parser {
         class Parser {
         private:
-                lexer::Lexer             lexer;
-
-                std::deque<lexer::Token> tokens;
+                lexer::Lexer              lexer;
+                std::deque<lexer::Token>  tokens;
+                reporter::ErrorReporter*  reporter;
         public:
-                Parser(const lexer::Lexer& lexer);
+                Parser(const lexer::Lexer& lexer, reporter::ErrorReporter* reporter);
+
+                void ParseError(const std::string& error);
 
                 void Accept(lexer::TokenKind exp_kind);
                 void Accept(lexer::TokenKind exp_kind,

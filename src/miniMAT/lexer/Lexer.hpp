@@ -5,19 +5,21 @@
 #include <sstream>
 
 #include <Token.hpp>
+#include <ErrorReporter.hpp>
 
 namespace miniMAT {
     namespace lexer {
         class Lexer {
         private:
-            std::string           input_line;
-            char                  current_char;
-            std::stringstream     stream;
-            bool                  is_done;
+            std::string              input_line;
+            reporter::ErrorReporter* reporter;
+            char                     current_char;
+            std::stringstream        stream;
+            bool                     is_done;
 
         public:
             Lexer() {}
-            Lexer(const std::string& input_line);
+            Lexer(const std::string& input_line, reporter::ErrorReporter* reporter);
 
             Lexer& operator=(const Lexer& lexer);
 
@@ -26,6 +28,7 @@ namespace miniMAT {
         private:
             void TakeIt();
             void NextChar();
+            void LexerError(const std::string& error);
         };
     }
 }

@@ -12,22 +12,24 @@
 
 namespace miniMAT {
     namespace parser {
-        Parser::Parser(const lexer::Lexer& lexer) {
-            this->lexer  = lexer;
-            this->tokens = std::deque<lexer::Token>();
+        Parser::Parser(const lexer::Lexer& lexer, reporter::ErrorReporter* reporter) {
+            this->lexer    = lexer;
+            this->tokens   = std::deque<lexer::Token>();
+            this->reporter = reporter;
+        }
+
+        void Parser::ParseError(const std::string& error) {
+            reporter->AddParseError(error);
+            throw 1;
         }
 
         void Parser::Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling) {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
+                
                 // TODO: Augment output with TokenKind
-                std::cout << "ERROR: Expecting " << exp_spelling
-                          << " but found " << token.GetSpelling()
-                          << std::endl;
-
-                // TODO: Come up with a better way of handling this
-                exit(-1);
+                ParseError("ERROR: Expecting "+exp_spelling+" but found "+token.GetSpelling());
             }
 
             // Advance token
@@ -38,13 +40,11 @@ namespace miniMAT {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind) { // || token.GetSpelling() != exp_spelling) {
+
                 // TODO: Once we fix that linker bug in TokenKind.hpp, we can
                 //       get a better error diagnostic here
 
-                std::cout << "ERROR: Incorrect TokenKind" << std::endl;
-
-                // TODO: Come up with a better way of handling this
-                exit(-1);
+                ParseError("ERROR: Incorrect TokenKind");
             }
 
             // Advance token
@@ -72,7 +72,11 @@ namespace miniMAT {
             }
             tokens.push_back(token);
 
-            return ParseStatement();
+            try {
+                return ParseStatement();
+            } catch (...) {
+                return nullptr;
+            }
         }
 
         std::unique_ptr<ast::Statement> Parser::ParseStatement() {
