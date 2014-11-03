@@ -30,16 +30,18 @@ namespace miniMAT {
 
                 lexer::Token GetCurrentToken();
 
-                std::shared_ptr<ast::AST> Parse();
+                std::unique_ptr<ast::AST> Parse();
 
-                std::shared_ptr<ast::Statement> ParseStatement();
+                std::unique_ptr<ast::Statement> ParseStatement();
 
-                std::shared_ptr<ast::ExprStmt>  ParseExprStmt();
+                std::unique_ptr<ast::ExprStmt>  ParseExprStmt();
 
-                std::shared_ptr<ast::Expression> ParseExpression();
-                std::shared_ptr<ast::Expression> ParseA();
-                std::shared_ptr<ast::Expression> ParseB();
-                std::shared_ptr<ast::Expression> ParseC();
+
+                std::unique_ptr<ast::Expression> ParseExpression();
+
+                std::unique_ptr<ast::Expression> ParseA();
+                std::unique_ptr<ast::Expression> ParseB();
+                std::unique_ptr<ast::Expression> ParseC();
         };
     }
 }

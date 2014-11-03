@@ -22,7 +22,6 @@ int main() {
         miniMAT::parser::Parser parser(lexer);
 
         parser.Parse();
-
     }
 
     return 0;

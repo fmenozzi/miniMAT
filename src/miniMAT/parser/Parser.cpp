@@ -63,7 +63,7 @@ namespace miniMAT {
             tokens.push_front(t);
         }
 
-        std::shared_ptr<ast::AST> Parser::Parse() {
+        std::unique_ptr<ast::AST> Parser::Parse() {
             // Fill up token buffer
             auto token = lexer.GetToken();
             while (token.GetKind() != lexer::TokenKind::TOK_EOF) {
@@ -75,63 +75,70 @@ namespace miniMAT {
             return ParseStatement();
         }
 
-        std::shared_ptr<ast::Statement> Parser::ParseStatement() {
+        std::unique_ptr<ast::Statement> Parser::ParseStatement() {
             return ParseExprStmt();
         }
 
-        std::shared_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
-            auto expr = ParseExpression();
+        std::unique_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
+            auto expr = std::move(ParseExpression());
             Accept(lexer::TokenKind::TOK_EOF);
 
-            return std::make_shared<ast::ExprStmt>(expr);
+            return std::make_unique<ast::ExprStmt>(std::move(expr));
         }
 
-        std::shared_ptr<ast::Expression> Parser::ParseExpression() {
-            auto expr = ParseA();
+        std::unique_ptr<ast::Expression> Parser::ParseExpression() {
+            auto expr = std::move(ParseA());
             while (GetCurrentToken().GetSpelling() == "+" ||
                    GetCurrentToken().GetSpelling() == "-") {
-                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
+                auto op = std::make_unique<ast::Operator>(std::make_unique<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseA());
+                expr = std::make_unique<ast::BinaryExpr>(std::move(expr),
+                                                         std::move(op),
+                                                         std::move(ParseA()));
             }
             return expr;
         }
 
-        std::shared_ptr<ast::Expression> Parser::ParseA() {
-            auto expr = ParseB();
+        std::unique_ptr<ast::Expression> Parser::ParseA() {
+            auto expr = std::move(ParseB());
             while (GetCurrentToken().GetSpelling() == "*" ||
                    GetCurrentToken().GetSpelling() == "/") {
-                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
+                auto op = std::make_unique<ast::Operator>(std::make_unique<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseB());
+                expr = std::make_unique<ast::BinaryExpr>(std::move(expr),
+                                                         std::move(op),
+                                                         std::move(ParseB()));
             }
             return expr;
         }
 
-        std::shared_ptr<ast::Expression> Parser::ParseB() {
-            auto expr = ParseC();
+        std::unique_ptr<ast::Expression> Parser::ParseB() {
+            auto expr = std::move(ParseC());
             while (GetCurrentToken().GetSpelling() == "^") {
-                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
+                auto op = std::make_unique<ast::Operator>(std::make_unique<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseB());
+                expr = std::make_unique<ast::BinaryExpr>(std::move(expr),
+                                                         std::move(op),
+                                                         std::move(ParseC()));
             }
             return expr;
         }
 
-        std::shared_ptr<ast::Expression> Parser::ParseC() {
+        std::unique_ptr<ast::Expression> Parser::ParseC() {
             if (GetCurrentToken().GetSpelling() == "-") {
-                auto op = std::make_shared<ast::Operator>(std::make_shared<lexer::Token>(GetCurrentToken()));
+                auto op = std::make_unique<ast::Operator>(std::make_unique<lexer::Token>(GetCurrentToken()));
                 AcceptIt();
-                return std::make_shared<ast::UnaryExpr>(op, ParseC());
+                return std::make_unique<ast::UnaryExpr>(std::move(op),
+                                                        std::move(ParseC()));
             } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_LPAREN) {
                 AcceptIt();
-                auto expr = ParseExpression();
+                auto expr = std::move(ParseExpression());
                 Accept(lexer::TokenKind::TOK_RPAREN);
                 return expr;
             } else {
-                auto floatlit = std::make_shared<ast::FloatLiteral>(GetCurrentToken().GetSpelling());
+                auto floatlit = std::make_unique<ast::FloatLiteral>(GetCurrentToken().GetSpelling());
                 Accept(lexer::TokenKind::TOK_FLOATLIT);
-                return std::make_shared<ast::LiteralExpr>(floatlit);
+                return std::make_unique<ast::LiteralExpr>(std::move(floatlit));
             }
         }
     }
