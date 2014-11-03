@@ -12,6 +12,8 @@ namespace miniMAT {
         public:
             ExprStmt(std::unique_ptr<Expression> expr);
 
+            virtual ~ExprStmt() {}
+
             void visit(Visitor& v);
 
         private:

@@ -14,6 +14,8 @@ namespace miniMAT {
                        std::unique_ptr<Operator> op,
                        std::unique_ptr<Expression> right);
 
+            virtual ~BinaryExpr() {}
+
             void visit(Visitor& v);
 
         private:

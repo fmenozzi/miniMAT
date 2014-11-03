@@ -10,6 +10,8 @@ namespace miniMAT {
         public:
             ScalarType(TypeKind kind) : Type(kind) {}
 
+            virtual ~ScalarType() {}
+
             void visit(Visitor& v);
 
         private:

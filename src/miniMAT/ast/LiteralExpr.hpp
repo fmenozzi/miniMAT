@@ -12,6 +12,8 @@ namespace miniMAT {
         public:
             LiteralExpr(std::unique_ptr<Literal> literal);
 
+            virtual ~LiteralExpr() {}
+
             void visit(Visitor& v);
 
         private:

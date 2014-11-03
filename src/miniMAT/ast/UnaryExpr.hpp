@@ -13,6 +13,8 @@ namespace miniMAT {
             UnaryExpr(std::unique_ptr<Operator> op,
                       std::unique_ptr<Expression> expr);
 
+            virtual ~UnaryExpr() {}
+
             void visit(Visitor& v);
 
         private:

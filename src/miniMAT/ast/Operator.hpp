@@ -14,6 +14,8 @@ namespace miniMAT {
                 this->token = std::move(token);
             }
 
+            virtual ~Operator() {}
+
             void visit(Visitor& v);
 
         private:
