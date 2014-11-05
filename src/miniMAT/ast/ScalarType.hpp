@@ -1,6 +1,8 @@
 #ifndef SCALAR_TYPE_HPP
 #define SCALAR_TYPE_HPP
 
+#include <string>
+
 #include <Type.hpp>
 #include <TypeKind.hpp>
 
@@ -12,7 +14,7 @@ namespace miniMAT {
 
             virtual ~ScalarType() {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
 
         private:
             TypeKind kind;

@@ -8,8 +8,8 @@ namespace miniMAT {
         }
         */
 
-        void ScalarType::visit(Visitor& v) {
-            v.VisitScalarType(*this);
+        void ScalarType::visit(DisplayVisitor& v, const std::string& prefix) {
+            v.VisitScalarType(*this, prefix);
         }
     }
 }

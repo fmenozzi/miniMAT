@@ -33,6 +33,8 @@ set(SOURCES src/miniMAT/miniMAT.cpp
 			src/miniMAT/ast/Terminal.cpp
 			src/miniMAT/ast/Type.cpp
 			src/miniMAT/ast/UnaryExpr.cpp
+
+			src/miniMAT/ast/ASTDisplay.cpp
 	)
 
 add_executable(miniMAT ${SOURCES})

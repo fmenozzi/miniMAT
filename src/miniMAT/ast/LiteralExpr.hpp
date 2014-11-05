@@ -2,6 +2,7 @@
 #define LITERAL_EXPR_HPP
 
 #include <memory>
+#include <string>
 
 #include <Expression.hpp>
 #include <Literal.hpp>
@@ -14,7 +15,7 @@ namespace miniMAT {
 
             virtual ~LiteralExpr() {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
 
         private:
             std::unique_ptr<Literal> literal;

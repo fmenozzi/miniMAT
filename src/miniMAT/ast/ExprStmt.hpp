@@ -2,6 +2,7 @@
 #define EXPR_STMT_HPP
 
 #include <memory>
+#include <string>
 
 #include <Expression.hpp>
 #include <Statement.hpp>
@@ -14,7 +15,7 @@ namespace miniMAT {
 
             virtual ~ExprStmt() {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
 
         private:
             std::unique_ptr<Expression> expr;

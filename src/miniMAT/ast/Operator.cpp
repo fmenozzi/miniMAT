@@ -8,8 +8,8 @@ namespace miniMAT {
         }
         */
 
-        void Operator::visit(Visitor& v) {
-            v.VisitOperator(*this);
+        void Operator::visit(DisplayVisitor& v, const std::string& prefix) {
+            v.VisitOperator(*this, prefix);
         }
     }
 }

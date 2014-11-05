@@ -6,8 +6,8 @@ namespace miniMAT {
             this->literal = std::move(literal);
         }
 
-        void LiteralExpr::visit(Visitor& v) {
-            v.VisitLiteralExpr(*this);
+        void LiteralExpr::visit(DisplayVisitor& v, const std::string& prefix) {
+            v.VisitLiteralExpr(*this, prefix);
         }
     }
 }

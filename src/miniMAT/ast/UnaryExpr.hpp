@@ -1,6 +1,7 @@
 #ifndef UNARY_EXPR_HPP
 #define UNARY_EXPR_HPP
 
+#include <string>
 #include <memory>
 
 #include <Expression.hpp>
@@ -15,7 +16,7 @@ namespace miniMAT {
 
             virtual ~UnaryExpr() {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
 
         private:
             std::unique_ptr<Operator>   op;

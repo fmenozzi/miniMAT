@@ -10,8 +10,8 @@ namespace miniMAT {
             this->right = std::move(right);
         }
 
-        void BinaryExpr::visit(Visitor& v) {
-            v.VisitBinaryExpr(*this);
+        void BinaryExpr::visit(DisplayVisitor& v, const std::string& prefix) {
+            v.VisitBinaryExpr(*this, prefix);
         }
     }
 }

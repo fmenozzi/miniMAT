@@ -2,6 +2,7 @@
 #define OPERATOR_HPP
 
 #include <memory>
+#include <string>
 
 #include <Terminal.hpp>
 #include <Token.hpp>
@@ -16,7 +17,7 @@ namespace miniMAT {
 
             virtual ~Operator() {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
 
         private:
             std::unique_ptr<lexer::Token> token;

@@ -8,8 +8,8 @@ namespace miniMAT {
             this->expr = std::move(expr);
         }
 
-        void UnaryExpr::visit(Visitor& v) {
-            v.VisitUnaryExpr(*this);
+        void UnaryExpr::visit(DisplayVisitor& v, const std::string& prefix) {
+            v.VisitUnaryExpr(*this, prefix);
         }
     }
 }

@@ -1,7 +1,7 @@
 #ifndef AST_HPP
 #define AST_HPP
 
-#include <Visitor.hpp>
+#include <DisplayVisitor.hpp>
 
 namespace miniMAT {
     namespace ast {
@@ -9,7 +9,7 @@ namespace miniMAT {
         public:
             virtual ~AST() {}
 
-            virtual void visit(Visitor& v) = 0;
+            virtual void visit(DisplayVisitor& v, const std::string& prefix) = 0;
         };
     }
 }

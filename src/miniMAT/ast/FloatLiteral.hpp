@@ -1,6 +1,8 @@
 #ifndef FLOAT_LITERAL_HPP
 #define FLOAT_LITERAL_HPP
 
+#include <string>
+
 #include <Literal.hpp>
 
 namespace miniMAT {
@@ -9,7 +11,7 @@ namespace miniMAT {
         public:
             FloatLiteral(const std::string& spelling) : Literal(spelling) {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
         };
     }
 }

@@ -2,8 +2,8 @@
 
 namespace miniMAT {
     namespace ast {
-        void FloatLiteral::visit(Visitor& v) {
-            v.VisitFloatLiteral(*this);
+        void FloatLiteral::visit(DisplayVisitor& v, const std::string& prefix) {
+            v.VisitFloatLiteral(*this, prefix);
         }
     }
 }

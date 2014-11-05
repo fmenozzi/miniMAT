@@ -16,7 +16,7 @@ namespace miniMAT {
 
             virtual ~BinaryExpr() {}
 
-            void visit(Visitor& v);
+            void visit(DisplayVisitor& v, const std::string& prefix);
 
         private:
             std::unique_ptr<Expression> left;
