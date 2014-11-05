@@ -14,6 +14,8 @@ namespace miniMAT {
 
             std::string GetSpelling();
 
+            virtual std::string GetClassName() = 0;
+
         private:
             std::string spelling;
         };

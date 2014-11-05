@@ -9,5 +9,9 @@ namespace miniMAT {
         void LiteralExpr::visit(DisplayVisitor& v, const std::string& prefix) {
             v.VisitLiteralExpr(*this, prefix);
         }
+
+        std::string LiteralExpr::GetClassName() {
+            return "LiteralExpr";
+        }
     }
 }

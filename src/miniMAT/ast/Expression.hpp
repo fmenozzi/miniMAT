@@ -8,6 +8,8 @@ namespace miniMAT {
         class Expression : public AST {
         public:
             virtual ~Expression() {}
+
+            virtual std::string GetClassName() = 0;
         };
     }
 }

@@ -11,5 +11,9 @@ namespace miniMAT {
         void ScalarType::visit(DisplayVisitor& v, const std::string& prefix) {
             v.VisitScalarType(*this, prefix);
         }
+
+        std::string ScalarType::GetClassName() {
+            return "ScalarType";
+        }
     }
 }

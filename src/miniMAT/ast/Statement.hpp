@@ -8,6 +8,8 @@ namespace miniMAT {
         class Statement : public AST {
         public:
             virtual ~Statement() {}
+
+            virtual std::string GetClassName() = 0;
         };
     }
 }

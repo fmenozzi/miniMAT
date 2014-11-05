@@ -13,6 +13,8 @@ namespace miniMAT {
 
             TypeKind GetKind();
 
+            virtual std::string GetClassName() = 0;
+
         private:
             TypeKind kind;
         };
