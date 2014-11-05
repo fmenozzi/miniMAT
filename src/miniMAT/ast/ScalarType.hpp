@@ -14,8 +14,6 @@ namespace miniMAT {
 
             virtual ~ScalarType() {}
 
-            void visit(DisplayVisitor& v, const std::string& prefix);
-
             std::string GetClassName() const;
 
         private:

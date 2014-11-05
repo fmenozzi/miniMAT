@@ -2,12 +2,8 @@
 
 namespace miniMAT {
     namespace ast {
-        ExprStmt::ExprStmt(std::unique_ptr<Expression> expr) {
-            this->expr = std::move(expr);
-        }
-
-        void ExprStmt::visit(DisplayVisitor& v, const std::string& prefix) {
-            v.VisitExprStmt(*this, prefix);
+        ExprStmt::ExprStmt(std::shared_ptr<Expression> expr) {
+            this->expr = expr;
         }
 
         std::string ExprStmt::GetClassName() const {

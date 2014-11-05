@@ -9,18 +9,18 @@
 
 namespace miniMAT {
     namespace ast {
+        class DisplayVisitor;
+
         class LiteralExpr : public Expression {
         public:
-            LiteralExpr(std::unique_ptr<Literal> literal);
+            LiteralExpr(std::shared_ptr<Literal> literal);
 
             virtual ~LiteralExpr() {}
-
-            void visit(DisplayVisitor& v, const std::string& prefix);
 
             std::string GetClassName() const;
 
         private:
-            std::unique_ptr<Literal> literal;
+            std::shared_ptr<Literal> literal;
         };
     }
 }

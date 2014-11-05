@@ -24,7 +24,6 @@ set(SOURCES src/miniMAT/miniMAT.cpp
 
 			src/miniMAT/parser/Parser.cpp
 
-			src/miniMAT/ast/ASTDisplay.cpp
 			src/miniMAT/ast/BinaryExpr.cpp
 			src/miniMAT/ast/ExprStmt.cpp
 			src/miniMAT/ast/FloatLiteral.cpp

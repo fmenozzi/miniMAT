@@ -9,20 +9,20 @@
 
 namespace miniMAT {
     namespace ast {
+        class DisplayVisitor;
+
         class UnaryExpr : public Expression {
         public:
-            UnaryExpr(std::unique_ptr<Operator> op,
-                      std::unique_ptr<Expression> expr);
+            UnaryExpr(std::shared_ptr<Operator> op,
+                      std::shared_ptr<Expression> expr);
 
             virtual ~UnaryExpr() {}
-
-            void visit(DisplayVisitor& v, const std::string& prefix);
 
             std::string GetClassName() const;
 
         private:
-            std::unique_ptr<Operator>   op;
-            std::unique_ptr<Expression> expr;
+            std::shared_ptr<Operator>   op;
+            std::shared_ptr<Expression> expr;
         };
     }
 }

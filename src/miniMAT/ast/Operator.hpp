@@ -9,15 +9,15 @@
 
 namespace miniMAT {
     namespace ast {
+        class DisplayVisitor;
+
         class Operator : public Terminal {
         public:
-            Operator(lexer::Token token) : Terminal(token->GetSpelling()) {
+            Operator(lexer::Token token) : Terminal(token.GetSpelling()) {
                 this->token = token;
             }
 
             virtual ~Operator() {}
-
-            void visit(DisplayVisitor& v, const std::string& prefix);
 
             std::string GetClassName() const;
 
