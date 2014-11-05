@@ -11,7 +11,7 @@ namespace miniMAT {
     namespace ast {
         class Operator : public Terminal {
         public:
-            Operator(Token token) : Terminal(token->GetSpelling()) {
+            Operator(lexer::Token token) : Terminal(token->GetSpelling()) {
                 this->token = token;
             }
 
@@ -22,7 +22,7 @@ namespace miniMAT {
             std::string GetClassName() const;
 
         private:
-            Token token;
+            lexer::Token token;
         };
     }
 }
