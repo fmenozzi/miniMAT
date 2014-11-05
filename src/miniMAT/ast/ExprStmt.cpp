@@ -10,7 +10,7 @@ namespace miniMAT {
             v.VisitExprStmt(*this, prefix);
         }
 
-        std::string ExprStmt::GetClassName() {
+        std::string ExprStmt::GetClassName() const {
             return "ExprStmt";
         }
     }

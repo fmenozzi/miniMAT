@@ -9,7 +9,7 @@ namespace miniMAT {
         public:
             virtual ~Statement() {}
 
-            virtual std::string GetClassName() = 0;
+            virtual std::string GetClassName() const = 0;
         };
     }
 }

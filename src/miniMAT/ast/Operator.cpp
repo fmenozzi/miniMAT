@@ -12,7 +12,7 @@ namespace miniMAT {
             v.VisitOperator(*this, prefix);
         }
 
-        std::string Operator::GetClassName() {
+        std::string Operator::GetClassName() const {
             return "Operator";
         }
     }

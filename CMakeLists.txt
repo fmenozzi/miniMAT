@@ -24,6 +24,7 @@ set(SOURCES src/miniMAT/miniMAT.cpp
 
 			src/miniMAT/parser/Parser.cpp
 
+			src/miniMAT/ast/ASTDisplay.cpp
 			src/miniMAT/ast/BinaryExpr.cpp
 			src/miniMAT/ast/ExprStmt.cpp
 			src/miniMAT/ast/FloatLiteral.cpp
@@ -33,8 +34,6 @@ set(SOURCES src/miniMAT/miniMAT.cpp
 			src/miniMAT/ast/Terminal.cpp
 			src/miniMAT/ast/Type.cpp
 			src/miniMAT/ast/UnaryExpr.cpp
-
-			src/miniMAT/ast/ASTDisplay.cpp
 	)
 
 add_executable(miniMAT ${SOURCES})

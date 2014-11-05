@@ -18,7 +18,7 @@ namespace miniMAT {
 
             void visit(DisplayVisitor& v, const std::string& prefix);
 
-            std::string GetClassName();
+            std::string GetClassName() const;
 
         private:
             std::unique_ptr<Expression> left;

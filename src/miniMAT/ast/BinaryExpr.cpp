@@ -14,7 +14,7 @@ namespace miniMAT {
             v.VisitBinaryExpr(*this, prefix);
         }
 
-        std::string BinaryExpr::GetClassName() {
+        std::string BinaryExpr::GetClassName() const {
             return "BinaryExpr";
         }
     }

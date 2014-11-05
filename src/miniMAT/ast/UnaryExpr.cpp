@@ -12,7 +12,7 @@ namespace miniMAT {
             v.VisitUnaryExpr(*this, prefix);
         }
 
-        std::string UnaryExpr::GetClassName() {
+        std::string UnaryExpr::GetClassName() const {
             return "UnaryExpr";
         }
     }

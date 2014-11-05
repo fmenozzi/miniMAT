@@ -11,7 +11,7 @@ namespace miniMAT {
 
             virtual void visit(DisplayVisitor& v, const std::string& prefix) = 0;
 
-            virtual std::string GetClassName() = 0;
+            virtual std::string GetClassName() const = 0;
         };
     }
 }

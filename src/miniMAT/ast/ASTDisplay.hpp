@@ -11,6 +11,9 @@ namespace miniMAT {
         class ASTDisplay : public DisplayVisitor {
         public:
             void ShowTree(AST& ast);
+            void Show(const std::string& prefix, const std::string& text);
+            void Show(const std::string& prefix, const AST& node);
+            std::string Quote(const std::string& text);
 
             // Types
             void VisitScalarType(ScalarType& st, const std::string& prefix);
