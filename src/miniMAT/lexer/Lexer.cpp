@@ -100,6 +100,41 @@ namespace miniMAT {
                         }
                     }
 
+                    // The 'e' (scientific notation)
+                    if (current_char == 'e') {
+                        numstr += current_char;
+                        TakeIt();
+                        if (current_char == '+' || current_char == '-') {
+                            numstr += current_char;
+                            TakeIt();
+                        }
+                        if (std::isdigit(current_char)) {
+                            // To the left of the decimal point
+                            while (std::isdigit(current_char)) {
+                                numstr += current_char;
+                                TakeIt();
+                            }
+
+                            // The decimal point
+                            if (current_char == '.') {
+                                numstr += current_char;
+                                TakeIt();
+
+                                // To the right of the decimal point
+                                while (std::isdigit(current_char)) {
+                                    numstr += current_char;
+                                    TakeIt();
+                                }
+                            }
+                        } else {
+                            std::string error = "Character " +
+                                                std::to_string(current_char) +
+                                                " not allowed in scientific notation";
+                            LexerError(error);
+                            return Token(TokenKind::TOK_ERROR, error);
+                        }
+                    }
+
                     return Token(TokenKind::TOK_FLOATLIT, numstr);
 
                 case '.':

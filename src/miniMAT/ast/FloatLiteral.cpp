@@ -1,5 +1,5 @@
 #include <FloatLiteral.hpp>
-#include <string>
+#include <sstream>
 
 namespace miniMAT {
     namespace ast {
@@ -14,7 +14,11 @@ namespace miniMAT {
         }
 
         double FloatLiteral::VisitEvaluate() const {
-            return std::stod(this->GetSpelling());
+            //return std::stod(this->GetSpelling());
+            std::istringstream iss(this->GetSpelling());
+            double result;
+            iss >> result;
+            return result;
         }
     }
 }
