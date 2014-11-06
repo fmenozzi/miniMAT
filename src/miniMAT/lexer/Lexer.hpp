@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <memory>
 
 #include <Token.hpp>
 #include <ErrorReporter.hpp>
@@ -11,15 +12,17 @@ namespace miniMAT {
     namespace lexer {
         class Lexer {
         private:
-            std::string              input_line;
-            reporter::ErrorReporter* reporter;
-            char                     current_char;
-            std::stringstream        stream;
-            bool                     is_done;
+            std::string       input_line;
+            char              current_char;
+            std::stringstream stream;
+            bool              is_done;
+
+            std::shared_ptr<reporter::ErrorReporter> reporter;
 
         public:
             Lexer() {}
-            Lexer(const std::string& input_line, reporter::ErrorReporter* reporter);
+            Lexer(const std::string& input_line,
+                  std::shared_ptr<reporter::ErrorReporter> reporter);
 
             Lexer& operator=(const Lexer& lexer);
 

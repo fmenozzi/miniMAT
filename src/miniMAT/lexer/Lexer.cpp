@@ -20,7 +20,8 @@ namespace miniMAT {
             return *this;
         }
 
-        Lexer::Lexer(const std::string& input_line, reporter::ErrorReporter* reporter) {
+        Lexer::Lexer(const std::string& input_line,
+                     std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->input_line   = input_line;
             this->reporter     = reporter;
             this->current_char = ' ';

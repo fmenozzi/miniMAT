@@ -12,7 +12,8 @@
 
 namespace miniMAT {
     namespace parser {
-        Parser::Parser(const lexer::Lexer& lexer, reporter::ErrorReporter* reporter) {
+        Parser::Parser(const lexer::Lexer& lexer,
+                       std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->lexer    = lexer;
             this->tokens   = std::deque<lexer::Token>();
             this->reporter = reporter;

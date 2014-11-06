@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include <memory>
+
 #include <Lexer.hpp>
 #include <Parser.hpp>
 #include <Visitors.hpp>
@@ -30,14 +32,14 @@ int main() {
             continue;
         }
 
-        miniMAT::reporter::ErrorReporter reporter;
-        miniMAT::lexer::Lexer   lexer(input_line, &reporter);
-        miniMAT::parser::Parser parser(lexer, &reporter);
+        auto reporter = std::make_shared<miniMAT::reporter::ErrorReporter>();
+        miniMAT::lexer::Lexer   lexer(input_line, reporter);
+        miniMAT::parser::Parser parser(lexer, reporter);
 
         auto ast = parser.Parse();
 
-        if (reporter.HasErrors())
-            reporter.ReportErrors();
+        if (reporter->HasErrors())
+            reporter->ReportErrors();
         else {
             ans = ast->VisitEvaluate();
             std::cout << "ans = " << ans << std::endl << std::endl;
