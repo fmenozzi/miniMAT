@@ -1,4 +1,4 @@
-#include <display.hpp>
+#include <Visitors.hpp>
 #include <iostream>
 
 namespace miniMAT {
@@ -25,6 +25,10 @@ namespace miniMAT {
             std::string Indent(const std::string& prefix) {
                 return prefix + "   ";
             }
+        }
+
+        namespace evaluate {
+
         }
     }
 }

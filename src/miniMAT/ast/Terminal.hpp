@@ -2,7 +2,7 @@
 #define TERMINAL_HPP
 
 #include <AST.hpp>
-#include <display.hpp>
+#include <Visitors.hpp>
 
 namespace miniMAT {
     namespace ast {

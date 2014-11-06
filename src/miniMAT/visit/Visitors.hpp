@@ -1,5 +1,5 @@
-#ifndef DISPLAY_HPP
-#define DISPLAY_HPP
+#ifndef VISITOR_HPP
+#define VISITOR_HPP
 
 #include <AST.hpp>
 
@@ -13,6 +13,10 @@ namespace miniMAT {
 
             std::string Quote(const std::string& text);
             std::string Indent(const std::string& text);
+        }
+
+        namespace evaluate {
+
         }
     }
 }

@@ -3,7 +3,7 @@
 
 #include <AST.hpp>
 #include <TypeKind.hpp>
-#include <display.hpp>
+#include <Visitors.hpp>
 
 namespace miniMAT {
     namespace ast {
