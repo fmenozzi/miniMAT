@@ -12,6 +12,8 @@ namespace miniMAT {
             FloatLiteral(const std::string& spelling) : Literal(spelling) {}
 
             std::string GetClassName() const;
+
+            void VisitDisplay(const std::string& prefix) const;
         };
     }
 }

@@ -9,8 +9,6 @@
 
 namespace miniMAT {
     namespace ast {
-        class DisplayVisitor;
-
         class Operator : public Terminal {
         public:
             Operator(lexer::Token token) : Terminal(token.GetSpelling()) {
@@ -20,6 +18,8 @@ namespace miniMAT {
             virtual ~Operator() {}
 
             std::string GetClassName() const;
+
+            void VisitDisplay(const std::string& prefix) const;
 
         private:
             lexer::Token token;

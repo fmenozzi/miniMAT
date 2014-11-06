@@ -9,5 +9,9 @@ namespace miniMAT {
         std::string Terminal::GetSpelling() {
             return spelling;
         }
+
+        void Terminal::VisitDisplay(const std::string& prefix) const {
+
+        }
     }
 }

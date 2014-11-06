@@ -9,5 +9,9 @@ namespace miniMAT {
         std::string ExprStmt::GetClassName() const {
             return "ExprStmt";
         }
+
+        void ExprStmt::VisitDisplay(const std::string& prefix) const {
+
+        }
     }
 }

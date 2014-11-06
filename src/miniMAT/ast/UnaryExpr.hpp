@@ -8,8 +8,6 @@
 
 namespace miniMAT {
     namespace ast {
-        class DisplayVisitor;
-
         class UnaryExpr : public Expression {
         public:
             UnaryExpr(std::shared_ptr<Operator> op,
@@ -18,6 +16,8 @@ namespace miniMAT {
             virtual ~UnaryExpr() {}
 
             std::string GetClassName() const;
+
+            void VisitDisplay(const std::string& prefix) const;
 
         private:
             std::shared_ptr<Operator>   op;

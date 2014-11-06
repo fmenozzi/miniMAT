@@ -13,6 +13,8 @@ namespace miniMAT {
             virtual ~Literal() {}
 
             virtual std::string GetClassName() const = 0;
+
+            virtual void VisitDisplay(const std::string& prefix) const = 0;
         };
     }
 }

@@ -5,5 +5,9 @@ namespace miniMAT {
         std::string FloatLiteral::GetClassName() const {
             return "FloatLiteral";
         }
+
+        void FloatLiteral::VisitDisplay(const std::string& prefix) const {
+
+        }
     }
 }

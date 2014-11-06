@@ -9,8 +9,6 @@
 
 namespace miniMAT {
     namespace ast {
-        class DisplayVisitor;
-
         class ExprStmt : public Statement {
         public:
             ExprStmt(std::shared_ptr<Expression> expr);
@@ -18,6 +16,8 @@ namespace miniMAT {
             virtual ~ExprStmt() {}
 
             std::string GetClassName() const;
+
+            void VisitDisplay(const std::string& prefix) const;
 
         private:
             std::shared_ptr<Expression> expr;
