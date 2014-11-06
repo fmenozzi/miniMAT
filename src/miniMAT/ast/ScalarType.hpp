@@ -1,8 +1,6 @@
 #ifndef SCALAR_TYPE_HPP
 #define SCALAR_TYPE_HPP
 
-#include <string>
-
 #include <Type.hpp>
 #include <TypeKind.hpp>
 

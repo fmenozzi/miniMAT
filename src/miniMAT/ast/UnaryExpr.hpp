@@ -1,7 +1,6 @@
 #ifndef UNARY_EXPR_HPP
 #define UNARY_EXPR_HPP
 
-#include <string>
 #include <memory>
 
 #include <Expression.hpp>

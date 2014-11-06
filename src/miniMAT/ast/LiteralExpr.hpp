@@ -2,7 +2,6 @@
 #define LITERAL_EXPR_HPP
 
 #include <memory>
-#include <string>
 
 #include <Expression.hpp>
 #include <Literal.hpp>
