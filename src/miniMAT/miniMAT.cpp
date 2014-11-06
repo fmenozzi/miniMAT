@@ -10,6 +10,10 @@ int main() {
 
     double ans = 0;
 
+    std::cout << "miniMAT: It's like MATLAB, but smaller." << std::endl;
+    std::cout << "Copyright (C) 2014 Federico Menozzi" << std::endl;
+    std::cout << std::endl;
+
     while (true) {
         std::cout << ">>> ";
 
@@ -36,7 +40,7 @@ int main() {
             reporter.ReportErrors();
         else {
             ans = ast->VisitEvaluate();
-            std::cout << "ans = " << ans << std::endl;
+            std::cout << "ans = " << ans << std::endl << std::endl;
         }
     }
 
