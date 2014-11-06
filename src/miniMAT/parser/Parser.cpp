@@ -103,8 +103,8 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseA() {
             auto expr = ParseB();
-            while (GetCurrentToken().GetSpelling() == "+" ||
-                   GetCurrentToken().GetSpelling() == "-") {
+            while (GetCurrentToken().GetSpelling() == "*" ||
+                   GetCurrentToken().GetSpelling() == "/") {
                 auto op = std::make_shared<ast::Operator>(GetCurrentToken());
                 AcceptIt();
                 expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseB());
@@ -114,8 +114,7 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseB() {
             auto expr = ParseC();
-            while (GetCurrentToken().GetSpelling() == "+" ||
-                   GetCurrentToken().GetSpelling() == "-") {
+            while (GetCurrentToken().GetSpelling() == "^") {
                 auto op = std::make_shared<ast::Operator>(GetCurrentToken());
                 AcceptIt();
                 expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseC());
