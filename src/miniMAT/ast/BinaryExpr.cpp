@@ -1,4 +1,5 @@
 #include <BinaryExpr.hpp>
+#include <cmath>
 
 namespace miniMAT {
     namespace ast {
@@ -21,6 +22,23 @@ namespace miniMAT {
             this->op->VisitDisplay(Indent(prefix));
             this->left->VisitDisplay(Indent(Indent(prefix)));
             this->right->VisitDisplay(Indent(Indent(prefix)));
+        }
+
+        double BinaryExpr::VisitEvaluate() const {
+            double left_result  = this->left->VisitEvaluate();
+            double right_result = this->right->VisitEvaluate();
+
+            std::string opstr = this->op->GetSpelling();
+            if (opstr == "+")
+                return left_result + right_result;
+            else if (opstr == "-")
+                return left_result - right_result;
+            else if (opstr == "*")
+                return left_result * right_result;
+            else if (opstr == "/")
+                return left_result / right_result;
+            else // ^
+                return pow(left_result, right_result);
         }
     }
 }

@@ -1,4 +1,5 @@
 #include <FloatLiteral.hpp>
+#include <string>
 
 namespace miniMAT {
     namespace ast {
@@ -10,6 +11,10 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, Quote(this->GetClassName()) + " " + Quote(this->GetSpelling()));
+        }
+
+        double FloatLiteral::VisitEvaluate() const {
+            return std::stod(this->GetSpelling());
         }
     }
 }

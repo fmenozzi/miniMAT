@@ -12,5 +12,10 @@ namespace miniMAT {
             // TODO: Once we get that linker bug fixed, we'll add the TypeKind
             Show(prefix, Quote(this->GetClassName()));
         }
+
+        double ScalarType::VisitEvaluate() const {
+            // TODO: This is bad design
+            return -1;
+        }
     }
 }

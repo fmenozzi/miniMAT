@@ -11,5 +11,10 @@ namespace miniMAT {
 
             Show(prefix, Quote(this->GetClassName()) + " " + Quote(this->GetSpelling()));
         }
+
+        double Operator::VisitEvaluate() const {
+            // TODO: This is bad design
+            return -1;
+        }
     }
 }

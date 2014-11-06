@@ -20,6 +20,7 @@ namespace miniMAT {
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;
+            double VisitEvaluate() const;
 
         //private:
             lexer::Token token;

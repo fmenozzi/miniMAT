@@ -8,6 +8,8 @@
 int main() {
     std::string input_line;
 
+    double ans = 0;
+
     while (true) {
         std::cout << ">>> ";
 
@@ -19,6 +21,11 @@ int main() {
 			break;
 		}
 
+        if (input_line == "ans") {
+            std::cout << "ans = " << ans << std::endl;
+            continue;
+        }
+
         miniMAT::reporter::ErrorReporter reporter;
         miniMAT::lexer::Lexer   lexer(input_line, &reporter);
         miniMAT::parser::Parser parser(lexer, &reporter);
@@ -27,8 +34,10 @@ int main() {
 
         if (reporter.HasErrors())
             reporter.ReportErrors();
-        else
-            ast->VisitDisplay("");
+        else {
+            ans = ast->VisitEvaluate();
+            std::cout << "ans = " << ans << std::endl;
+        }
     }
 
     return 0;

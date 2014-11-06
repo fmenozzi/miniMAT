@@ -16,5 +16,9 @@ namespace miniMAT {
             Show(prefix, *this);
             this->literal->VisitDisplay(Indent(prefix));
         }
+
+        double LiteralExpr::VisitEvaluate() const {
+            return this->literal->VisitEvaluate();
+        }
     }
 }

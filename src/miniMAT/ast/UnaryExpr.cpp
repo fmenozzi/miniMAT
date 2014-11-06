@@ -19,5 +19,12 @@ namespace miniMAT {
             this->op->VisitDisplay(Indent(prefix));
             this->expr->VisitDisplay(Indent(Indent(prefix)));
         }
+
+        double UnaryExpr::VisitEvaluate() const {
+            double result = this->expr->VisitEvaluate();
+            if (this->op->GetSpelling() == "-")
+                result *= -1;
+            return result;
+        }
     }
 }
