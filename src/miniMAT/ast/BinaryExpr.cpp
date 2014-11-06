@@ -15,7 +15,12 @@ namespace miniMAT {
         }
 
         void BinaryExpr::VisitDisplay(const std::string& prefix) const {
+            using namespace miniMAT::visit::display;
 
+            Show(prefix, *this);
+            this->op->VisitDisplay(Indent(prefix));
+            this->left->VisitDisplay(Indent(Indent(prefix)));
+            this->right->VisitDisplay(Indent(Indent(prefix)));
         }
     }
 }

@@ -2,6 +2,7 @@
 #define TERMINAL_HPP
 
 #include <AST.hpp>
+#include <display.hpp>
 
 namespace miniMAT {
     namespace ast {
@@ -10,7 +11,7 @@ namespace miniMAT {
             Terminal(const std::string& spelling);
             virtual ~Terminal() {}
 
-            std::string GetSpelling();
+            std::string GetSpelling() const;
 
             virtual std::string GetClassName() const = 0;
 

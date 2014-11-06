@@ -19,7 +19,7 @@ namespace miniMAT {
 
             void VisitDisplay(const std::string& prefix) const;
 
-        private:
+        //private:
             std::shared_ptr<Operator>   op;
             std::shared_ptr<Expression> expr;
         };

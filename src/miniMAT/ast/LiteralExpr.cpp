@@ -11,7 +11,10 @@ namespace miniMAT {
         }
 
         void LiteralExpr::VisitDisplay(const std::string& prefix) const {
+            using namespace miniMAT::visit::display;
 
+            Show(prefix, *this);
+            this->literal->VisitDisplay(Indent(prefix));
         }
     }
 }

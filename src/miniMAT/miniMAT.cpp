@@ -3,6 +3,7 @@
 
 #include <Lexer.hpp>
 #include <Parser.hpp>
+#include <display.hpp>
 
 int main() {
     std::string input_line;
@@ -26,6 +27,8 @@ int main() {
 
         if (reporter.HasErrors())
             reporter.ReportErrors();
+        else
+            ast->VisitDisplay("");
     }
 
     return 0;

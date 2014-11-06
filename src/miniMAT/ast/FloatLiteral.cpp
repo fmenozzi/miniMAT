@@ -7,7 +7,9 @@ namespace miniMAT {
         }
 
         void FloatLiteral::VisitDisplay(const std::string& prefix) const {
+            using namespace miniMAT::visit::display;
 
+            Show(prefix, Quote(this->GetClassName()) + " " + Quote(this->GetSpelling()));
         }
     }
 }

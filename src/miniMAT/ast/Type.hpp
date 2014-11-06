@@ -3,6 +3,7 @@
 
 #include <AST.hpp>
 #include <TypeKind.hpp>
+#include <display.hpp>
 
 namespace miniMAT {
     namespace ast {
@@ -11,7 +12,7 @@ namespace miniMAT {
             Type(TypeKind kind);
             virtual ~Type() {}
 
-            TypeKind GetKind();
+            TypeKind GetKind() const;
 
             virtual std::string GetClassName() const = 0;
 

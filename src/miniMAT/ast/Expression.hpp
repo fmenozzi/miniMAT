@@ -2,6 +2,7 @@
 #define EXPRESSION_HPP
 
 #include <AST.hpp>
+#include <display.hpp>
 
 namespace miniMAT {
     namespace ast {

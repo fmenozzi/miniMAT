@@ -6,7 +6,7 @@ namespace miniMAT {
             this->kind = kind;
         }
 
-        TypeKind Type::GetKind() {
+        TypeKind Type::GetKind() const {
             return this->kind;
         }
     }

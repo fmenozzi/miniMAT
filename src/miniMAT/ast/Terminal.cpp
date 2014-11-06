@@ -6,7 +6,7 @@ namespace miniMAT {
             this->spelling = spelling;
         }
 
-        std::string Terminal::GetSpelling() {
+        std::string Terminal::GetSpelling() const {
             return spelling;
         }
 

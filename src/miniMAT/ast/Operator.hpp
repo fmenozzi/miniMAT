@@ -21,7 +21,7 @@ namespace miniMAT {
 
             void VisitDisplay(const std::string& prefix) const;
 
-        private:
+        //private:
             lexer::Token token;
         };
     }

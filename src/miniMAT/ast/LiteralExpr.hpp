@@ -18,7 +18,7 @@ namespace miniMAT {
 
             void VisitDisplay(const std::string& prefix) const;
 
-        private:
+        //private:
             std::shared_ptr<Literal> literal;
         };
     }
