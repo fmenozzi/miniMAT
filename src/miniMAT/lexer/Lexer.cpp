@@ -163,6 +163,10 @@ namespace miniMAT {
                         return Token(TokenKind::TOK_ERROR, "Single . not allowed!");
                     }
 
+                case ';':
+                    TakeIt();
+                    return Token(TokenKind::TOK_SEMICOL, ";");
+
                 default:
                     temp = current_char;
                     TakeIt();

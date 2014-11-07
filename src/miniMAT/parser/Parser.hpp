@@ -17,13 +17,17 @@ namespace miniMAT {
         private:
                 lexer::Lexer              lexer;
                 std::deque<lexer::Token>  tokens;
+                bool                      suppressed = false;
 
                 std::shared_ptr<reporter::ErrorReporter> reporter;
+
         public:
                 Parser(const lexer::Lexer& lexer,
                        std::shared_ptr<reporter::ErrorReporter> reporter);
 
                 void ParseError(const std::string& error);
+
+                bool SuppressedOutput();
 
                 void Accept(lexer::TokenKind exp_kind);
                 void Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling);

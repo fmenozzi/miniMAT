@@ -24,6 +24,10 @@ namespace miniMAT {
             throw 1;
         }
 
+        bool Parser::SuppressedOutput() {
+            return suppressed;
+        }
+
         void Parser::Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling) {
             // Check for validity of current token
             auto token = GetCurrentToken();
@@ -89,6 +93,10 @@ namespace miniMAT {
 
         std::shared_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
             auto expr = ParseExpression();
+            if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_SEMICOL) {
+                AcceptIt();
+                this->suppressed = true;
+            }
             Accept(lexer::TokenKind::TOK_EOF);
 
             return std::make_shared<ast::ExprStmt>(expr);

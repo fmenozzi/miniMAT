@@ -14,7 +14,8 @@ namespace miniMAT {
             TOK_DOT,
             TOK_ARITHOP,
             TOK_LPAREN,
-            TOK_RPAREN
+            TOK_RPAREN,
+            TOK_SEMICOL
         };
 
         // Uncomment to fail linking

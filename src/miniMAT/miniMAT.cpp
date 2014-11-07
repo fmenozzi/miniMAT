@@ -45,8 +45,10 @@ int main() {
             std::cout << std::endl;
         } else {
             ans = ast->VisitEvaluate();
-            std::cout << "ans = " << std::endl << std::endl;
-            std::cout << "     " << ans << std::endl << std::endl;
+            if (!parser.SuppressedOutput()) {
+                std::cout << "ans = " << std::endl << std::endl;
+                std::cout << "     " << ans << std::endl << std::endl;
+            }
         }
     }
 
