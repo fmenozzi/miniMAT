@@ -22,14 +22,15 @@ int main() {
         std::getline(std::cin, input_line);
         if (input_line == "quit" || input_line == "exit")
             break;
-		if (std::cin.eof()) {
-			std::cout << std::endl;
-			break;
-		}
-
-        if (input_line == "ans") {
+        else if (input_line == "ans") {
             std::cout << "ans = " << ans << std::endl;
             continue;
+        } else if (input_line == "")
+            continue;
+
+        if (std::cin.eof()) {
+            std::cout << std::endl;
+            break;
         }
 
         auto reporter = std::make_shared<miniMAT::reporter::ErrorReporter>();
@@ -42,7 +43,8 @@ int main() {
             reporter->ReportErrors();
         else {
             ans = ast->VisitEvaluate();
-            std::cout << "ans = " << ans << std::endl << std::endl;
+            std::cout << "ans = " << std::endl << std::endl;
+            std::cout << "     " << ans << std::endl << std::endl;
         }
     }
 
