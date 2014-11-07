@@ -20,6 +20,10 @@ int main() {
         std::cout << ">>> ";
 
         std::getline(std::cin, input_line);
+        if (std::cin.eof()) {
+            std::cout << std::endl;
+            break;
+        }
         if (input_line == "quit" || input_line == "exit")
             break;
         else if (input_line == "ans") {
@@ -28,11 +32,6 @@ int main() {
             continue;
         } else if (input_line == "")
             continue;
-
-        if (std::cin.eof()) {
-            std::cout << std::endl;
-            break;
-        }
 
         auto reporter = std::make_shared<miniMAT::reporter::ErrorReporter>();
         miniMAT::lexer::Lexer   lexer(input_line, reporter);
