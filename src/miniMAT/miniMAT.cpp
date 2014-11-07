@@ -23,7 +23,8 @@ int main() {
         if (input_line == "quit" || input_line == "exit")
             break;
         else if (input_line == "ans") {
-            std::cout << "ans = " << ans << std::endl;
+            std::cout << "ans = " << std::endl << std::endl;
+            std::cout << "     " << ans << std::endl << std::endl;
             continue;
         } else if (input_line == "")
             continue;
