@@ -127,9 +127,9 @@ namespace miniMAT {
                                 }
                             }
                         } else {
-                            std::string error = "Character " +
-                                                std::to_string(current_char) +
-                                                " not allowed in scientific notation";
+                            std::string error = "Character \'" +
+                                                std::string(1, current_char) +
+                                                "\' not allowed after 'e' in scientific notation";
                             LexerError(error);
                             return Token(TokenKind::TOK_ERROR, error);
                         }
