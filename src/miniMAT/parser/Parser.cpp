@@ -73,6 +73,9 @@ namespace miniMAT {
             }
             tokens.push_back(token);
 
+            if (reporter->HasErrors())
+                return nullptr;
+
             try {
                 return ParseStatement();
             } catch (...) {
@@ -133,10 +136,15 @@ namespace miniMAT {
                 auto expr = ParseExpression();
                 Accept(lexer::TokenKind::TOK_RPAREN);
                 return expr;
-            } else {
+            } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
                 auto floatlit = std::make_shared<ast::FloatLiteral>(GetCurrentToken().GetSpelling());
                 Accept(lexer::TokenKind::TOK_FLOATLIT);
                 return std::make_shared<ast::LiteralExpr>(floatlit);
+            } else { // TOK_IDENTIFIER
+                // For now, identifiers are not allowed
+                ParseError("Undefined function or variable \'" +
+                           GetCurrentToken().GetSpelling() + "\'.");
+                return nullptr;
             }
         }
     }

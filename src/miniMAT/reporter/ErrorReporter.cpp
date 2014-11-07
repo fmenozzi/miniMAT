@@ -29,17 +29,12 @@ namespace miniMAT {
         }
 
         void ErrorReporter::ReportErrors() {
-            if (HasLexerErrors()) {
-                std::cout << "LEXER ERROR(S):" << std::endl;
-                for (auto error : this->lexer_errors)
-                    std::cout << "\t-" << error << std::endl;
-            }
+            // For now, we just output one error at a time
 
-            if (HasParseErrors()) {
-                std::cout << "PARSE ERROR(S):" << std::endl;
-                for (auto error : this->parse_errors)
-                    std::cout << "\t-" << error << std::endl;
-            }
+            if (HasLexerErrors())
+                std::cout << lexer_errors[0] << std::endl;
+            if (HasParseErrors())
+                std::cout << parse_errors[0] << std::endl;
         }
     }
 }

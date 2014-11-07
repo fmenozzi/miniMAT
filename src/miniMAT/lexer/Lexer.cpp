@@ -41,6 +41,16 @@ namespace miniMAT {
             if (is_done)
                 return Token(TokenKind::TOK_EOF, "EOF");
 
+            // Identifiers
+            if (std::isalpha(current_char)) {
+                std::string idstr;
+                while (std::isalnum(current_char) || current_char == '_') {
+                    idstr += current_char;
+                    TakeIt();
+                }
+                return Token(TokenKind::TOK_IDENTIFIER, idstr);
+            }
+
             // Non-identifiers
             char temp;
             std::string numstr;

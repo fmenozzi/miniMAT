@@ -9,6 +9,7 @@ namespace miniMAT {
         enum class TokenKind {
             TOK_EOF,
             TOK_ERROR,
+            TOK_IDENTIFIER,
             TOK_FLOATLIT,
             TOK_DOT,
             TOK_ARITHOP,

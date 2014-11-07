@@ -40,9 +40,10 @@ int main() {
 
         auto ast = parser.Parse();
 
-        if (reporter->HasErrors())
+        if (reporter->HasErrors()) {
             reporter->ReportErrors();
-        else {
+            std::cout << std::endl;
+        } else {
             ans = ast->VisitEvaluate();
             std::cout << "ans = " << std::endl << std::endl;
             std::cout << "     " << ans << std::endl << std::endl;
