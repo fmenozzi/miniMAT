@@ -20,9 +20,9 @@ A small MATLAB interpreter written in C++ with minimal dependencies
         $ mkdir build
         $ cd build
     
-    Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, simply run `ccmake miniMAT/CMakeLists.txt` instead):
+    Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, simply run `ccmake path/to/miniMAT/CMakeLists.txt` instead):
     
-        $ cmake miniMAT/CMakeLists.txt 
+        $ cmake path/to/miniMAT/CMakeLists.txt 
         $ make
 
 3. From the build directory, type `./miniMAT` to launch the REPL
