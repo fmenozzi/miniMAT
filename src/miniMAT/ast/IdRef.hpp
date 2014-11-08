@@ -1,0 +1,27 @@
+#ifndef ID_REF_HPP
+#define ID_REF_HPP
+
+#include <memory>
+
+#include <Reference.hpp>
+#include <Identifier.hpp>
+
+namespace miniMAT {
+    namespace ast {
+        class IdRef : public Reference {
+        public:
+            IdRef(std::shared_ptr<Identifier> id);
+            virtual ~IdRef() {}
+
+            std::string GetClassName() const;
+
+            void VisitDisplay(const std::string& prefix) const;
+            double VisitEvaluate() const;
+
+        //private:
+            std::shared_ptr<Identifier> id;
+        };
+    }
+}
+
+#endif

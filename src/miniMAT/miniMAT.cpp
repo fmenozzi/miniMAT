@@ -2,6 +2,7 @@
 #include <string>
 
 #include <memory>
+#include <map>
 
 #include <Lexer.hpp>
 #include <Parser.hpp>
@@ -11,6 +12,8 @@ int main() {
     std::string input_line;
 
     double ans = 0;
+
+    auto id_table = std::make_shared<std::map<std::string, double>>();
 
     std::cout << "miniMAT: It's like MATLAB, but smaller." << std::endl;
     std::cout << "Copyright (C) 2014 Federico Menozzi" << std::endl;

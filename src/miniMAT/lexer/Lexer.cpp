@@ -158,10 +158,14 @@ namespace miniMAT {
                         }
                         return Token(TokenKind::TOK_FLOATLIT, numstr);
                     } else {
-                        //return Token(TokenKind::TOK_DOT, ".");
+                        // TODO: Fix this error message
                         LexerError("Single . not allowed!");
                         return Token(TokenKind::TOK_ERROR, "Single . not allowed!");
                     }
+
+                case '=':
+                    TakeIt();
+                    return Token(TokenKind::TOK_ASSIGN, "=");
 
                 case ';':
                     TakeIt();

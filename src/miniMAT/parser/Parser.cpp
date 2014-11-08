@@ -9,6 +9,8 @@
 #include <BinaryExpr.hpp>
 #include <UnaryExpr.hpp>
 #include <LiteralExpr.hpp>
+#include <IdRef.hpp>
+#include <AssignStmt.hpp>
 
 namespace miniMAT {
     namespace parser {
@@ -88,7 +90,31 @@ namespace miniMAT {
         }
 
         std::shared_ptr<ast::Statement> Parser::ParseStatement() {
-            return ParseExprStmt();
+            if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_IDENTIFIER) {
+                auto id_token = GetCurrentToken();
+                AcceptIt();
+
+                auto next_token = GetCurrentToken();
+
+                PutBack(id_token);
+
+                if (next_token.GetKind() == lexer::TokenKind::TOK_ASSIGN) {
+                    return ParseAssignStmt();
+                } else /*if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_ARITHOP)*/ {
+        			return ParseExprStmt();
+        		}
+            } else {
+                return ParseExprStmt();
+            }
+
+
+
+            // Some kind of ParseError
+            ParseError("We've arrived at that Parser error");
+            return nullptr;
+
+
+
         }
 
         std::shared_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
@@ -100,6 +126,18 @@ namespace miniMAT {
             Accept(lexer::TokenKind::TOK_EOF);
 
             return std::make_shared<ast::ExprStmt>(expr);
+        }
+
+        std::shared_ptr<ast::AssignStmt> Parser::ParseAssignStmt() {
+            auto id   = std::make_shared<ast::Identifier>(GetCurrentToken().GetSpelling());
+            auto ref  = std::make_shared<ast::IdRef>(id);
+            AcceptIt();
+
+            Accept(lexer::TokenKind::TOK_ASSIGN);
+
+            auto expr = ParseExpression();
+
+            return std::make_shared<ast::AssignStmt>(ref, expr);
         }
 
         std::shared_ptr<ast::Expression> Parser::ParseExpression() {

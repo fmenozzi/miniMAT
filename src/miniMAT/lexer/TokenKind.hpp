@@ -10,6 +10,7 @@ namespace miniMAT {
             TOK_EOF,
             TOK_ERROR,
             TOK_IDENTIFIER,
+            TOK_ASSIGN,
             TOK_FLOATLIT,
             TOK_DOT,
             TOK_ARITHOP,

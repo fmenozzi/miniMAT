@@ -9,6 +9,7 @@
 #include <AST.hpp>
 #include <Statement.hpp>
 #include <ExprStmt.hpp>
+#include <AssignStmt.hpp>
 #include <Expression.hpp>
 
 namespace miniMAT {
@@ -39,10 +40,10 @@ namespace miniMAT {
 
                 std::shared_ptr<ast::AST> Parse();
 
-                std::shared_ptr<ast::Statement> ParseStatement();
+                std::shared_ptr<ast::Statement>  ParseStatement();
 
-                std::shared_ptr<ast::ExprStmt>  ParseExprStmt();
-
+                std::shared_ptr<ast::ExprStmt>   ParseExprStmt();
+                std::shared_ptr<ast::AssignStmt> ParseAssignStmt();
 
                 std::shared_ptr<ast::Expression> ParseExpression();
 
