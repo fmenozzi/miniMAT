@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-
 #include <memory>
 #include <map>
 
@@ -37,9 +36,16 @@ int main() {
             continue;
         } else if (input_line == "who") {
             // TODO: I'll format this nicer later
-             for (auto var : *id_table)
-                 std::cout << var.first << " = " << var.second << std::endl;
-             continue;
+            for (auto var : *id_table)
+                std::cout << var.first << std::endl;
+            std::cout << std::endl;
+            continue;
+        } else if (input_line == "whos") {
+            // TODO: I'll format this nicer later
+            for (auto var : *id_table)
+                std::cout << var.first << " = " << var.second << std::endl;
+            std::cout << std::endl;
+            continue;
         }
 
         auto reporter = std::make_shared<miniMAT::reporter::ErrorReporter>();
