@@ -10,6 +10,7 @@
 #include <UnaryExpr.hpp>
 #include <LiteralExpr.hpp>
 #include <IdRef.hpp>
+#include <RefExpr.hpp>
 #include <AssignStmt.hpp>
 
 namespace miniMAT {
@@ -79,6 +80,7 @@ namespace miniMAT {
             }
             tokens.push_back(token);
 
+            // Don't parse if we have lexer errors
             if (reporter->HasErrors())
                 return nullptr;
 
@@ -106,15 +108,6 @@ namespace miniMAT {
             } else {
                 return ParseExprStmt();
             }
-
-
-
-            // Some kind of ParseError
-            ParseError("We've arrived at that Parser error");
-            return nullptr;
-
-
-
         }
 
         std::shared_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
@@ -188,9 +181,16 @@ namespace miniMAT {
                 return std::make_shared<ast::LiteralExpr>(floatlit);
             } else { // TOK_IDENTIFIER
                 // For now, identifiers are not allowed
-                ParseError("Undefined function or variable \'" +
-                           GetCurrentToken().GetSpelling() + "\'.");
-                return nullptr;
+            //    ParseError("Undefined function or variable \'" +
+            //               GetCurrentToken().GetSpelling() + "\'.");
+            //    return nullptr;
+
+                auto id  = std::make_shared<ast::Identifier>(GetCurrentToken().GetSpelling());
+                AcceptIt();
+
+                auto idref = std::make_shared<ast::IdRef>(id);
+
+                return std::make_shared<ast::RefExpr>(idref);
             }
         }
     }

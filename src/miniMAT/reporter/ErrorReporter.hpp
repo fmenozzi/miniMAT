@@ -10,8 +10,9 @@ namespace miniMAT {
         public:
             ErrorReporter();
 
-            void AddLexerError(std::string error);
-            void AddParseError(std::string error);
+            void AddLexerError(const std::string& error);
+            void AddParseError(const std::string& error);
+            void AddCheckError(const std::string& error);
 
             bool HasErrors();
 
@@ -20,9 +21,11 @@ namespace miniMAT {
         private:
             std::vector<std::string> lexer_errors;
             std::vector<std::string> parse_errors;
+            std::vector<std::string> check_errors;
 
             bool HasLexerErrors();
             bool HasParseErrors();
+            bool HasCheckErrors();
         };
     }
 }

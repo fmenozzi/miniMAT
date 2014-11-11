@@ -14,6 +14,7 @@ include_directories(src/miniMAT/lexer)
 include_directories(src/miniMAT/parser)
 include_directories(src/miniMAT/ast)
 include_directories(src/miniMAT/visit)
+include_directories(src/miniMAT/checker)
 
 set(SOURCES src/miniMAT/miniMAT.cpp
 
@@ -40,6 +41,8 @@ set(SOURCES src/miniMAT/miniMAT.cpp
 			src/miniMAT/ast/UnaryExpr.cpp
 
 			src/miniMAT/visit/Visitors.cpp
+
+			src/miniMAT/checker/Checker.cpp
 	)
 
 add_executable(miniMAT ${SOURCES})

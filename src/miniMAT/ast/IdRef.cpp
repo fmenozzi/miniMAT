@@ -21,5 +21,9 @@ namespace miniMAT {
             // TODO: This is really bad design
             return 1;
         }
+
+        void IdRef::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+                               std::shared_ptr<reporter::ErrorReporter> reporter) const {
+        }
     }
 }

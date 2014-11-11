@@ -1,9 +1,6 @@
 #ifndef ASSIGN_STMT_HPP
 #define ASSIGN_STMT_HPP
 
-#include <memory>
-#include <string>
-
 #include <Reference.hpp>
 #include <Expression.hpp>
 #include <Statement.hpp>
@@ -21,6 +18,8 @@ namespace miniMAT {
 
             void VisitDisplay(const std::string& prefix) const;
             double VisitEvaluate() const;
+            void VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+                            std::shared_ptr<reporter::ErrorReporter> checker) const;
 
         //private:
             std::shared_ptr<Reference> ref;

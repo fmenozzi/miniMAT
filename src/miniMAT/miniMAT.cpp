@@ -30,7 +30,7 @@ int main() {
         if (input_line == "quit" || input_line == "exit")
             break;
         else if (input_line == "ans") {
-            std::cout << "ans = " << std::endl << std::endl;
+            std::cout << "ans =" << std::endl << std::endl;
             std::cout << "     " << ans << std::endl << std::endl;
             continue;
         } else if (input_line == "")
@@ -48,8 +48,15 @@ int main() {
         } else {
             ans = ast->VisitEvaluate();
             if (!parser.SuppressedOutput()) {
-                std::cout << "ans = " << std::endl << std::endl;
-                std::cout << "     " << ans << std::endl << std::endl;
+                if (ast->GetClassName() == "ExprStmt") {
+                    std::cout << "ans =" << std::endl << std::endl;
+                    std::cout << "     " << ans << std::endl << std::endl;
+                } else if (ast->GetClassName() == "AssignStmt") {
+                    auto assign_stmt = std::dynamic_pointer_cast<miniMAT::ast::AssignStmt>(ast);
+
+                    std::cout << assign_stmt->ref->GetClassName() << " "
+                              << assign_stmt->expr->GetClassName() << std::endl;
+                }
             }
         }
     }

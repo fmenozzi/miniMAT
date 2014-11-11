@@ -26,5 +26,9 @@ namespace miniMAT {
                 result *= -1;
             return result;
         }
+
+        void UnaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace miniMAT {
 
             virtual void VisitDisplay(const std::string& prefix) const = 0;
             virtual double VisitEvaluate() const = 0;
+            virtual void VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+                                    std::shared_ptr<reporter::ErrorReporter> reporter) const = 0;
 
         private:
             TypeKind kind;
