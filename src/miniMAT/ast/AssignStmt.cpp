@@ -35,6 +35,8 @@ namespace miniMAT {
 
         void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
+            this->expr->VisitCheck(id_table, reporter);
+
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
                 (*id_table)[varname] = this->expr->VisitEvaluate(id_table);
