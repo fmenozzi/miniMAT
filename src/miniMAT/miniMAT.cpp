@@ -62,6 +62,12 @@ int main() {
 
         auto ast = parser.Parse();
 
+        if (reporter->HasErrors()) {
+            reporter->ReportErrors();
+            std::cout << std::endl;
+            continue;
+        }
+
         miniMAT::checker::Checker checker(id_table, reporter);
         ast = checker.check(ast);
 
