@@ -24,9 +24,9 @@ namespace miniMAT {
             this->right->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        double BinaryExpr::VisitEvaluate() const {
-            double left_result  = this->left->VisitEvaluate();
-            double right_result = this->right->VisitEvaluate();
+        double BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+            double left_result  = this->left->VisitEvaluate(id_table);
+            double right_result = this->right->VisitEvaluate(id_table);
 
             std::string opstr = this->op->GetSpelling();
             if (opstr == "+")

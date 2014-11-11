@@ -17,7 +17,6 @@
  * WHERE I LEFT OFF: vars can be referenced on their own.
  *
  * WHAT I NEED TO ADD:
- *      - id checking to ALL expression types
  *      - ability to reference vars
  *
  */
@@ -76,7 +75,7 @@ int main() {
             std::cout << std::endl;
         } else {
             //ast->VisitDisplay("");
-            ans = ast->VisitEvaluate();
+            ans = ast->VisitEvaluate(id_table);
             if (!parser.SuppressedOutput()) {
                 if (ast->GetClassName() == "ExprStmt") {
                     auto exprstmt = std::dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);

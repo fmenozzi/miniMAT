@@ -23,8 +23,8 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(prefix));
         }
 
-        double AssignStmt::VisitEvaluate() const {
-            return this->expr->VisitEvaluate();
+        double AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+            return this->expr->VisitEvaluate(id_table);
         }
 
         void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
@@ -32,7 +32,7 @@ namespace miniMAT {
 
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-                (*id_table)[varname] = this->expr->VisitEvaluate();
+                (*id_table)[varname] = this->expr->VisitEvaluate(id_table);
                 std::cout << varname << " = " << id_table->at(varname) << std::endl;
             } else {
                 std::cout << "ref->GetClassName() actually equals " << ref->GetClassName() << std::endl;

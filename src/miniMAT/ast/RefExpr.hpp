@@ -16,13 +16,12 @@ namespace miniMAT {
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;
-            double VisitEvaluate() const;
+            double VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const;
             void VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
         //private:
             std::shared_ptr<Reference> ref;
-            double val;
         };
     }
 }

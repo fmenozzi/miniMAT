@@ -12,7 +12,7 @@ namespace miniMAT {
             Show(prefix, Quote(this->GetClassName()) + " " + Quote(this->GetSpelling()));
         }
 
-        double Operator::VisitEvaluate() const {
+        double Operator::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
             // TODO: This is bad design
             return -1;
         }

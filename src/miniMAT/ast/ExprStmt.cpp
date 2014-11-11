@@ -17,8 +17,8 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(prefix));
         }
 
-        double ExprStmt::VisitEvaluate() const {
-            return this->expr->VisitEvaluate();
+        double ExprStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+            return this->expr->VisitEvaluate(id_table);
         }
 
         void ExprStmt::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,

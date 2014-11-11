@@ -6,8 +6,6 @@ namespace miniMAT {
     namespace ast {
         RefExpr::RefExpr(std::shared_ptr<Reference> ref) {
             this->ref = ref;
-
-            this->val = 0;
         }
 
         std::string RefExpr::GetClassName() const {
@@ -21,10 +19,8 @@ namespace miniMAT {
             this->ref->VisitDisplay(Indent(prefix));
         }
 
-        double RefExpr::VisitEvaluate() const {
-            // TODO: This is really bad design
-
-            return val;
+        double RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+            return this->ref->VisitEvaluate(id_table);
         }
 
         void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,

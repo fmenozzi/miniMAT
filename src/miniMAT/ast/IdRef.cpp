@@ -17,13 +17,15 @@ namespace miniMAT {
             this->id->VisitDisplay(Indent(prefix));
         }
 
-        double IdRef::VisitEvaluate() const {
-            // TODO: This is really bad design
-            return 1;
+        double IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+            return id_table->at(this->id->GetSpelling());
         }
 
         void IdRef::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
                                std::shared_ptr<reporter::ErrorReporter> reporter) const {
+            auto varname = this->id->GetSpelling();
+            if (id_table->find(varname) == id_table->end())
+                throw "Undefined variable or function \'" + varname + "\'.";
         }
     }
 }

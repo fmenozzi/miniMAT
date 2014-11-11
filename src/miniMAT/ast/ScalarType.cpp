@@ -13,7 +13,7 @@ namespace miniMAT {
             Show(prefix, Quote(this->GetClassName()));
         }
 
-        double ScalarType::VisitEvaluate() const {
+        double ScalarType::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
             // TODO: This is bad design
             return -1;
         }
