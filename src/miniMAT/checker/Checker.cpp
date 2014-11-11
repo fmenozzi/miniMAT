@@ -2,6 +2,8 @@
 
 #include <Checker.hpp>
 
+#include <iostream>
+
 namespace miniMAT {
     namespace checker {
         Checker::Checker(std::shared_ptr<std::map<std::string, double>> id_table,
@@ -14,7 +16,8 @@ namespace miniMAT {
             try {
                 ast->VisitCheck(this->id_table, this->reporter);
                 return ast;
-            } catch (...) {
+            } catch (std::string error) {
+                reporter->AddCheckError(error);
                 return nullptr;
             }
         }

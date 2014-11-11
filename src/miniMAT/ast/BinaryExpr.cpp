@@ -43,6 +43,9 @@ namespace miniMAT {
 
         void BinaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
+            this->left->VisitCheck(id_table, reporter);
+            this->op->VisitCheck(id_table, reporter);
+            this->right->VisitCheck(id_table, reporter);
         }
     }
 }

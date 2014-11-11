@@ -1,4 +1,6 @@
 #include <RefExpr.hpp>
+#include <IdRef.hpp>
+#include <iostream>
 
 namespace miniMAT {
     namespace ast {
@@ -22,12 +24,17 @@ namespace miniMAT {
         double RefExpr::VisitEvaluate() const {
             // TODO: This is really bad design
 
-            // Maybe we should store the value of
             return val;
         }
 
         void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
+            if (ref->GetClassName() == "IdRef") {
+                auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
+                if (id_table->find(varname) == id_table->end()) {
+                    throw "Undefined variable or function \'" + varname + "\'.";
+                }
+            }
         }
     }
 }
