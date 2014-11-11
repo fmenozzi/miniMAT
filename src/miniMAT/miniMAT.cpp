@@ -13,20 +13,11 @@
 #include <RefExpr.hpp>
 #include <IdRef.hpp>
 
-/*
- * WHERE I LEFT OFF: vars can be referenced on their own.
- *
- * WHAT I NEED TO ADD:
- *      - ability to reference vars
- *
- */
-
 int main() {
     std::string input_line;
 
-    double ans = 0;
-
     auto id_table = std::make_shared<std::map<std::string, double>>();
+    (*id_table)["ans"] = 0;
 
     std::cout << "miniMAT: It's like MATLAB, but smaller." << std::endl;
     std::cout << "Copyright (C) 2014 Federico Menozzi" << std::endl;
@@ -40,12 +31,8 @@ int main() {
             std::cout << std::endl;
             break;
         }
-        if (input_line == "quit" || input_line == "exit")
+        if (input_line == "quit" || input_line == "exit") {
             break;
-        else if (input_line == "ans") {
-            std::cout << "ans =" << std::endl << std::endl;
-            std::cout << "     " << ans << std::endl << std::endl;
-            continue;
         } else if (input_line == "") {
             continue;
         } else if (input_line == "who") {
@@ -74,8 +61,7 @@ int main() {
             reporter->ReportErrors();
             std::cout << std::endl;
         } else {
-            //ast->VisitDisplay("");
-            ans = ast->VisitEvaluate(id_table);
+            double ans = ast->VisitEvaluate(id_table);
             if (!parser.SuppressedOutput()) {
                 if (ast->GetClassName() == "ExprStmt") {
                     auto exprstmt = std::dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
@@ -86,6 +72,7 @@ int main() {
                         std::cout << varname << " =" << std::endl << std::endl;
                         std::cout << "    " << id_table->at(varname) << std::endl << std::endl;
                     } else {
+                        (*id_table)["ans"] = ans;
                         std::cout << "ans =" << std::endl << std::endl;
                         std::cout << "     " << ans << std::endl << std::endl;
                     }
@@ -94,7 +81,13 @@ int main() {
                     auto assign_stmt = std::dynamic_pointer_cast<miniMAT::ast::AssignStmt>(ast);
 
                     if (assign_stmt->ref->GetClassName() == "IdRef") {
-                        ;
+                        auto idref   = std::dynamic_pointer_cast<miniMAT::ast::IdRef>(assign_stmt->ref);
+
+                        auto varname = idref->id->GetSpelling();
+                        auto val     = assign_stmt->val;
+
+                        std::cout << varname << " =" << std::endl << std::endl;
+                        std::cout << "     " << val << std::endl << std::endl;
                     }
                 }
             }

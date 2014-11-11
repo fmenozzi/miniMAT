@@ -13,7 +13,7 @@ namespace miniMAT {
             Show(prefix, Quote(this->GetClassName()) + " " + Quote(this->GetSpelling()));
         }
 
-        double FloatLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+        double FloatLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
             std::istringstream iss(this->GetSpelling());
             double result;
             iss >> result;

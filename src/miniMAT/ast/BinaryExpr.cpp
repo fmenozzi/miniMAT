@@ -24,7 +24,7 @@ namespace miniMAT {
             this->right->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        double BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+        double BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
             double left_result  = this->left->VisitEvaluate(id_table);
             double right_result = this->right->VisitEvaluate(id_table);
 

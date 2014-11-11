@@ -20,7 +20,7 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        double UnaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+        double UnaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
             double result = this->expr->VisitEvaluate(id_table);
             if (this->op->GetSpelling() == "-")
                 result *= -1;

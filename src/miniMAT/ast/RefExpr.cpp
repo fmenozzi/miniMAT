@@ -19,7 +19,7 @@ namespace miniMAT {
             this->ref->VisitDisplay(Indent(prefix));
         }
 
-        double RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+        double RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
             return this->ref->VisitEvaluate(id_table);
         }
 

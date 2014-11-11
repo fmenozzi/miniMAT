@@ -17,7 +17,7 @@ namespace miniMAT {
             this->id->VisitDisplay(Indent(prefix));
         }
 
-        double IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) const {
+        double IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
             return id_table->at(this->id->GetSpelling());
         }
 
