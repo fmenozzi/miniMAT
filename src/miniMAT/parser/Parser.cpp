@@ -130,6 +130,11 @@ namespace miniMAT {
 
             auto expr = ParseExpression();
 
+            if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_SEMICOL) {
+                AcceptIt();
+                this->suppressed = true;
+            }
+
             return std::make_shared<ast::AssignStmt>(ref, expr);
         }
 
