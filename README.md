@@ -20,26 +20,27 @@ A small MATLAB interpreter written in C++ with minimal dependencies
         $ mkdir build
         $ cd build
     
-    Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, simply run `ccmake path/to/miniMAT/CMakeLists.txt` instead):
+    Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, run `ccmake` instead):
     
-        $ cmake path/to/miniMAT/CMakeLists.txt 
+        $ cmake ..
         $ make
 
 3. From the build directory, type `./miniMAT` to launch the REPL
 4. Enjoy!
 
 ## Current Features
-miniMAT aims to be a subset of MATLAB. Currently, that subset is very small, but I'm working on it! The features currently supported include:
+miniMAT aims to be a subset of MATLAB. Currently, that subset is small, but I'm working on it! The features currently supported include:
   * Evaluation of numeric expressions (using `+`, `-`, `*`, `/`, `^`, `(`, and `)`)
   * Support for floating point numbers in scientific notation (e.g. `0.314159e+1`)
+  * Scalar variable assignment and manipilation (including the `ans` variable)
+  * `who` and `whos` to view variables in current scope
   * `quit` and `exit` to quit the application
   * REPL and error diagnostic output closely resembling MATLAB output
 
 ## Future Features
 miniMAT is growing rapidly. Features planned for future releases include:
-  * Variable assignment and manipulation
   * Matrix manipulation (obviously)
-  * "Standard" functions including `clear`, `clc`, `who`, `whos`, etc.
+  * More "standard" functions including `clear`, `clc`, etc.
   * Command history
   * Scripting
   * And much more
