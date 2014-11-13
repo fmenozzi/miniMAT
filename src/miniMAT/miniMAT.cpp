@@ -13,6 +13,13 @@
 #include <RefExpr.hpp>
 #include <IdRef.hpp>
 
+void PrintResult(std::string varname, double val, bool suppressed) {
+    if (!suppressed) {
+        std::cout << varname << " =" << std::endl << std::endl;
+        std::cout << "    " << val << std::endl << std::endl;
+    }
+}
+
 int main() {
     std::string input_line;
 
@@ -79,17 +86,11 @@ int main() {
                     auto refexpr = std::dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
                     auto varname = std::dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->GetSpelling();
 
-                    if (!parser.SuppressedOutput()) {
-                        std::cout << varname << " =" << std::endl << std::endl;
-                        std::cout << "    " << id_table->at(varname) << std::endl << std::endl;
-                    }
+                    PrintResult(varname, id_table->at(varname), parser.SuppressedOutput());
                 } else {
                     (*id_table)["ans"] = ans;
 
-                    if (!parser.SuppressedOutput()) {
-                        std::cout << "ans =" << std::endl << std::endl;
-                        std::cout << "     " << ans << std::endl << std::endl;
-                    }
+                    PrintResult("ans", ans, parser.SuppressedOutput());
                 }
 
             } else if (ast->GetClassName() == "AssignStmt") {
@@ -101,10 +102,7 @@ int main() {
                     auto varname = idref->id->GetSpelling();
                     auto val     = assign_stmt->val;
 
-                    if (!parser.SuppressedOutput()) {
-                        std::cout << varname << " =" << std::endl << std::endl;
-                        std::cout << "     " << val << std::endl << std::endl;
-                    }
+                    PrintResult(varname, val, parser.SuppressedOutput());
                 }
             }
         }
