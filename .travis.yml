@@ -3,7 +3,11 @@ language: cpp
 compiler:
     - clang
 
+bu
+
 before_script:
+	- sudo apt-get install libeigen3-dev -y
+	- export EIGEN3_INCLUDE_DIR=/usr/include/eigen3
     - mkdir build
     - cd build
     - cmake ..
