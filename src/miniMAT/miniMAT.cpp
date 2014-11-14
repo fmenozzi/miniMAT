@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <algorithm>
 
 #include <Lexer.hpp>
 #include <Parser.hpp>
@@ -49,10 +50,18 @@ int main() {
             continue;
         } else if (input_line == "whos") {
             // Find longest var name (for formatting)
+            /*
             std::size_t max_var_length = 0;
             for (auto var : *id_table)
                 if (var.first.size() > max_var_length)
                     max_var_length = var.first.size();
+            */
+            auto max_var_length = std::max_element(std::begin(*id_table),
+                                                   std::end(*id_table),
+                                                   [] (std::pair<std::string, double> p1, 
+                                                       std::pair<std::string, double> p2) {
+                return p1.first.size() < p2.first.size();
+            })->first.size();
 
             for (auto var : *id_table)
                 std::cout << std::setw(max_var_length) << var.first << " = " << var.second << std::endl;
