@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 
 #include <ErrorReporter.hpp>
 
@@ -14,7 +14,7 @@ namespace miniMAT {
         class AST {
         public:
             typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> Matrix;
-            
+
             virtual ~AST() {}
 
             virtual std::string GetClassName() const = 0;

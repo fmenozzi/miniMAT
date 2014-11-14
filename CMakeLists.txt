@@ -1,22 +1,28 @@
-cmake_minimum_required(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-project(miniMAT)
+PROJECT(miniMAT)
 
 # C++11, all warnings
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 
 # Check for Eigen
-find_package(Eigen3 REQUIRED)
-include_directories(${EIGEN3_INCLUDE_DIR})
+FIND_PACKAGE(Eigen3 REQUIRED)
 
-include_directories(src/miniMAT/ast)
-include_directories(src/miniMAT/checker)
-include_directories(src/miniMAT/lexer)
-include_directories(src/miniMAT/parser)
-include_directories(src/miniMAT/reporter)
-include_directories(src/miniMAT/visit)
+SET(EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}")
+IF (NOT EIGEN3_INCLUDE_DIR)
+    MESSAGE(FATAL_ERROR "Please point the environment variable EIGEN3_INCLUDE_DIR to the include directory of your Eigen3 installation.")
+ENDIF()
+INCLUDE_DIRECTORIES(${EIGEN_INCLUDE_DIR})
 
-set(SOURCES src/miniMAT/miniMAT.cpp
+
+INCLUDE_DIRECTORIES(src/miniMAT/ast)
+INCLUDE_DIRECTORIES(src/miniMAT/checker)
+INCLUDE_DIRECTORIES(src/miniMAT/lexer)
+INCLUDE_DIRECTORIES(src/miniMAT/parser)
+INCLUDE_DIRECTORIES(src/miniMAT/reporter)
+INCLUDE_DIRECTORIES(src/miniMAT/visit)
+
+SET(SOURCES src/miniMAT/miniMAT.cpp
 
             src/miniMAT/ast/AssignStmt.cpp
             src/miniMAT/ast/BinaryExpr.cpp
@@ -45,4 +51,4 @@ set(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/visit/Visitors.cpp
     )
 
-add_executable(miniMAT ${SOURCES})
+ADD_EXECUTABLE(miniMAT ${SOURCES})
