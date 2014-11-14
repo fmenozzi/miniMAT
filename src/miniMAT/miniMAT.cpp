@@ -52,11 +52,13 @@ int main() {
             continue;
         } else if (input_line == "whos") {
             // Find longest var name (for formatting)
-            auto w = max_element(begin(*id_table), end(*id_table), [](pair<string, double> p1, pair<string, double> p2) {
+            auto vars = *id_table;
+            auto w = max_element(begin(vars), end(vars), [](pair<string, double> p1, pair<string, double> p2) {
                 return p1.first.size() < p2.first.size();
             })->first.size();
 
-            for (auto var : *id_table)
+            cout << endl;
+            for (auto var : vars)
                 cout << setw(w) << var.first << " = " << var.second << endl;
             cout << endl;
             continue;
