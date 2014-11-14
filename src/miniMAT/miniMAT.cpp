@@ -14,29 +14,31 @@
 #include <RefExpr.hpp>
 #include <IdRef.hpp>
 
-void PrintResult(std::string varname, double val, bool suppressed) {
+using namespace std;
+
+void PrintResult(string varname, double val, bool suppressed) {
     if (!suppressed) {
-        std::cout << varname << " =" << std::endl << std::endl;
-        std::cout << "    " << val << std::endl << std::endl;
+        cout << varname << " =" << endl << endl;
+        cout << "    " << val << endl << endl;
     }
 }
 
 int main() {
-    std::string input_line;
+    string input_line;
 
-    auto id_table = std::make_shared<std::map<std::string, double>>();
+    auto id_table = make_shared<map<string, double>>();
     (*id_table)["ans"] = 0;
 
-    std::cout << "miniMAT: It's like MATLAB, but smaller." << std::endl;
-    std::cout << "Copyright (C) 2014 Federico Menozzi" << std::endl;
-    std::cout << std::endl;
+    cout << "miniMAT: It's like MATLAB, but smaller." << endl;
+    cout << "Copyright (C) 2014 Federico Menozzi" << endl;
+    cout << endl;
 
     while (true) {
-        std::cout << ">>> ";
+        cout << ">>> ";
 
-        std::getline(std::cin, input_line);
-        if (std::cin.eof()) {
-            std::cout << std::endl;
+        getline(cin, input_line);
+        if (cin.eof()) {
+            cout << endl;
             break;
         }
         if (input_line == "quit" || input_line == "exit") {
@@ -45,31 +47,22 @@ int main() {
             continue;
         } else if (input_line == "who") {
             for (auto var : *id_table)
-                std::cout << var.first << std::endl;
-            std::cout  << std::endl;
+                cout << var.first << endl;
+            cout  << endl;
             continue;
         } else if (input_line == "whos") {
             // Find longest var name (for formatting)
-            /*
-            std::size_t max_var_length = 0;
-            for (auto var : *id_table)
-                if (var.first.size() > max_var_length)
-                    max_var_length = var.first.size();
-            */
-            auto max_var_length = std::max_element(std::begin(*id_table),
-                                                   std::end(*id_table),
-                                                   [] (std::pair<std::string, double> p1, 
-                                                       std::pair<std::string, double> p2) {
+            auto w = max_element(begin(*id_table), end(*id_table), [](pair<string, double> p1, pair<string, double> p2) {
                 return p1.first.size() < p2.first.size();
             })->first.size();
 
             for (auto var : *id_table)
-                std::cout << std::setw(max_var_length) << var.first << " = " << var.second << std::endl;
-            std::cout << std::endl;
+                cout << setw(w) << var.first << " = " << var.second << endl;
+            cout << endl;
             continue;
         }
 
-        auto reporter = std::make_shared<miniMAT::reporter::ErrorReporter>();
+        auto reporter = make_shared<miniMAT::reporter::ErrorReporter>();
         miniMAT::lexer::Lexer   lexer(input_line, reporter);
         miniMAT::parser::Parser parser(lexer, reporter);
 
@@ -77,7 +70,7 @@ int main() {
 
         if (reporter->HasErrors()) {
             reporter->ReportErrors();
-            std::cout << std::endl;
+            cout << endl;
             continue;
         }
 
@@ -86,14 +79,14 @@ int main() {
 
         if (reporter->HasErrors()) {
             reporter->ReportErrors();
-            std::cout << std::endl;
+            cout << endl;
         } else {
             double ans = ast->VisitEvaluate(id_table);
             if (ast->GetClassName() == "ExprStmt") {
-                auto exprstmt = std::dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
+                auto exprstmt = dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
                 if (exprstmt->expr->GetClassName() == "RefExpr") {
-                    auto refexpr = std::dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
-                    auto varname = std::dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->GetSpelling();
+                    auto refexpr = dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
+                    auto varname = dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->GetSpelling();
 
                     PrintResult(varname, id_table->at(varname), parser.SuppressedOutput());
                 } else {
@@ -103,10 +96,10 @@ int main() {
                 }
 
             } else if (ast->GetClassName() == "AssignStmt") {
-                auto assign_stmt = std::dynamic_pointer_cast<miniMAT::ast::AssignStmt>(ast);
+                auto assign_stmt = dynamic_pointer_cast<miniMAT::ast::AssignStmt>(ast);
 
                 if (assign_stmt->ref->GetClassName() == "IdRef") {
-                    auto idref   = std::dynamic_pointer_cast<miniMAT::ast::IdRef>(assign_stmt->ref);
+                    auto idref   = dynamic_pointer_cast<miniMAT::ast::IdRef>(assign_stmt->ref);
 
                     auto varname = idref->id->GetSpelling();
                     auto val     = assign_stmt->val;
