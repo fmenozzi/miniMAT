@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 
-#include <eigen3/Eigen/Dense>
+#include <armadillo>
 
 #include <ErrorReporter.hpp>
 
@@ -13,7 +13,7 @@ namespace miniMAT {
     namespace ast {
         class AST {
         public:
-            typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> Matrix;
+            typedef arma::mat Matrix;
 
             virtual ~AST() {}
 

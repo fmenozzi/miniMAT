@@ -4,8 +4,7 @@ compiler:
     - clang
 
 before_script:
-    - sudo apt-get install libeigen3-dev -y
-    - export EIGEN3_INCLUDE_DIR=/usr/include/eigen3
+    - sudo apt-get install libarmadillo-dev -y
     - mkdir build
     - cd build
     - cmake ..
