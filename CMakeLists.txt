@@ -6,11 +6,11 @@ PROJECT(miniMAT)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 
 # Check for Eigen
-#SET(EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}")
-#IF (NOT EIGEN3_INCLUDE_DIR)
-#    MESSAGE(FATAL_ERROR "Please point the environment variable EIGEN3_INCLUDE_DIR to the include directory of #your Eigen3 installation.")
-#ENDIF()
-#INCLUDE_DIRECTORIES(${EIGEN_INCLUDE_DIR})
+SET(EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}")
+IF (NOT EIGEN3_INCLUDE_DIR)
+    MESSAGE(FATAL_ERROR "Please point the environment variable EIGEN3_INCLUDE_DIR to the include directory of your Eigen3 installation.")
+ENDIF()
+INCLUDE_DIRECTORIES(${EIGEN_INCLUDE_DIR})
 
 
 INCLUDE_DIRECTORIES(src/miniMAT/ast)
