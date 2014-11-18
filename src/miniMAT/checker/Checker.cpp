@@ -6,7 +6,7 @@
 
 namespace miniMAT {
     namespace checker {
-        Checker::Checker(std::shared_ptr<std::map<std::string, double>> id_table,
+        Checker::Checker(std::shared_ptr<std::map<std::string, Matrix>> id_table,
                          std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->id_table = id_table;
             this->reporter = reporter;

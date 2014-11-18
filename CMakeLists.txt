@@ -25,10 +25,10 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/ast/AssignStmt.cpp
             src/miniMAT/ast/BinaryExpr.cpp
             src/miniMAT/ast/ExprStmt.cpp
-            src/miniMAT/ast/FloatLiteral.cpp
             src/miniMAT/ast/Identifier.cpp
             src/miniMAT/ast/IdRef.cpp
             src/miniMAT/ast/LiteralExpr.cpp
+            src/miniMAT/ast/MatrixLiteral.cpp
             src/miniMAT/ast/Operator.cpp
             src/miniMAT/ast/RefExpr.cpp
             src/miniMAT/ast/ScalarType.cpp

@@ -13,12 +13,12 @@ namespace miniMAT {
             Show(prefix, Quote(this->GetClassName()));
         }
 
-        double ScalarType::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
+        Matrix ScalarType::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
             // TODO: This is really bad design
-            return -1;
+            return Matrix::Zero(1,1);
         }
 
-        void ScalarType::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+        void ScalarType::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
         }
     }

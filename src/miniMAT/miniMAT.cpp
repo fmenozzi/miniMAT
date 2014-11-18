@@ -5,6 +5,8 @@
 #include <map>
 #include <algorithm>
 
+#include <Matrix.hpp>
+
 #include <Lexer.hpp>
 #include <Parser.hpp>
 #include <Visitors.hpp>
@@ -16,7 +18,7 @@
 
 using namespace std;
 
-void PrintResult(string varname, double val, bool suppressed) {
+void PrintResult(string varname, Matrix val, bool suppressed) {
     if (!suppressed) {
         cout << varname << " =" << endl << endl;
         cout << "    " << val << endl << endl;
@@ -26,8 +28,8 @@ void PrintResult(string varname, double val, bool suppressed) {
 int main() {
     string input_line;
 
-    auto id_table = make_shared<map<string, double>>();
-    (*id_table)["ans"] = 0;
+    auto id_table = make_shared<map<string, Matrix>>();
+    (*id_table)["ans"] = Matrix::Zero(1,1);
 
     cout << "miniMAT: It's like MATLAB, but smaller." << endl;
     cout << "Copyright (C) 2014 Federico Menozzi" << endl;
@@ -53,7 +55,7 @@ int main() {
         } else if (input_line == "whos") {
             // Find longest var name (for formatting)
             auto vars = *id_table;
-            auto w = max_element(begin(vars), end(vars), [](pair<string, double> p1, pair<string, double> p2) {
+            auto w = max_element(begin(vars), end(vars), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
                 return p1.first.size() < p2.first.size();
             })->first.size();
 
@@ -83,7 +85,7 @@ int main() {
             reporter->ReportErrors();
             cout << endl;
         } else {
-            double ans = ast->VisitEvaluate(id_table);
+            Matrix ans = ast->VisitEvaluate(id_table);
             if (ast->GetClassName() == "ExprStmt") {
                 auto exprstmt = dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
                 if (exprstmt->expr->GetClassName() == "RefExpr") {
