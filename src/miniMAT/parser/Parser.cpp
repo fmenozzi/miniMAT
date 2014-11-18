@@ -5,7 +5,7 @@
 #include <Lexer.hpp>
 
 #include <Operator.hpp>
-#include <FloatLiteral.hpp>
+#include <MatrixLiteral.hpp>
 #include <BinaryExpr.hpp>
 #include <UnaryExpr.hpp>
 #include <LiteralExpr.hpp>
@@ -181,15 +181,14 @@ namespace miniMAT {
                 Accept(lexer::TokenKind::TOK_RPAREN);
                 return expr;
             } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
-                auto floatlit = std::make_shared<ast::FloatLiteral>(GetCurrentToken().GetSpelling());
-                Accept(lexer::TokenKind::TOK_FLOATLIT);
-                return std::make_shared<ast::LiteralExpr>(floatlit);
-            } else { // TOK_IDENTIFIER
-                // For now, identifiers are not allowed
-            //    ParseError("Undefined function or variable \'" +
-            //               GetCurrentToken().GetSpelling() + "\'.");
-            //    return nullptr;
+                Matrix m(1,1);
+                m(0) = std::atof(GetCurrentToken().GetSpelling().c_str());
 
+                auto floatlit = std::make_shared<ast::MatrixLiteral>(GetCurrentToken().GetSpelling(), m);
+                Accept(lexer::TokenKind::TOK_FLOATLIT);
+
+                return std::make_shared<ast::LiteralExpr>(floatlit);
+            } else { 
                 auto id  = std::make_shared<ast::Identifier>(GetCurrentToken().GetSpelling());
                 AcceptIt();
 

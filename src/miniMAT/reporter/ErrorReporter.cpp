@@ -6,6 +6,7 @@ namespace miniMAT {
         ErrorReporter::ErrorReporter() {
             this->lexer_errors = std::vector<std::string>();
             this->parse_errors = std::vector<std::string>();
+            this->check_errors = std::vector<std::string>();
         }
 
         void ErrorReporter::AddLexerError(const std::string& error) {

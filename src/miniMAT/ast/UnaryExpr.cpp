@@ -20,14 +20,14 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        double UnaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
-            double result = this->expr->VisitEvaluate(id_table);
+        Matrix UnaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
+            Matrix result = this->expr->VisitEvaluate(id_table);
             if (this->op->GetSpelling() == "-")
                 result *= -1;
             return result;
         }
 
-        void UnaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+        void UnaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
                                    std::shared_ptr<reporter::ErrorReporter> reporter) const {
             this->op->VisitCheck(id_table, reporter);
             this->expr->VisitCheck(id_table, reporter);

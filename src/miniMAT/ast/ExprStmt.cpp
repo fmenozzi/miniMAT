@@ -17,11 +17,11 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(prefix));
         }
 
-        double ExprStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
+        Matrix ExprStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
             return this->expr->VisitEvaluate(id_table);
         }
 
-        void ExprStmt::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+        void ExprStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
             this->expr->VisitCheck(id_table, reporter);
         }

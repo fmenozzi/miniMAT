@@ -10,7 +10,7 @@ namespace miniMAT {
             this->ref  = ref;
             this->expr = expr;
 
-            this->val  = 0;
+            this->val  = Matrix::Zero(1,1);
         }
 
         std::string AssignStmt::GetClassName() const {
@@ -25,7 +25,7 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(prefix));
         }
 
-        double AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, double>> id_table) {
+        Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
                 this->val = id_table->at(varname);
@@ -33,7 +33,7 @@ namespace miniMAT {
             return this->val;
         }
 
-        void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, double>> id_table,
+        void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
             this->expr->VisitCheck(id_table, reporter);
 

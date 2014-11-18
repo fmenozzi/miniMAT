@@ -1,17 +1,17 @@
-#ifndef REF_EXPR_HPP
-#define REF_EXPR_HPP
+#ifndef MATRIX_LITERAL_HPP
+#define MATRIX_LITERAL_HPP
 
-#include <memory>
+#include <string>
 
-#include <Expression.hpp>
-#include <Reference.hpp>
+#include <Literal.hpp>
 
 namespace miniMAT {
     namespace ast {
-        class RefExpr : public Expression {
+        class MatrixLiteral : public Literal {
         public:
-            RefExpr(std::shared_ptr<Reference> ref);
-            virtual ~RefExpr() {}
+            MatrixLiteral(const std::string& spelling, Matrix mat) : Literal(spelling) {
+                this->mat = mat;
+            }
 
             std::string GetClassName() const;
 
@@ -21,7 +21,7 @@ namespace miniMAT {
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
         //private:
-            std::shared_ptr<Reference> ref;
+            Matrix mat;
         };
     }
 }
