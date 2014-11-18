@@ -43,7 +43,7 @@ int main() {
             cout << endl;
             break;
         }
-        if (input_line == "quit" || input_line == "exit") {
+        if (input_line == "quit" || input_line == "exit" || input_line == "bye!") {
             break;
         } else if (input_line == "") {
             continue;
