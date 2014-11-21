@@ -19,8 +19,7 @@ namespace miniMAT {
             TOK_SEMICOL
         };
 
-        // Uncomment to fail linking
-        //std::map<std::string, lexer::TokenKind> token_spellings;
+        std::string GetTokenSpelling(TokenKind kind);
     }
 }
 

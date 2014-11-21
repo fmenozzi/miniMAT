@@ -25,7 +25,7 @@ namespace miniMAT {
                                std::shared_ptr<reporter::ErrorReporter> reporter) const {
             auto varname = this->id->GetSpelling();
             if (vars->find(varname) == vars->end())
-                throw "Undefined variable or function \'" + varname + "\'.";
+                throw "Undefined function or variable \'" + varname + "\'.";
         }
     }
 }

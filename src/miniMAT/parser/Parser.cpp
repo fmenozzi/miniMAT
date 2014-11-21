@@ -35,9 +35,7 @@ namespace miniMAT {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
-
-                // TODO: Augment output with TokenKind
-                ParseError("ERROR: Expecting "+exp_spelling+" but found "+token.GetSpelling());
+                ParseError("Syntax error on " + lexer::GetTokenSpelling(token.GetKind()) + " " + exp_spelling);
             }
 
             // Advance token
@@ -47,12 +45,11 @@ namespace miniMAT {
         void Parser::Accept(lexer::TokenKind exp_kind) {
             // Check for validity of current token
             auto token = GetCurrentToken();
-            if (token.GetKind() != exp_kind) { // || token.GetSpelling() != exp_spelling) {
-
-                // TODO: Once we fix that linker bug in TokenKind.hpp, we can
-                //       get a better error diagnostic here
-
-                ParseError("ERROR: Incorrect TokenKind");
+            if (token.GetKind() != exp_kind) {
+                if (token.GetKind() == lexer::TokenKind::TOK_EOF)
+                    ParseError("Error: Expression or statement is incomplete or incorrect");
+                else
+                    ParseError("Syntax error on token " + lexer::GetTokenSpelling(token.GetKind()));
             }
 
             // Advance token
@@ -102,7 +99,7 @@ namespace miniMAT {
 
                 if (next_token.GetKind() == lexer::TokenKind::TOK_ASSIGN) {
                     return ParseAssignStmt();
-                } else /*if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_ARITHOP)*/ {
+                } else {
         			return ParseExprStmt();
         		}
             } else {
@@ -134,6 +131,8 @@ namespace miniMAT {
                 AcceptIt();
                 this->suppressed = true;
             }
+
+            Accept(lexer::TokenKind::TOK_EOF);
 
             return std::make_shared<ast::AssignStmt>(ref, expr);
         }
@@ -188,9 +187,9 @@ namespace miniMAT {
                 Accept(lexer::TokenKind::TOK_FLOATLIT);
 
                 return std::make_shared<ast::LiteralExpr>(floatlit);
-            } else { 
+            } else { // id
                 auto id  = std::make_shared<ast::Identifier>(GetCurrentToken().GetSpelling());
-                AcceptIt();
+                Accept(lexer::TokenKind::TOK_IDENTIFIER);
 
                 auto idref = std::make_shared<ast::IdRef>(id);
 

@@ -28,7 +28,7 @@ namespace miniMAT {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
                 if (vars->find(varname) == vars->end()) {
-                    throw "Undefined variable or function \'" + varname + "\'.";
+                    throw "Undefined function or variable \'" + varname + "\'.";
                 }
             }
         }
