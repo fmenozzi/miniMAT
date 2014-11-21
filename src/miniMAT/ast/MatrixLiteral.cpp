@@ -16,11 +16,11 @@ namespace miniMAT {
             Show(prefix, Quote(this->GetClassName()) + " " + Quote(r + "x" + c));
         }
 
-        Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
+        Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             return this->mat;
         }
 
-        void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
+        void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                       std::shared_ptr<reporter::ErrorReporter> reporter) const {
         }
     }

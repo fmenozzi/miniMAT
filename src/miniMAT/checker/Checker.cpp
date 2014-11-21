@@ -6,15 +6,15 @@
 
 namespace miniMAT {
     namespace checker {
-        Checker::Checker(std::shared_ptr<std::map<std::string, Matrix>> id_table,
+        Checker::Checker(std::shared_ptr<std::map<std::string, Matrix>> vars,
                          std::shared_ptr<reporter::ErrorReporter> reporter) {
-            this->id_table = id_table;
+            this->vars = vars;
             this->reporter = reporter;
         }
 
         std::shared_ptr<ast::AST> Checker::check(std::shared_ptr<ast::AST> ast) {
             try {
-                ast->VisitCheck(this->id_table, this->reporter);
+                ast->VisitCheck(this->vars, this->reporter);
                 return ast;
             } catch (std::string error) {
                 reporter->AddCheckError(error);

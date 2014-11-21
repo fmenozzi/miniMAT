@@ -17,14 +17,14 @@ namespace miniMAT {
             this->id->VisitDisplay(Indent(prefix));
         }
 
-        Matrix IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
-            return id_table->at(this->id->GetSpelling());
+        Matrix IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+            return vars->at(this->id->GetSpelling());
         }
 
-        void IdRef::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
+        void IdRef::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                std::shared_ptr<reporter::ErrorReporter> reporter) const {
             auto varname = this->id->GetSpelling();
-            if (id_table->find(varname) == id_table->end())
+            if (vars->find(varname) == vars->end())
                 throw "Undefined variable or function \'" + varname + "\'.";
         }
     }

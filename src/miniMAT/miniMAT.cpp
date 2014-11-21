@@ -16,20 +16,17 @@
 #include <RefExpr.hpp>
 #include <IdRef.hpp>
 
-using namespace std;
+#include <Util.hpp>
 
-void PrintResult(string varname, Matrix val, bool suppressed) {
-    if (!suppressed) {
-        cout << varname << " =" << endl << endl;
-        cout << "    " << val << endl << endl;
-    }
-}
+using namespace std;
 
 int main() {
     string input_line;
 
-    auto id_table = make_shared<map<string, Matrix>>();
-    (*id_table)["ans"] = Matrix::Zero(1,1);
+    auto vars = make_shared<map<string, Matrix>>();
+    (*vars)["ans"] = Matrix::Zero(1,1);
+
+    miniMAT::util::Util::init(vars);
 
     cout << "miniMAT: It's like MATLAB, but smaller." << endl;
     cout << "Copyright (C) 2014 Federico Menozzi" << endl;
@@ -43,26 +40,13 @@ int main() {
             cout << endl;
             break;
         }
-        if (input_line == "quit" || input_line == "exit" || input_line == "bye!") {
-            break;
-        } else if (input_line == "") {
-            continue;
-        } else if (input_line == "who") {
-            for (auto var : *id_table)
-                cout << var.first << endl;
-            cout  << endl;
-            continue;
-        } else if (input_line == "whos") {
-            // Find longest var name (for formatting)
-            auto vars = *id_table;
-            auto w = max_element(begin(vars), end(vars), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
-                return p1.first.size() < p2.first.size();
-            })->first.size();
 
-            cout << endl;
-            for (auto var : vars)
-                cout << setw(w) << var.first << " = " << var.second << endl;
-            cout << endl;
+        if (miniMAT::util::Util::HasFunction(input_line)) {
+            try {
+                miniMAT::util::Util::GetFunction(input_line)();
+            } catch (...) {
+                break;
+            }
             continue;
         }
 
@@ -78,25 +62,25 @@ int main() {
             continue;
         }
 
-        miniMAT::checker::Checker checker(id_table, reporter);
+        miniMAT::checker::Checker checker(vars, reporter);
         ast = checker.check(ast);
 
         if (reporter->HasErrors()) {
             reporter->ReportErrors();
             cout << endl;
         } else {
-            Matrix ans = ast->VisitEvaluate(id_table);
+            Matrix ans = ast->VisitEvaluate(vars);
             if (ast->GetClassName() == "ExprStmt") {
                 auto exprstmt = dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
                 if (exprstmt->expr->GetClassName() == "RefExpr") {
                     auto refexpr = dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
                     auto varname = dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->GetSpelling();
 
-                    PrintResult(varname, id_table->at(varname), parser.SuppressedOutput());
+                    miniMAT::util::Util::PrintResult(varname, vars->at(varname), parser.SuppressedOutput());
                 } else {
-                    (*id_table)["ans"] = ans;
+                    (*vars)["ans"] = ans;
 
-                    PrintResult("ans", ans, parser.SuppressedOutput());
+                    miniMAT::util::Util::PrintResult("ans", ans, parser.SuppressedOutput());
                 }
 
             } else if (ast->GetClassName() == "AssignStmt") {
@@ -108,7 +92,7 @@ int main() {
                     auto varname = idref->id->GetSpelling();
                     auto val     = assign_stmt->val;
 
-                    PrintResult(varname, val, parser.SuppressedOutput());
+                    miniMAT::util::Util::PrintResult(varname, val, parser.SuppressedOutput());
                 }
             }
         }

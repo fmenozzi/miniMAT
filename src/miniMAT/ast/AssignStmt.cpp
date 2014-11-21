@@ -25,21 +25,21 @@ namespace miniMAT {
             this->expr->VisitDisplay(Indent(prefix));
         }
 
-        Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
+        Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-                this->val = id_table->at(varname);
+                this->val = vars->at(varname);
             }
             return this->val;
         }
 
-        void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
+        void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            this->expr->VisitCheck(id_table, reporter);
+            this->expr->VisitCheck(vars, reporter);
 
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-                (*id_table)[varname] = this->expr->VisitEvaluate(id_table);
+                (*vars)[varname] = this->expr->VisitEvaluate(vars);
             }
         }
     }

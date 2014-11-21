@@ -24,9 +24,9 @@ namespace miniMAT {
             this->right->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
-            Matrix left_result  = this->left->VisitEvaluate(id_table);
-            Matrix right_result = this->right->VisitEvaluate(id_table);
+        Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+            Matrix left_result  = this->left->VisitEvaluate(vars);
+            Matrix right_result = this->right->VisitEvaluate(vars);
 
             // Check to see if both results are scalars
             if (left_result.rows() == right_result.rows() &&
@@ -64,11 +64,11 @@ namespace miniMAT {
             }
         }
 
-        void BinaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
+        void BinaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            this->left->VisitCheck(id_table, reporter);
-            this->op->VisitCheck(id_table, reporter);
-            this->right->VisitCheck(id_table, reporter);
+            this->left->VisitCheck(vars, reporter);
+            this->op->VisitCheck(vars, reporter);
+            this->right->VisitCheck(vars, reporter);
         }
     }
 }

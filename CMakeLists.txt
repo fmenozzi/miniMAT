@@ -18,6 +18,7 @@ INCLUDE_DIRECTORIES(src/miniMAT/checker)
 INCLUDE_DIRECTORIES(src/miniMAT/lexer)
 INCLUDE_DIRECTORIES(src/miniMAT/parser)
 INCLUDE_DIRECTORIES(src/miniMAT/reporter)
+INCLUDE_DIRECTORIES(src/miniMAT/util)
 INCLUDE_DIRECTORIES(src/miniMAT/visit)
 
 SET(SOURCES src/miniMAT/miniMAT.cpp
@@ -45,6 +46,8 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/parser/Parser.cpp
 
             src/miniMAT/reporter/ErrorReporter.cpp
+
+            src/miniMAT/util/Util.cpp
 
             src/miniMAT/visit/Visitors.cpp
     )

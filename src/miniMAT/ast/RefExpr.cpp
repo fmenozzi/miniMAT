@@ -19,15 +19,15 @@ namespace miniMAT {
             this->ref->VisitDisplay(Indent(prefix));
         }
 
-        Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> id_table) {
-            return this->ref->VisitEvaluate(id_table);
+        Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+            return this->ref->VisitEvaluate(vars);
         }
 
-        void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> id_table,
+        void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-                if (id_table->find(varname) == id_table->end()) {
+                if (vars->find(varname) == vars->end()) {
                     throw "Undefined variable or function \'" + varname + "\'.";
                 }
             }
