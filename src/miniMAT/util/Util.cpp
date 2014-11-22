@@ -16,23 +16,25 @@ namespace miniMAT {
             };
 
             funcs["who"] = [vars]() {
-            	using namespace std;
-
             	for (auto var : *vars)
-                    cout << var.first << endl;
-                cout  << endl;
+                    std::cout << var.first << std::endl;
+                std::cout  << std::endl;
             };
 
             funcs["whos"] = [vars]() {
                 using namespace std;
 
-                auto w = max_element(begin(*vars), end(*vars), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                auto max_width = max_element(begin(*vars), 
+                                             end(*vars), 
+                                             [](pair<string, Matrix> p1, 
+                                                pair<string, Matrix> p2) {
+                    // Compare by variable name length
                     return p1.first.size() < p2.first.size();
                 })->first.size();
 
                 cout << endl;
                 for (auto var : *vars)
-                    cout << setw(w) << var.first << " = " << var.second << endl;
+                    cout << setw(max_width) << var.first << " = " << var.second << endl;
                 cout << endl;
             };
 
@@ -55,5 +57,5 @@ namespace miniMAT {
         bool Util::HasFunction(const std::string& s) {
             return funcs.find(s) != funcs.end();
         }
-	}
+    }
 }
