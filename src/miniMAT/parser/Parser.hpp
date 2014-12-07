@@ -1,5 +1,5 @@
-#ifndef PARSER_HPP
-#define PARSER_HPP
+#ifndef MINIMAT_PARSER_PARSER_HPP
+#define MINIMAT_PARSER_PARSER_HPP
 
 #include <deque>
 #include <memory>

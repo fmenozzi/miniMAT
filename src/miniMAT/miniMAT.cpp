@@ -41,6 +41,7 @@ int main() {
             break;
         }
 
+        // If input line is a "standard" function, call it
         if (miniMAT::util::Util::HasFunction(input_line)) {
             try {
                 miniMAT::util::Util::GetFunction(input_line)();
@@ -98,5 +99,5 @@ int main() {
         }
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }

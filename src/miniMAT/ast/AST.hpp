@@ -1,5 +1,5 @@
-#ifndef AST_HPP
-#define AST_HPP
+#ifndef MINIMAT_AST_AST_HPP
+#define MINIMAT_AST_AST_HPP
 
 #include <string>
 #include <map>

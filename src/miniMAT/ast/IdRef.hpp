@@ -1,5 +1,5 @@
-#ifndef ID_REF_HPP
-#define ID_REF_HPP
+#ifndef MINIMAT_AST_ID_REF_HPP
+#define MINIMAT_AST_ID_REF_HPP
 
 #include <memory>
 

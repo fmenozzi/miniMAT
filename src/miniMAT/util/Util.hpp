@@ -1,5 +1,5 @@
-#ifndef UTIL_HPP
-#define UTIL_HPP
+#ifndef MINIMAT_UTIL_UTIL_HPP
+#define MINIMAT_UTIL_UTIL_HPP
 
 #include <map>
 #include <string>

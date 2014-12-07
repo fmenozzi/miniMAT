@@ -1,5 +1,5 @@
-#ifndef TOKENKIND_HPP
-#define TOKENKIND_HPP
+#ifndef MINIMAT_LEXER_TOKENKIND_HPP
+#define MINIMAT_LEXER_TOKENKIND_HPP
 
 #include <string>
 #include <map>

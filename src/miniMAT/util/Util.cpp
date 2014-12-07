@@ -26,8 +26,7 @@ namespace miniMAT {
 
                 auto max_width = max_element(begin(*vars), 
                                              end(*vars), 
-                                             [](pair<string, Matrix> p1, 
-                                                pair<string, Matrix> p2) {
+                                             [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
                     // Compare by variable name length
                     return p1.first.size() < p2.first.size();
                 })->first.size();

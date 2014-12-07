@@ -1,5 +1,5 @@
-#ifndef VISITOR_HPP
-#define VISITOR_HPP
+#ifndef MINIMAT_VISIT_VISITORS_HPP
+#define MINIMAT_VISIT_VISITORS_HPP
 
 #include <AST.hpp>
 

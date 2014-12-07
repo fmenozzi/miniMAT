@@ -1,5 +1,5 @@
-#ifndef BINARY_EXPR_HPP
-#define BINARY_EXPR_HPP
+#ifndef MINIMAT_AST_BINARY_EXPR_HPP
+#define MINIMAT_AST_BINARY_EXPR_HPP
 
 #include <memory>
 

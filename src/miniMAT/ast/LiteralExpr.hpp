@@ -1,5 +1,5 @@
-#ifndef LITERAL_EXPR_HPP
-#define LITERAL_EXPR_HPP
+#ifndef MINIMAT_AST_LITERAL_EXPR_HPP
+#define MINIMAT_AST_LITERAL_EXPR_HPP
 
 #include <memory>
 

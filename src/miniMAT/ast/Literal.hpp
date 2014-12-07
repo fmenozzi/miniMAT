@@ -1,5 +1,5 @@
-#ifndef LITERAL_HPP
-#define LITERAL_HPP
+#ifndef MINIMAT_AST_LITERAL_HPP
+#define MINIMAT_AST_LITERAL_HPP
 
 #include <string>
 

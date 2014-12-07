@@ -1,5 +1,5 @@
-#ifndef ERROR_REPORTER_HPP
-#define ERROR_REPORTER_HPP
+#ifndef MINIMAT_REPORTER_ERRORREPORTER_HPP
+#define MINIMAT_REPORTER_ERRORREPORTER_HPP
 
 #include <vector>
 #include <string>

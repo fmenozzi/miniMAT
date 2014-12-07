@@ -1,5 +1,5 @@
-#ifndef IDENTIFIER_HPP
-#define IDENTIFIER_HPP
+#ifndef MINIMAT_AST_IDENTIFIER_HPP
+#define MINIMAT_AST_IDENTIFIER_HPP
 
 #include <string>
 

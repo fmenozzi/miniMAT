@@ -1,5 +1,5 @@
-#ifndef REFERENCE_HPP
-#define REFERENCE_HPP
+#ifndef MINIMAT_AST_REFERENCE_HPP
+#define MINIMAT_AST_REFERENCE_HPP
 
 #include <AST.hpp>
 #include <Visitors.hpp>

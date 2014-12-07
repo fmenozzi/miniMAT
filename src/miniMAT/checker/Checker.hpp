@@ -1,5 +1,5 @@
-#ifndef CHECKER_HPP
-#define CHECKER_HPP
+#ifndef MINIMAT_CHECKER_CHECKER_HPP
+#define MINIMAT_CHECKER_CHECKER_HPP
 
 #include <map>
 #include <string>

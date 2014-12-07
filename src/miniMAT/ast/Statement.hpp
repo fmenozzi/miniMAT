@@ -1,5 +1,5 @@
-#ifndef STATEMENT_HPP
-#define STATEMENT_HPP
+#ifndef MINIMAT_AST_STATEMENT_HPP
+#define MINIMAT_AST_STATEMENT_HPP
 
 #include <AST.hpp>
 #include <Visitors.hpp>

@@ -1,5 +1,5 @@
-#ifndef TERMINAL_HPP
-#define TERMINAL_HPP
+#ifndef MINIMAT_AST_TERMINAL_HPP
+#define MINIMAT_AST_TERMINAL_HPP
 
 #include <AST.hpp>
 #include <Visitors.hpp>

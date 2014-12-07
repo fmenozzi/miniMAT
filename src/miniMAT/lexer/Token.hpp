@@ -1,5 +1,5 @@
-#ifndef TOKEN_HPP
-#define TOKEN_HPP
+#ifndef MINIMAT_LEXER_TOKEN_HPP
+#define MINIMAT_LEXER_TOKEN_HPP
 
 #include <string>
 

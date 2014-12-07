@@ -1,6 +1,8 @@
 #include <ErrorReporter.hpp>
 #include <iostream>
 
+#include <cstdio>
+
 namespace miniMAT {
     namespace reporter {
         ErrorReporter::ErrorReporter() {
@@ -46,6 +48,15 @@ namespace miniMAT {
                 std::cout << parse_errors[0] << std::endl;
             if (HasCheckErrors())
                 std::cout << check_errors[0] << std::endl;
+            
+            /*
+            if (HasLexerErrors())
+                std::printf("%c[1;31m%s\n", 27, lexer_errors[0].c_str()); // red
+            if (HasParseErrors())
+                std::printf("%c[1;31m%s\n", 27, parse_errors[0].c_str()); // red
+            if (HasCheckErrors())
+                std::printf("%c[1;31m%s\n", 27, check_errors[0].c_str()); // red
+            */
         }
     }
 }

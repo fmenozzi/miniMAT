@@ -1,5 +1,5 @@
-#ifndef ASSIGN_STMT_HPP
-#define ASSIGN_STMT_HPP
+#ifndef MINIMAT_AST_ASSIGN_STMT_HPP
+#define MINIMAT_AST_ASSIGN_STMT_HPP
 
 #include <Reference.hpp>
 #include <Expression.hpp>

@@ -1,5 +1,5 @@
-#ifndef LEXER_HPP
-#define LEXER_HPP
+#ifndef MINIMAT_LEXER_LEXER_HPP
+#define MINIMAT_LEXER_LEXER_HPP
 
 #include <string>
 #include <sstream>
@@ -21,8 +21,7 @@ namespace miniMAT {
 
         public:
             Lexer() {}
-            Lexer(const std::string& input_line,
-                  std::shared_ptr<reporter::ErrorReporter> reporter);
+            Lexer(const std::string& input_line, std::shared_ptr<reporter::ErrorReporter> reporter);
 
             Lexer& operator=(const Lexer& lexer);
 

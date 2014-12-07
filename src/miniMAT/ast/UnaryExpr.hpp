@@ -1,5 +1,5 @@
-#ifndef UNARY_EXPR_HPP
-#define UNARY_EXPR_HPP
+#ifndef MINIMAT_AST_UNARY_EXPR_HPP
+#define MINIMAT_AST_UNARY_EXPR_HPP
 
 #include <memory>
 

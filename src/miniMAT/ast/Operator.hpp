@@ -1,5 +1,5 @@
-#ifndef OPERATOR_HPP
-#define OPERATOR_HPP
+#ifndef MINIMAT_AST_OPERATOR_HPP
+#define MINIMAT_AST_OPERATOR_HPP
 
 #include <memory>
 #include <string>

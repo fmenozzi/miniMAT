@@ -1,5 +1,5 @@
-#ifndef SCALAR_TYPE_HPP
-#define SCALAR_TYPE_HPP
+#ifndef MINIMAT_AST_SCALAR_TYPE_HPP
+#define MINIMAT_AST_SCALAR_TYPE_HPP
 
 #include <Type.hpp>
 #include <TypeKind.hpp>

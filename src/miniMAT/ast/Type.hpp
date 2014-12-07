@@ -1,5 +1,5 @@
-#ifndef TYPE_HPP
-#define TYPE_HPP
+#ifndef MINIMAT_AST_TYPE_HPP
+#define MINIMAT_AST_TYPE_HPP
 
 #include <AST.hpp>
 #include <TypeKind.hpp>
