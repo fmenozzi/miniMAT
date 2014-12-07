@@ -42,10 +42,12 @@ namespace miniMAT {
             };
         }
 
-        void Util::PrintResult(std::string varname, Matrix val, bool suppressed) {
+        void Util::PrintResult(std::string varname, Matrix m, bool suppressed) {
             if (!suppressed) {
+                // Print a row at a time
                 std::cout << varname << " =" << std::endl << std::endl;
-                std::cout << "    " << val << std::endl << std::endl;
+                for (int i = 0; i < m.rows(); i++)
+                    std::cout << "    " << m.block(i, 0, 1, m.cols()) << std::endl;
             }
         }
 

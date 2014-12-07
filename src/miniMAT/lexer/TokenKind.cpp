@@ -16,12 +16,18 @@ namespace miniMAT {
         			return "FLOATLIT";
         		case TokenKind::TOK_DOT:
         			return ".";
+                case TokenKind::TOK_COMMA:
+                    return ",";
         		case TokenKind::TOK_ARITHOP:
         			return "ARITHOP";
         		case TokenKind::TOK_LPAREN:
         			return "(";
         		case TokenKind::TOK_RPAREN:
         			return ")";
+                case TokenKind::TOK_LBRACKET:
+                    return "[";
+                case TokenKind::TOK_RBRACKET:
+                    return "]";
 				case TokenKind::TOK_SEMICOL:
 					return ";";
 				default:

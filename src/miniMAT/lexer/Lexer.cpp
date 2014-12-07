@@ -80,6 +80,13 @@ namespace miniMAT {
                     TakeIt();
                     return Token(TokenKind::TOK_RPAREN, ")");
 
+                case '[':
+                    TakeIt();
+                    return Token(TokenKind::TOK_LBRACKET, "[");
+                case ']':
+                    TakeIt();
+                    return Token(TokenKind::TOK_RBRACKET, "]");
+
                 case '0':
                 case '1':
                 case '2':
@@ -162,6 +169,10 @@ namespace miniMAT {
                         LexerError("Single . not allowed!");
                         return Token(TokenKind::TOK_ERROR, "Single . not allowed!");
                     }
+
+                case ',':
+                    TakeIt();
+                    return Token(TokenKind::TOK_COMMA, ",");
 
                 case '=':
                     TakeIt();

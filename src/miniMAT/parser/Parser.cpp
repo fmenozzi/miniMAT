@@ -170,25 +170,83 @@ namespace miniMAT {
         }
 
         std::shared_ptr<ast::Expression> Parser::ParseC() {
-            if (GetCurrentToken().GetSpelling() == "-") {
-                auto op = std::make_shared<ast::Operator>(GetCurrentToken());
+            auto token = GetCurrentToken();
+
+            if (token.GetSpelling() == "-") {
+                auto op = std::make_shared<ast::Operator>(token);
                 AcceptIt();
                 return std::make_shared<ast::UnaryExpr>(op, ParseC());
-            } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_LPAREN) {
+            } else if (token.GetKind() == lexer::TokenKind::TOK_LPAREN) {
                 AcceptIt();
                 auto expr = ParseExpression();
                 Accept(lexer::TokenKind::TOK_RPAREN);
                 return expr;
-            } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
-                Matrix m(1,1);
-                m(0) = std::atof(GetCurrentToken().GetSpelling().c_str());
+            } else if (token.GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
+                Matrix matrix(1,1);
+                matrix(0) = std::stod(token.GetSpelling());
 
-                auto floatlit = std::make_shared<ast::MatrixLiteral>(GetCurrentToken().GetSpelling(), m);
+                auto floatlit = std::make_shared<ast::MatrixLiteral>(token.GetSpelling(), matrix);
                 Accept(lexer::TokenKind::TOK_FLOATLIT);
 
                 return std::make_shared<ast::LiteralExpr>(floatlit);
+            } else if (token.GetKind() == lexer::TokenKind::TOK_LBRACKET) {
+                AcceptIt();
+
+                int num_rows = 1;
+                int num_cols = 0;
+                int current_col_num = 0;
+                bool first_pass_through_first_row = true;
+                std::vector<double> vals;
+
+                // Lambda for handling dimension mismatch
+                auto check_for_dimension_mismatch = [this](int current_col_num, int num_cols) {
+                    if (current_col_num != num_cols)
+                        ParseError("ERROR: Column mismatch!");
+                };
+
+                while (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RBRACKET) {
+                    double val = std::stod(GetCurrentToken().GetSpelling());
+                    AcceptIt();
+
+                    vals.push_back(val);
+
+                    current_col_num++;
+                    if (first_pass_through_first_row)
+                        num_cols++;
+
+                    // Space or comma to separate values in rows
+                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_COMMA)
+                        AcceptIt();
+
+                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_SEMICOL) {
+                        AcceptIt();
+
+                        check_for_dimension_mismatch(current_col_num, num_cols);
+
+                        if (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RBRACKET) {
+                            first_pass_through_first_row = false;
+                            num_rows++;
+                        }
+
+                        current_col_num = 0;
+                    }
+
+                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_RBRACKET)
+                        check_for_dimension_mismatch(current_col_num, num_cols);
+                }
+                Accept(lexer::TokenKind::TOK_RBRACKET);
+
+                auto spelling = std::to_string(num_rows) + " x " + std::to_string(num_cols);
+                Matrix matrix(num_rows, num_cols);
+
+                for (size_t i = 0; i < vals.size(); i++)
+                    matrix(i) = vals[i];
+
+                auto matrixlit = std::make_shared<ast::MatrixLiteral>(spelling, matrix);
+
+                return std::make_shared<ast::LiteralExpr>(matrixlit);
             } else { // id
-                auto id  = std::make_shared<ast::Identifier>(GetCurrentToken().GetSpelling());
+                auto id  = std::make_shared<ast::Identifier>(token.GetSpelling());
                 Accept(lexer::TokenKind::TOK_IDENTIFIER);
 
                 auto idref = std::make_shared<ast::IdRef>(id);

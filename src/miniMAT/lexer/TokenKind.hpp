@@ -13,9 +13,12 @@ namespace miniMAT {
             TOK_ASSIGN,
             TOK_FLOATLIT,
             TOK_DOT,
+            TOK_COMMA,
             TOK_ARITHOP,
             TOK_LPAREN,
             TOK_RPAREN,
+            TOK_LBRACKET,
+            TOK_RBRACKET,
             TOK_SEMICOL
         };
 
