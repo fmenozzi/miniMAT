@@ -15,6 +15,7 @@ namespace miniMAT {
 			static bool scalar_mat(Matrix l, Matrix r);
 			static bool mat_scalar(Matrix l, Matrix r);
 			static bool scalar_scalar(Matrix l, Matrix r);
+			static bool mat_mat(Matrix l, Matrix r);
 		};
 	}
 }

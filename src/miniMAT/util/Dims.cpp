@@ -25,5 +25,9 @@ namespace miniMAT {
 		bool Dims::scalar_scalar(Matrix l, Matrix r) {
 			return is_scalar(l) && is_scalar(r);
 		}
+
+		bool Dims::mat_mat(Matrix l, Matrix r) {
+			return ! is_scalar(l) && ! is_scalar(r);
+		}
 	}
 }

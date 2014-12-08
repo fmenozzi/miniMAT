@@ -10,6 +10,10 @@ namespace miniMAT {
             return "LiteralExpr";
         }
 
+        std::shared_ptr<Literal> LiteralExpr::GetLiteral() const {
+            return this->literal;
+        }
+
         void LiteralExpr::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 

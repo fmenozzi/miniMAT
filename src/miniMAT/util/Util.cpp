@@ -48,6 +48,7 @@ namespace miniMAT {
                 std::cout << varname << " =" << std::endl << std::endl;
                 for (int i = 0; i < m.rows(); i++)
                     std::cout << "    " << m.block(i, 0, 1, m.cols()) << std::endl;
+                std::cout << std::endl;
             }
         }
 

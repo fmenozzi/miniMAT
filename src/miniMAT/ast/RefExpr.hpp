@@ -13,7 +13,8 @@ namespace miniMAT {
             RefExpr(std::shared_ptr<Reference> ref);
             virtual ~RefExpr() {}
 
-            std::string GetClassName() const;
+            std::string                GetClassName() const;
+            std::shared_ptr<Reference> GetReference() const;
 
             void VisitDisplay(const std::string& prefix) const;
             Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars);

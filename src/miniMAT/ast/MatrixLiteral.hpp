@@ -14,6 +14,7 @@ namespace miniMAT {
             }
 
             std::string GetClassName() const;
+            Matrix      GetMatrix() const;
 
             void VisitDisplay(const std::string& prefix) const;
             Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars);

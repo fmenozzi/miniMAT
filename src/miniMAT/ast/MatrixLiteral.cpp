@@ -7,6 +7,10 @@ namespace miniMAT {
             return "MatrixLiteral";
         }
 
+        Matrix MatrixLiteral::GetMatrix() const {
+            return this->mat;
+        }
+
         void MatrixLiteral::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 

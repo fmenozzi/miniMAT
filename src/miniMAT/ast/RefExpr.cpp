@@ -12,6 +12,10 @@ namespace miniMAT {
             return "RefExpr";
         }
 
+        std::shared_ptr<Reference> RefExpr::GetReference() const {
+            return this->ref;
+        }
+
         void RefExpr::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
