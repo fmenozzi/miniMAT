@@ -35,7 +35,7 @@ namespace miniMAT {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
-                ParseError("Syntax error on " + lexer::GetTokenSpelling(token.GetKind()) + " " + exp_spelling);
+                ParseError("Syntax error on " + lexer::GetTokenSpelling(token.GetKind()) + " " + token.GetSpelling());
             }
 
             // Advance token
@@ -49,7 +49,7 @@ namespace miniMAT {
                 if (token.GetKind() == lexer::TokenKind::TOK_EOF)
                     ParseError("Error: Expression or statement is incomplete or incorrect");
                 else
-                    ParseError("Syntax error on token " + lexer::GetTokenSpelling(token.GetKind()));
+                    ParseError("Syntax error on " + lexer::GetTokenSpelling(token.GetKind()) + " " + token.GetSpelling());
             }
 
             // Advance token
@@ -201,12 +201,15 @@ namespace miniMAT {
                 // Lambda for handling dimension mismatch
                 auto check_for_dimension_mismatch = [this](int current_col_num, int num_cols) {
                     if (current_col_num != num_cols)
-                        ParseError("ERROR: Column mismatch!");
+                        ParseError("Syntax error: Dimension mismatch in matrix initialization.");
                 };
 
                 while (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RBRACKET) {
-                    double val = std::stod(GetCurrentToken().GetSpelling());
-                    AcceptIt();
+                    double val;
+                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_FLOATLIT)
+                        val = std::stod(GetCurrentToken().GetSpelling());
+                    Accept(lexer::TokenKind::TOK_FLOATLIT);
+
 
                     vals.push_back(val);
 
