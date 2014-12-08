@@ -233,9 +233,6 @@ namespace miniMAT {
 
                         current_col_num = 0;
                     }
-
-                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_RBRACKET)
-                        check_for_dimension_mismatch(current_col_num, num_cols);
                 }
                 Accept(lexer::TokenKind::TOK_RBRACKET);
 
