@@ -1,4 +1,4 @@
-#include <Util.hpp>
+#include <Function.hpp>
 
 #include <iostream>
 #include <iomanip>
@@ -8,9 +8,9 @@ namespace miniMAT {
     namespace util {
 
         // auto doesn't seem to work here, for some reason
-        std::map<std::string, std::function<void(void)>> Util::funcs = std::map<std::string, std::function<void(void)>>();
+        std::map<std::string, std::function<void(void)>> Function::funcs = std::map<std::string, std::function<void(void)>>();
 
-        void Util::init(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        void Function::init(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             funcs["quit"] = funcs["exit"] = funcs["bye!"] = []() {
                 throw 1;
             };
@@ -42,7 +42,7 @@ namespace miniMAT {
             };
         }
 
-        void Util::PrintResult(std::string varname, Matrix m, bool suppressed) {
+        void Function::PrintResult(std::string varname, Matrix m, bool suppressed) {
             if (!suppressed) {
                 // Print a row at a time
                 std::cout << varname << " =" << std::endl << std::endl;
@@ -52,11 +52,11 @@ namespace miniMAT {
             }
         }
 
-        std::function<void(void)> Util::GetFunction(const std::string& s) {
+        std::function<void(void)> Function::GetFunction(const std::string& s) {
         	return funcs[s];
         }
 
-        bool Util::HasFunction(const std::string& s) {
+        bool Function::HasFunction(const std::string& s) {
             return funcs.find(s) != funcs.end();
         }
     }

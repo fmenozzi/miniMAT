@@ -16,7 +16,7 @@
 #include <RefExpr.hpp>
 #include <IdRef.hpp>
 
-#include <Util.hpp>
+#include <Function.hpp>
 
 using namespace std;
 
@@ -26,7 +26,7 @@ int main() {
     auto vars = make_shared<map<string, Matrix>>();
     (*vars)["ans"] = Matrix::Zero(1,1);
 
-    miniMAT::util::Util::init(vars);
+    miniMAT::util::Function::init(vars);
 
     cout << "miniMAT: It's like MATLAB, but smaller." << endl;
     cout << "Copyright (C) 2014 Federico Menozzi" << endl;
@@ -42,9 +42,9 @@ int main() {
         }
 
         // If input line is a "standard" function, call it
-        if (miniMAT::util::Util::HasFunction(input_line)) {
+        if (miniMAT::util::Function::HasFunction(input_line)) {
             try {
-                miniMAT::util::Util::GetFunction(input_line)();
+                miniMAT::util::Function::GetFunction(input_line)();
             } catch (...) {
                 break;
             }
@@ -77,11 +77,11 @@ int main() {
                     auto refexpr = dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
                     auto varname = dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->GetSpelling();
 
-                    miniMAT::util::Util::PrintResult(varname, vars->at(varname), parser.SuppressedOutput());
+                    miniMAT::util::Function::PrintResult(varname, vars->at(varname), parser.SuppressedOutput());
                 } else {
                     (*vars)["ans"] = ans;
 
-                    miniMAT::util::Util::PrintResult("ans", ans, parser.SuppressedOutput());
+                    miniMAT::util::Function::PrintResult("ans", ans, parser.SuppressedOutput());
                 }
 
             } else if (ast->GetClassName() == "AssignStmt") {
@@ -93,7 +93,7 @@ int main() {
                     auto varname = idref->id->GetSpelling();
                     auto val     = assign_stmt->val;
 
-                    miniMAT::util::Util::PrintResult(varname, val, parser.SuppressedOutput());
+                    miniMAT::util::Function::PrintResult(varname, val, parser.SuppressedOutput());
                 }
             }
         }

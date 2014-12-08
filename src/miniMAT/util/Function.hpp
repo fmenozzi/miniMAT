@@ -1,5 +1,5 @@
-#ifndef MINIMAT_UTIL_UTIL_HPP
-#define MINIMAT_UTIL_UTIL_HPP
+#ifndef MINIMAT_UTIL_FUNCTION_HPP
+#define MINIMAT_UTIL_FUNCTION_HPP
 
 #include <map>
 #include <string>
@@ -10,7 +10,7 @@
 
 namespace miniMAT {
     namespace util {
-        class Util {
+        class Function {
         public:
             static std::map<std::string, std::function<void(void)>> funcs;
 
