@@ -231,17 +231,19 @@ namespace miniMAT {
                             num_rows++;
                         }
 
-                        current_col_num = 0;
+                        if (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RBRACKET)
+                            current_col_num = 0;
                     }
 
                     if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_RBRACKET)
                         check_for_dimension_mismatch(current_col_num, num_cols);
                 }
+
                 Accept(lexer::TokenKind::TOK_RBRACKET);
 
                 auto spelling = std::to_string(num_rows) + " x " + std::to_string(num_cols);
-                Matrix matrix(num_rows, num_cols);
 
+                Matrix matrix(num_rows, num_cols);
                 for (size_t i = 0; i < vals.size(); i++)
                     matrix(i) = vals[i];
 
