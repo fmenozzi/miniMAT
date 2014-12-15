@@ -15,8 +15,7 @@
 
 namespace miniMAT {
     namespace parser {
-        Parser::Parser(const lexer::Lexer& lexer,
-                       std::shared_ptr<reporter::ErrorReporter> reporter) {
+        Parser::Parser(const lexer::Lexer& lexer, std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->lexer    = lexer;
             this->tokens   = std::deque<lexer::Token>();
             this->reporter = reporter;
@@ -35,7 +34,12 @@ namespace miniMAT {
             // Check for validity of current token
             auto token = GetCurrentToken();
             if (token.GetKind() != exp_kind || token.GetSpelling() != exp_spelling) {
-                ParseError("Syntax error on " + lexer::GetTokenSpelling(token.GetKind()) + " " + token.GetSpelling());
+                auto tokspelling  = token.GetSpelling();
+                auto kindspelling = lexer::GetTokenSpelling(token.GetKind());
+                if (std::isalpha(kindspelling[0]))
+                    ParseError("Syntax error on " + kindspelling + " " + tokspelling);
+                else
+                    ParseError("Syntax error on " + tokspelling);
             }
 
             // Advance token
@@ -48,8 +52,14 @@ namespace miniMAT {
             if (token.GetKind() != exp_kind) {
                 if (token.GetKind() == lexer::TokenKind::TOK_EOF)
                     ParseError("Error: Expression or statement is incomplete or incorrect");
-                else
-                    ParseError("Syntax error on " + lexer::GetTokenSpelling(token.GetKind()) + " " + token.GetSpelling());
+                else {
+                    auto tokspelling  = token.GetSpelling();
+                    auto kindspelling = lexer::GetTokenSpelling(token.GetKind());
+                    if (std::isalpha(kindspelling[0]))
+                        ParseError("Syntax error on " + kindspelling + " " + tokspelling);
+                    else
+                        ParseError("Syntax error on " + tokspelling);
+                }
             }
 
             // Advance token
