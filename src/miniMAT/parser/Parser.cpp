@@ -23,7 +23,7 @@ namespace miniMAT {
 
         void Parser::ParseError(const std::string& error) {
             reporter->AddParseError(error);
-            throw 1;
+            throw "Parse Error";
         }
 
         bool Parser::SuppressedOutput() {
@@ -93,7 +93,7 @@ namespace miniMAT {
 
             try {
                 return ParseStatement();
-            } catch (...) {
+            } catch (...) { // Catch ParseError exceptions
                 return nullptr;
             }
         }

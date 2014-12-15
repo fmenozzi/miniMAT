@@ -12,7 +12,7 @@ namespace miniMAT {
 
         void Function::init(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             funcs["quit"] = funcs["exit"] = funcs["bye!"] = []() {
-                throw 1;
+                throw "Exit";
             };
 
             funcs["who"] = [vars]() {

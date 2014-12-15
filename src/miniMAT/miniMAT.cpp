@@ -43,7 +43,7 @@ int main() {
         if (miniMAT::util::Function::HasFunction(input_line)) {
             try {
                 miniMAT::util::Function::GetFunction(input_line)();
-            } catch (...) {
+            } catch (...) { // Catch Function::init expection
                 break;
             }
             continue;
