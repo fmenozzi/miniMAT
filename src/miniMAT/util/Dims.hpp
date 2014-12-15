@@ -1,7 +1,7 @@
 #ifndef MINIMAT_UTIL_DIMS_HPP
 #define MINIMAT_UTIL_DIMS_HPP
 
-#include <Matrix.hpp>
+#include <miniMAT/ast/Matrix.hpp>
 
 namespace miniMAT {
 	namespace util {

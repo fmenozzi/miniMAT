@@ -5,10 +5,8 @@
 #include <string>
 #include <memory>
 
-#include <Matrix.hpp>
-
-#include <ErrorReporter.hpp>
-#include <AST.hpp>
+#include <miniMAT/ast/AST.hpp>
+#include <miniMAT/reporter/ErrorReporter.hpp>
 
 namespace miniMAT {
     namespace checker {

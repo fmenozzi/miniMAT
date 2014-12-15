@@ -1,4 +1,4 @@
-#include <Dims.hpp>
+#include <miniMAT/util/Dims.hpp>
 
 namespace miniMAT {
 	namespace util {

@@ -1,17 +1,17 @@
 #include <iostream>
 #include <deque>
 
-#include <Parser.hpp>
-#include <Lexer.hpp>
+#include <miniMAT/parser/Parser.hpp>
+#include <miniMAT/lexer/Lexer.hpp>
 
-#include <Operator.hpp>
-#include <MatrixLiteral.hpp>
-#include <BinaryExpr.hpp>
-#include <UnaryExpr.hpp>
-#include <LiteralExpr.hpp>
-#include <IdRef.hpp>
-#include <RefExpr.hpp>
-#include <AssignStmt.hpp>
+#include <miniMAT/ast/Operator.hpp>
+#include <miniMAT/ast/MatrixLiteral.hpp>
+#include <miniMAT/ast/BinaryExpr.hpp>
+#include <miniMAT/ast/UnaryExpr.hpp>
+#include <miniMAT/ast/LiteralExpr.hpp>
+#include <miniMAT/ast/IdRef.hpp>
+#include <miniMAT/ast/RefExpr.hpp>
+#include <miniMAT/ast/AssignStmt.hpp>
 
 namespace miniMAT {
     namespace parser {

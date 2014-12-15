@@ -1,6 +1,6 @@
-#include <ErrorReporter.hpp>
-#include <iostream>
+#include <miniMAT/reporter/ErrorReporter.hpp>
 
+#include <iostream>
 #include <cstdio>
 
 namespace miniMAT {

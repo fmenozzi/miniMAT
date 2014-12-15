@@ -1,6 +1,6 @@
 #include <string>
 
-#include <Token.hpp>
+#include <miniMAT/lexer/Token.hpp>
 
 namespace miniMAT {
     namespace lexer {

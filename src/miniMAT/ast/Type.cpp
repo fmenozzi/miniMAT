@@ -1,4 +1,4 @@
-#include <Type.hpp>
+#include <miniMAT/ast/Type.hpp>
 
 namespace miniMAT {
     namespace ast {

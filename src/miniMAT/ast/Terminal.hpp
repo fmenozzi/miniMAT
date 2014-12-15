@@ -1,8 +1,9 @@
 #ifndef MINIMAT_AST_TERMINAL_HPP
 #define MINIMAT_AST_TERMINAL_HPP
 
-#include <AST.hpp>
-#include <Visitors.hpp>
+#include <miniMAT/ast/AST.hpp>
+
+#include <miniMAT/visit/Visitors.hpp>
 
 namespace miniMAT {
     namespace ast {

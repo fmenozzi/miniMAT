@@ -1,7 +1,7 @@
 #include <cctype>
 #include <iostream>
 
-#include <Lexer.hpp>
+#include <miniMAT/lexer/Lexer.hpp>
 
 namespace miniMAT {
     namespace lexer {

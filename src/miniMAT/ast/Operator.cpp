@@ -1,4 +1,4 @@
-#include <Operator.hpp>
+#include <miniMAT/ast/Operator.hpp>
 
 namespace miniMAT {
     namespace ast {

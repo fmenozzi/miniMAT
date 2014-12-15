@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <Literal.hpp>
+#include <miniMAT/ast/Literal.hpp>
 
 namespace miniMAT {
     namespace ast {

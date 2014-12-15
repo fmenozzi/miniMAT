@@ -1,5 +1,6 @@
-#include <RefExpr.hpp>
-#include <IdRef.hpp>
+#include <miniMAT/ast/RefExpr.hpp>
+#include <miniMAT/ast/IdRef.hpp>
+
 #include <iostream>
 
 namespace miniMAT {

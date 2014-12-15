@@ -1,9 +1,9 @@
 #ifndef MINIMAT_AST_TYPE_HPP
 #define MINIMAT_AST_TYPE_HPP
 
-#include <AST.hpp>
-#include <TypeKind.hpp>
-#include <Visitors.hpp>
+#include <miniMAT/ast/AST.hpp>
+#include <miniMAT/ast/TypeKind.hpp>
+#include <miniMAT/visit/Visitors.hpp>
 
 namespace miniMAT {
     namespace ast {

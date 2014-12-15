@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <Checker.hpp>
+#include <miniMAT/checker/Checker.hpp>
 
 #include <iostream>
 

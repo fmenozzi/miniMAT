@@ -1,5 +1,5 @@
-#include <AssignStmt.hpp>
-#include <IdRef.hpp>
+#include <miniMAT/ast/AssignStmt.hpp>
+#include <miniMAT/ast/IdRef.hpp>
 
 #include <iostream>
 

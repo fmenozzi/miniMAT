@@ -1,8 +1,8 @@
 #ifndef MINIMAT_AST_SCALAR_TYPE_HPP
 #define MINIMAT_AST_SCALAR_TYPE_HPP
 
-#include <Type.hpp>
-#include <TypeKind.hpp>
+#include <miniMAT/ast/Type.hpp>
+#include <miniMAT/ast/TypeKind.hpp>
 
 namespace miniMAT {
     namespace ast {

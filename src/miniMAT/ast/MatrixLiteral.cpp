@@ -1,5 +1,4 @@
-#include <MatrixLiteral.hpp>
-#include <sstream>
+#include <miniMAT/ast/MatrixLiteral.hpp>
 
 namespace miniMAT {
     namespace ast { 
@@ -25,7 +24,7 @@ namespace miniMAT {
         }
 
         void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
-                                      std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                       std::shared_ptr<reporter::ErrorReporter> reporter) const {
         }
     }
 }

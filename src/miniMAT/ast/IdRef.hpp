@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include <Reference.hpp>
-#include <Identifier.hpp>
+#include <miniMAT/ast/Reference.hpp>
+#include <miniMAT/ast/Identifier.hpp>
 
 namespace miniMAT {
     namespace ast {

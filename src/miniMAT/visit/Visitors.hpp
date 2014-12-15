@@ -1,7 +1,7 @@
 #ifndef MINIMAT_VISIT_VISITORS_HPP
 #define MINIMAT_VISIT_VISITORS_HPP
 
-#include <AST.hpp>
+#include <miniMAT/ast/AST.hpp>
 
 namespace miniMAT {
     namespace visit {

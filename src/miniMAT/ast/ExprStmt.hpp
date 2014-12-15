@@ -4,8 +4,8 @@
 #include <memory>
 #include <string>
 
-#include <Expression.hpp>
-#include <Statement.hpp>
+#include <miniMAT/ast/Expression.hpp>
+#include <miniMAT/ast/Statement.hpp>
 
 namespace miniMAT {
     namespace ast {

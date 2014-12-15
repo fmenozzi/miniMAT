@@ -4,13 +4,13 @@
 #include <deque>
 #include <memory>
 
-#include <Lexer.hpp>
+#include <miniMAT/lexer/Lexer.hpp>
 
-#include <AST.hpp>
-#include <Statement.hpp>
-#include <ExprStmt.hpp>
-#include <AssignStmt.hpp>
-#include <Expression.hpp>
+#include <miniMAT/ast/AST.hpp>
+#include <miniMAT/ast/Statement.hpp>
+#include <miniMAT/ast/ExprStmt.hpp>
+#include <miniMAT/ast/AssignStmt.hpp>
+#include <miniMAT/ast/Expression.hpp>
 
 namespace miniMAT {
     namespace parser {

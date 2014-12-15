@@ -1,4 +1,4 @@
-#include <ScalarType.hpp>
+#include <miniMAT/ast/ScalarType.hpp>
 
 namespace miniMAT {
     namespace ast {

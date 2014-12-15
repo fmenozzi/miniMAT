@@ -5,9 +5,9 @@
 #include <map>
 #include <memory>
 
-#include <Matrix.hpp>
+#include <miniMAT/ast/Matrix.hpp>
 
-#include <ErrorReporter.hpp>
+#include <miniMAT/reporter/ErrorReporter.hpp>
 
 namespace miniMAT {
     namespace ast {

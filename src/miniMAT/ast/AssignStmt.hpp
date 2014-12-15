@@ -1,9 +1,9 @@
 #ifndef MINIMAT_AST_ASSIGN_STMT_HPP
 #define MINIMAT_AST_ASSIGN_STMT_HPP
 
-#include <Reference.hpp>
-#include <Expression.hpp>
-#include <Statement.hpp>
+#include <miniMAT/ast/Reference.hpp>
+#include <miniMAT/ast/Expression.hpp>
+#include <miniMAT/ast/Statement.hpp>
 
 namespace miniMAT {
     namespace ast {

@@ -1,4 +1,4 @@
-#include <Visitors.hpp>
+#include <miniMAT/visit/Visitors.hpp>
 #include <iostream>
 
 namespace miniMAT {

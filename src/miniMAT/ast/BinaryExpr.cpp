@@ -1,9 +1,10 @@
-#include <BinaryExpr.hpp>
-#include <LiteralExpr.hpp>
-#include <RefExpr.hpp>
-#include <MatrixLiteral.hpp>
-#include <IdRef.hpp>
-#include <Dims.hpp>
+#include <miniMAT/ast/BinaryExpr.hpp>
+#include <miniMAT/ast/LiteralExpr.hpp>
+#include <miniMAT/ast/RefExpr.hpp>
+#include <miniMAT/ast/MatrixLiteral.hpp>
+#include <miniMAT/ast/IdRef.hpp>
+
+#include <miniMAT/util/Dims.hpp>
 
 #include <cmath>
 #include <iostream>

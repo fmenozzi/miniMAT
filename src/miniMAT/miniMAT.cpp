@@ -1,22 +1,20 @@
 #include <iostream>
-#include <iomanip>
 #include <string>
 #include <memory>
 #include <map>
-#include <algorithm>
 
-#include <Matrix.hpp>
+#include <miniMAT/ast/Matrix.hpp>
 
-#include <Lexer.hpp>
-#include <Parser.hpp>
-#include <Visitors.hpp>
-#include <Checker.hpp>
+#include <miniMAT/lexer/Lexer.hpp>
+#include <miniMAT/parser/Parser.hpp>
+#include <miniMAT/visit/Visitors.hpp>
+#include <miniMAT/checker/Checker.hpp>
 
-#include <ExprStmt.hpp>
-#include <RefExpr.hpp>
-#include <IdRef.hpp>
+#include <miniMAT/ast/ExprStmt.hpp>
+#include <miniMAT/ast/RefExpr.hpp>
+#include <miniMAT/ast/IdRef.hpp>
 
-#include <Function.hpp>
+#include <miniMAT/util/Function.hpp>
 
 using namespace std;
 

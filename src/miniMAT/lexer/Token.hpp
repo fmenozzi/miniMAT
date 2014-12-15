@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <TokenKind.hpp>
+#include <miniMAT/lexer/TokenKind.hpp>
 
 namespace miniMAT {
     namespace lexer {

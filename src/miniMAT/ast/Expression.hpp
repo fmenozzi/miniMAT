@@ -1,8 +1,8 @@
 #ifndef MINIMAT_AST_EXPRESSION_HPP
 #define MINIMAT_AST_EXPRESSION_HPP
 
-#include <AST.hpp>
-#include <Visitors.hpp>
+#include <miniMAT/ast/AST.hpp>
+#include <miniMAT/visit/Visitors.hpp>
 
 namespace miniMAT {
     namespace ast {

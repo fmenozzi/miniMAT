@@ -1,4 +1,4 @@
-#include <IdRef.hpp>
+#include <miniMAT/ast/IdRef.hpp>
 
 namespace miniMAT {
     namespace ast {

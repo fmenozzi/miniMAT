@@ -4,8 +4,9 @@
 #include <memory>
 #include <string>
 
-#include <Terminal.hpp>
-#include <Token.hpp>
+#include <miniMAT/ast/Terminal.hpp>
+
+#include <miniMAT/lexer/Token.hpp>
 
 namespace miniMAT {
     namespace ast {

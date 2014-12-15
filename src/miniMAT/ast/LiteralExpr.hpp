@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include <Expression.hpp>
-#include <Literal.hpp>
+#include <miniMAT/ast/Expression.hpp>
+#include <miniMAT/ast/Literal.hpp>
 
 namespace miniMAT {
     namespace ast {

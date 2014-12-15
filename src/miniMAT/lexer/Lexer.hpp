@@ -5,8 +5,8 @@
 #include <sstream>
 #include <memory>
 
-#include <Token.hpp>
-#include <ErrorReporter.hpp>
+#include <miniMAT/lexer/Token.hpp>
+#include <miniMAT/reporter/ErrorReporter.hpp>
 
 namespace miniMAT {
     namespace lexer {

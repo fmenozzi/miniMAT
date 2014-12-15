@@ -6,7 +6,7 @@
 #include <functional>
 #include <memory>
 
-#include <Matrix.hpp>
+#include <miniMAT/ast/Matrix.hpp>
 
 namespace miniMAT {
     namespace util {

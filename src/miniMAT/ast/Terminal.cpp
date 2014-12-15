@@ -1,4 +1,4 @@
-#include <Terminal.hpp>
+#include <miniMAT/ast/Terminal.hpp>
 
 namespace miniMAT {
     namespace ast {
