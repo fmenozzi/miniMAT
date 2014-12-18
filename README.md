@@ -40,8 +40,8 @@ miniMAT aims to be a subset of MATLAB. Currently, that subset is small, but I'm 
   * Evaluation of numeric expressions (using `+`, `-`, `*`, `/`, `^`, `(`, and `)`)
   * Support for floating point numbers in scientific notation (e.g. `0.314159e+1`)
   * Assignment and manipulation of scalars (including the `ans` variable)
-  * Assignment and manipulation of matrix literals with literal fields (e.g. [1 2; 3 4])
-  * Read-only single-value matrix indexing (e.g. A(2), A(1,1))
+  * Assignment and manipulation of matrix literals with literal fields (e.g. `[1 2; 3 4]`)
+  * Read-only single-value matrix indexing (e.g. `A(2)`, `A(1,1)`)
   * `who` and `whos` to view variables in current scope
   * `quit` and `exit` to quit the application
   * REPL and error diagnostic output closely resembling MATLAB output
