@@ -18,6 +18,7 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
 
             src/miniMAT/ast/AssignStmt.cpp
             src/miniMAT/ast/BinaryExpr.cpp
+            src/miniMAT/ast/CallExpr.cpp
             src/miniMAT/ast/ExprStmt.cpp
             src/miniMAT/ast/Identifier.cpp
             src/miniMAT/ast/IdRef.cpp
