@@ -12,6 +12,8 @@
 #include <miniMAT/ast/IdRef.hpp>
 #include <miniMAT/ast/RefExpr.hpp>
 #include <miniMAT/ast/AssignStmt.hpp>
+#include <miniMAT/ast/ExprList.hpp>
+#include <miniMAT/ast/CallExpr.hpp>
 
 namespace miniMAT {
     namespace parser {
@@ -276,7 +278,17 @@ namespace miniMAT {
 
                 auto idref = std::make_shared<ast::IdRef>(id);
 
-                return std::make_shared<ast::RefExpr>(idref);
+                if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_LPAREN) {
+                    AcceptIt();
+                    auto args = std::make_shared<ast::ExprList>();
+                    if (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RPAREN)
+                        args = ParseArgList();
+                    Accept(lexer::TokenKind::TOK_RPAREN);
+
+                    return std::make_shared<ast::CallExpr>(idref, args);
+                } else {
+                    return std::make_shared<ast::RefExpr>(idref);
+                }
             }
         }
     }
