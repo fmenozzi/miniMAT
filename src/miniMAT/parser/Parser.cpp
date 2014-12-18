@@ -147,6 +147,16 @@ namespace miniMAT {
             return std::make_shared<ast::AssignStmt>(ref, expr);
         }
 
+        std::shared_ptr<ast::ExprList> Parser::ParseArgList() {
+            auto args = std::make_shared<ast::ExprList>();
+            args->push_back(ParseExpression());               
+            while (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_COMMA) {
+                Accept(lexer::TokenKind::TOK_COMMA);               
+                args->push_back(ParseExpression());            
+            }
+            return args;
+        }
+
         std::shared_ptr<ast::Expression> Parser::ParseExpression() {
             auto expr = ParseA();
             while (GetCurrentToken().GetSpelling() == "+" ||

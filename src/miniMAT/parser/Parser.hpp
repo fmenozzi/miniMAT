@@ -8,6 +8,7 @@
 
 #include <miniMAT/ast/AST.hpp>
 #include <miniMAT/ast/Statement.hpp>
+#include <miniMAT/ast/ExprList.hpp>
 #include <miniMAT/ast/ExprStmt.hpp>
 #include <miniMAT/ast/AssignStmt.hpp>
 #include <miniMAT/ast/Expression.hpp>
@@ -43,6 +44,8 @@ namespace miniMAT {
 
             std::shared_ptr<ast::ExprStmt>   ParseExprStmt();
             std::shared_ptr<ast::AssignStmt> ParseAssignStmt();
+
+            std::shared_ptr<ast::ExprList>   ParseArgList();
 
             std::shared_ptr<ast::Expression> ParseExpression();
 
