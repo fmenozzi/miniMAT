@@ -10,8 +10,9 @@
 namespace miniMAT {
 	namespace ast {
 		class CallExpr : public Expression {
-			CallExpr(std::shared_ptr<Reference> function_ref, 
-					 std::shared_ptr<ExprList> arg_list);
+		public:
+			CallExpr(std::shared_ptr<Reference> functionref, 
+					 std::shared_ptr<ExprList> arglist);
 
 			std::string GetClassName() const;
 
@@ -21,8 +22,8 @@ namespace miniMAT {
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
 		//private:
-            std::shared_ptr<Reference> function_ref;
-            std::shared_ptr<ExprList>  arg_list;
+            std::shared_ptr<Reference> functionref;
+            std::shared_ptr<ExprList>  arglist;
 		};
 	}
 }
