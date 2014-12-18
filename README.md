@@ -15,10 +15,14 @@ A small MATLAB interpreter written in C++ with minimal dependencies
     First, clone the repository (Depending on your network settings, you may have to use the `https` protocol instead of the `git` protocol):
 
         $ git clone git://github.com/fmenozzi/miniMAT.git
+        
+   Next, we want to make sure that we're using the latest stable release. To do so, run the following commands:
+      
+        $ cd miniMAT
+        $ git describe --abbrev=0 --tags | git checkout
 
     Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
 
-        $ cd miniMAT
         $ mkdir build
         $ cd build
    
@@ -32,8 +36,6 @@ A small MATLAB interpreter written in C++ with minimal dependencies
         $ make
 
 3. From the build directory, type `./miniMAT` to launch the REPL
-
-4. Enjoy!
 
 ## Current Features
 miniMAT aims to be a subset of MATLAB. Currently, that subset is small, but I'm working on it! The features currently supported include:
