@@ -1,3 +1,11 @@
+#ifdef _WIN32
+    auto clearstr = "cls";
+#elif __APPLE__
+    auto clearstr = "clear";
+#elif __linux
+    auto clearstr = "clear";
+#endif
+
 #include <miniMAT/util/Function.hpp>
 
 #include <iostream>
@@ -16,23 +24,36 @@ namespace miniMAT {
             };
 
             funcs["who"] = [vars]() {
-            	for (auto var : *vars)
-                    std::cout << var.first << std::endl;
-                std::cout  << std::endl;
+                if (vars->size() != 0) {
+                    std::cout  << std::endl;
+                    for (auto var : *vars)
+                        std::cout << var.first << std::endl;
+                    std::cout  << std::endl;
+                }
             };
 
             funcs["whos"] = [vars]() {
-                using namespace std;
+                if (vars->size() != 0) {
+                    using namespace std;
 
-                auto max_width = max_element(begin(*vars), end(*vars), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
-                    // Compare by variable name length
-                    return p1.first.size() < p2.first.size();
-                })->first.size();
+                    auto max_width = max_element(begin(*vars), end(*vars), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                        // Compare by variable name length
+                        return p1.first.size() < p2.first.size();
+                    })->first.size();
 
-                cout << endl;
-                for (auto var : *vars)
-                    cout << setw(max_width) << var.first << " = " << var.second << endl;
-                cout << endl;
+                    cout << endl;
+                    for (auto var : *vars) {
+                        cout << setw(max_width);
+                        PrintResult(var.first, var.second, false);
+                    }
+                }
+            };
+
+            funcs["clc"] = []() {
+                if (std::system(nullptr))
+                    std::system(clearstr);
+                else
+                    std::cout << "Could not clear screen, for some reason" << std::endl;
             };
 
             funcs[""] = []() {

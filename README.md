@@ -43,13 +43,14 @@ miniMAT aims to be a subset of MATLAB. Currently, that subset is small, but I'm 
   * Assignment and manipulation of matrix literals with literal fields (e.g. `[1 2; 3 4]`)
   * Read-only single-value matrix indexing (e.g. `A(2)`, `A(1,1)`)
   * `who` and `whos` to view variables in current scope
+  * `clc` to clear the console
   * `quit` and `exit` to quit the application
   * REPL and error diagnostic output closely resembling MATLAB output
 
 ## Future Features
 miniMAT is growing rapidly. Features planned for future releases include:
   * Additional capabilities for matrix manipulation (e.g. read-write indexing, ranges)
-  * More "standard" functions including `clear`, `clc`, etc.
+  * More "standard" functions
   * Command history
   * Scripting
   * And much more
