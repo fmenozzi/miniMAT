@@ -14,20 +14,23 @@ namespace miniMAT {
                 this->stream.str(input_line);
                 this->stream >> std::noskipws;
 
+                keywords.insert("clear");
+
                 this->is_done = false;
             }
 
             return *this;
         }
 
-        Lexer::Lexer(const std::string& input_line,
-                     std::shared_ptr<reporter::ErrorReporter> reporter) {
+        Lexer::Lexer(const std::string& input_line, std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->input_line   = input_line;
             this->reporter     = reporter;
             this->current_char = ' ';
 
             this->stream.str(input_line);
             this->stream >> std::noskipws;
+
+            keywords.insert("clear");
 
             this->is_done = false;
         }
@@ -48,7 +51,11 @@ namespace miniMAT {
                     idstr += current_char;
                     TakeIt();
                 }
-                return Token(TokenKind::TOK_IDENTIFIER, idstr);
+
+                if (keywords.find(idstr) != keywords.end())
+                    return Token(TokenKind::TOK_KEYWORD, idstr);
+                else
+                    return Token(TokenKind::TOK_IDENTIFIER, idstr);
             }
 
             // Non-identifiers

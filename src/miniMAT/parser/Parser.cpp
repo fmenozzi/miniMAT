@@ -102,18 +102,22 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Statement> Parser::ParseStatement() {
             if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_IDENTIFIER) {
-                auto id_token = GetCurrentToken();
+                auto idtok = GetCurrentToken();
                 AcceptIt();
 
-                auto next_token = GetCurrentToken();
+                auto nexttok = GetCurrentToken();
 
-                PutBack(id_token);
+                PutBack(idtok);
 
-                if (next_token.GetKind() == lexer::TokenKind::TOK_ASSIGN) {
+
+
+                if (nexttok.GetKind() == lexer::TokenKind::TOK_ASSIGN) {
                     return ParseAssignStmt();
                 } else {
-        			return ParseExprStmt();
-        		}
+                    return ParseExprStmt();
+                }
+            } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_KEYWORD) {
+                return ParseClearStmt();
             } else {
                 return ParseExprStmt();
             }
@@ -128,6 +132,25 @@ namespace miniMAT {
             Accept(lexer::TokenKind::TOK_EOF);
 
             return std::make_shared<ast::ExprStmt>(expr);
+        }
+
+        std::shared_ptr<ast::ClearStmt> Parser::ParseClearStmt() {
+            std::vector<std::shared_ptr<ast::Reference>> refs;
+
+            Accept(lexer::TokenKind::TOK_KEYWORD, "clear");
+            while (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_EOF) {
+                auto reftok = GetCurrentToken();
+
+                Accept(lexer::TokenKind::TOK_IDENTIFIER);
+                if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_COMMA)
+                    AcceptIt();
+                
+                refs.push_back(std::make_shared<ast::IdRef>(std::make_shared<ast::Identifier>(reftok.GetSpelling())));
+            }
+
+            Accept(lexer::TokenKind::TOK_EOF);
+
+            return std::make_shared<ast::ClearStmt>(refs);
         }
 
         std::shared_ptr<ast::AssignStmt> Parser::ParseAssignStmt() {

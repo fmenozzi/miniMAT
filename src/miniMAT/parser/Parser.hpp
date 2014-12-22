@@ -7,6 +7,7 @@
 #include <miniMAT/lexer/Lexer.hpp>
 
 #include <miniMAT/ast/AST.hpp>
+#include <miniMAT/ast/ClearStmt.hpp>
 #include <miniMAT/ast/Statement.hpp>
 #include <miniMAT/ast/ExprList.hpp>
 #include <miniMAT/ast/ExprStmt.hpp>
@@ -44,6 +45,7 @@ namespace miniMAT {
 
             std::shared_ptr<ast::ExprStmt>   ParseExprStmt();
             std::shared_ptr<ast::AssignStmt> ParseAssignStmt();
+            std::shared_ptr<ast::ClearStmt>  ParseClearStmt();
 
             std::shared_ptr<ast::ExprList>   ParseArgList();
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <memory>
+#include <set>
 
 #include <miniMAT/lexer/Token.hpp>
 #include <miniMAT/reporter/ErrorReporter.hpp>
@@ -16,6 +17,8 @@ namespace miniMAT {
             char              current_char;
             std::stringstream stream;
             bool              is_done;
+
+            std::set<std::string> keywords;
 
             std::shared_ptr<reporter::ErrorReporter> reporter;
 

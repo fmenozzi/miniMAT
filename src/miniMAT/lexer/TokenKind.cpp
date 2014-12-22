@@ -10,6 +10,8 @@ namespace miniMAT {
         			return "ERROR";
         		case TokenKind::TOK_IDENTIFIER:
         			return "IDENTIFIER";
+                case TokenKind::TOK_KEYWORD:
+                    return "KEYWORD";
         		case TokenKind::TOK_ASSIGN:
         			return "=";
         		case TokenKind::TOK_FLOATLIT:
