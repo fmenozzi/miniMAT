@@ -17,8 +17,8 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->functionref->VisitDisplay(Indent(prefix));
-            for (auto& e : *(this->arglist))
+            functionref->VisitDisplay(Indent(prefix));
+            for (auto& e : *arglist)
             	e->VisitDisplay(Indent(prefix));
         }
 
@@ -50,17 +50,17 @@ namespace miniMAT {
 
         void CallExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            this->functionref->VisitCheck(vars, reporter);
+            functionref->VisitCheck(vars, reporter);
 
         	// For now, assume all call expressions are matrix indexing (i.e. requires 1 or 2 args)
         	if (arglist->size() < 1 || arglist->size() > 2)
         		throw std::string("Incorrect number of args in matrix index");
 
-            for (auto& e : *(this->arglist))
+            for (auto& e : *arglist)
             	e->VisitCheck(vars, reporter);
 
             // Make sure that indices don't go out of bounds
-            for (auto e : *(this->arglist)) {
+            for (auto e : *arglist) {
             	auto indexval = e->VisitEvaluate(vars)(0);
             	auto mat      = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->GetSpelling());
             	if (indexval < 1 || indexval > mat.size())

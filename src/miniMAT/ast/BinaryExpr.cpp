@@ -27,18 +27,18 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->op->VisitDisplay(Indent(prefix));
-            this->left->VisitDisplay(Indent(Indent(prefix)));
-            this->right->VisitDisplay(Indent(Indent(prefix)));
+            op->VisitDisplay(Indent(prefix));
+            left->VisitDisplay(Indent(Indent(prefix)));
+            right->VisitDisplay(Indent(Indent(prefix)));
         }
 
         Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             using namespace miniMAT::util;
 
-            Matrix lresult = this->left->VisitEvaluate(vars);
-            Matrix rresult = this->right->VisitEvaluate(vars);
+            Matrix lresult = left->VisitEvaluate(vars);
+            Matrix rresult = right->VisitEvaluate(vars);
 
-            auto opstr = this->op->GetSpelling();
+            auto opstr = op->GetSpelling();
             if (opstr == "+" || opstr == "-") {
                 // Check for scalar-matrix or matrix-scalar addition/subtraction
                 if (Dims::scalar_mat(lresult, rresult))

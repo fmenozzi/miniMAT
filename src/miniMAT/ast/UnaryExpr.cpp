@@ -16,21 +16,21 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->op->VisitDisplay(Indent(prefix));
-            this->expr->VisitDisplay(Indent(Indent(prefix)));
+            op->VisitDisplay(Indent(prefix));
+            expr->VisitDisplay(Indent(Indent(prefix)));
         }
 
         Matrix UnaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            Matrix result = this->expr->VisitEvaluate(vars);
-            if (this->op->GetSpelling() == "-")
+            Matrix result = expr->VisitEvaluate(vars);
+            if (op->GetSpelling() == "-")
                 result *= -1;
             return result;
         }
 
         void UnaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                    std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            this->op->VisitCheck(vars, reporter);
-            this->expr->VisitCheck(vars, reporter);
+            op->VisitCheck(vars, reporter);
+            expr->VisitCheck(vars, reporter);
         }
     }
 }

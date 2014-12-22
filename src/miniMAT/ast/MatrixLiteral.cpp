@@ -7,20 +7,20 @@ namespace miniMAT {
         }
 
         Matrix MatrixLiteral::GetMatrix() const {
-            return this->mat;
+            return mat;
         }
 
         void MatrixLiteral::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
-            auto r = std::to_string(this->mat.rows());
-            auto c = std::to_string(this->mat.cols());
+            auto r = std::to_string(mat.rows());
+            auto c = std::to_string(mat.cols());
 
-            Show(prefix, Quote(this->GetClassName()) + " " + Quote(r + "x" + c));
+            Show(prefix, Quote(GetClassName()) + " " + Quote(r + "x" + c));
         }
 
         Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            return this->mat;
+            return mat;
         }
 
         void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,

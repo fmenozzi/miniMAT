@@ -14,16 +14,16 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->expr->VisitDisplay(Indent(prefix));
+            expr->VisitDisplay(Indent(prefix));
         }
 
         Matrix ExprStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            return this->expr->VisitEvaluate(vars);
+            return expr->VisitEvaluate(vars);
         }
 
         void ExprStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            this->expr->VisitCheck(vars, reporter);
+            expr->VisitCheck(vars, reporter);
         }
     }
 }

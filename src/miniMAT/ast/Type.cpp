@@ -7,7 +7,7 @@ namespace miniMAT {
         }
 
         TypeKind Type::GetKind() const {
-            return this->kind;
+            return kind;
         }
     }
 }

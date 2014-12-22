@@ -14,18 +14,18 @@ namespace miniMAT {
         }
 
         std::shared_ptr<Reference> RefExpr::GetReference() const {
-            return this->ref;
+            return ref;
         }
 
         void RefExpr::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->ref->VisitDisplay(Indent(prefix));
+            ref->VisitDisplay(Indent(prefix));
         }
 
         Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            return this->ref->VisitEvaluate(vars);
+            return ref->VisitEvaluate(vars);
         }
 
         void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,

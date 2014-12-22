@@ -14,7 +14,7 @@ namespace miniMAT {
 
         std::shared_ptr<ast::AST> Checker::check(std::shared_ptr<ast::AST> ast) {
             try {
-                ast->VisitCheck(this->vars, this->reporter);
+                ast->VisitCheck(vars, reporter);
                 return ast;
             } catch (std::string& error) {
                 reporter->AddCheckError(error);

@@ -21,25 +21,25 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->ref->VisitDisplay(Indent(prefix));
-            this->expr->VisitDisplay(Indent(prefix));
+            ref->VisitDisplay(Indent(prefix));
+            expr->VisitDisplay(Indent(prefix));
         }
 
         Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-                this->val = vars->at(varname);
+                val = vars->at(varname);
             }
-            return this->val;
+            return val;
         }
 
         void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            this->expr->VisitCheck(vars, reporter);
+            expr->VisitCheck(vars, reporter);
 
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-                (*vars)[varname] = this->expr->VisitEvaluate(vars);
+                (*vars)[varname] = expr->VisitEvaluate(vars);
             }
         }
     }

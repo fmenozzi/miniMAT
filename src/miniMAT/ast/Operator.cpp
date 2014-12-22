@@ -9,7 +9,7 @@ namespace miniMAT {
         void Operator::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
-            Show(prefix, Quote(this->GetClassName()) + " " + Quote(this->GetSpelling()));
+            Show(prefix, Quote(GetClassName()) + " " + Quote(GetSpelling()));
         }
 
         Matrix Operator::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {

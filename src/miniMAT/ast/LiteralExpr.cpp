@@ -11,18 +11,18 @@ namespace miniMAT {
         }
 
         std::shared_ptr<Literal> LiteralExpr::GetLiteral() const {
-            return this->literal;
+            return literal;
         }
 
         void LiteralExpr::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->literal->VisitDisplay(Indent(prefix));
+            literal->VisitDisplay(Indent(prefix));
         }
 
         Matrix LiteralExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            return this->literal->VisitEvaluate(vars);
+            return literal->VisitEvaluate(vars);
         }
 
         void LiteralExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,

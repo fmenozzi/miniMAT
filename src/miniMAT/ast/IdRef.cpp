@@ -14,16 +14,16 @@ namespace miniMAT {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
-            this->id->VisitDisplay(Indent(prefix));
+            id->VisitDisplay(Indent(prefix));
         }
 
         Matrix IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            return vars->at(this->id->GetSpelling());
+            return vars->at(id->GetSpelling());
         }
 
         void IdRef::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            auto varname = this->id->GetSpelling();
+            auto varname = id->GetSpelling();
             if (vars->find(varname) == vars->end())
                 throw "Undefined function or variable \'" + varname + "\'.";
         }
