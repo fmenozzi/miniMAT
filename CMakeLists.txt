@@ -28,9 +28,7 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/ast/MatrixLiteral.cpp
             src/miniMAT/ast/Operator.cpp
             src/miniMAT/ast/RefExpr.cpp
-            src/miniMAT/ast/ScalarType.cpp
             src/miniMAT/ast/Terminal.cpp
-            src/miniMAT/ast/Type.cpp
             src/miniMAT/ast/UnaryExpr.cpp
             src/miniMAT/ast/WhoStmt.cpp
             src/miniMAT/ast/WhosStmt.cpp
