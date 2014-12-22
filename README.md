@@ -14,26 +14,30 @@ A small MATLAB interpreter written in C++ with minimal dependencies
 
     First, clone the repository (Depending on your network settings, you may have to use the `https` protocol instead of the `git` protocol):
 
-        $ git clone git://github.com/fmenozzi/miniMAT.git
+         $ git clone git://github.com/fmenozzi/miniMAT.git
+         $ cd miniMAT
         
-   Next, we want to make sure that we're using the latest stable release. To do so, run the following commands:
+   Next, we want to make sure that we're using the latest stable release. The latest tag number can be obtained by running the following command:
       
-        $ cd miniMAT
-        $ git tag | tail -n 1 | git checkout
+         $ git tag | tail -n 1
+        
+   To switch to a particular tag:
+   
+         $ git checkout *tag*
 
     Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
 
-        $ mkdir build
-        $ cd build
+         $ mkdir build
+         $ cd build
    
    Now, we need to tell CMake where to find Eigen by creating an environment variable that points to the installation directory. On Linux, this can be accomplished with the following command (assuming the default installation directory for Eigen):
          
-        $ export EIGEN3_INCLUDE_DIR=/usr/include/eigen3
+         $ export EIGEN3_INCLUDE_DIR=/usr/include/eigen3
     
     Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, run `ccmake` instead):
     
-        $ cmake ..
-        $ make
+         $ cmake ..
+         $ make
 
 3. From the build directory, type `./miniMAT` to launch the REPL
 
