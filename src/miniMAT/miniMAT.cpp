@@ -31,7 +31,7 @@ int main() {
     cout << endl;
 
     while (true) {
-        cout << ">>> ";
+        cout << ">> ";
 
         getline(cin, input_line);
         if (cin.eof()) {
