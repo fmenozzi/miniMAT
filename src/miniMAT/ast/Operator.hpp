@@ -16,8 +16,6 @@ namespace miniMAT {
                 this->token = token;
             }
 
-            virtual ~Operator() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

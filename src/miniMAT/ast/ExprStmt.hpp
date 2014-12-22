@@ -13,8 +13,6 @@ namespace miniMAT {
         public:
             ExprStmt(std::shared_ptr<Expression> expr);
 
-            virtual ~ExprStmt() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

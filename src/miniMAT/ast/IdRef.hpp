@@ -11,7 +11,6 @@ namespace miniMAT {
         class IdRef : public Reference {
         public:
             IdRef(std::shared_ptr<Identifier> id);
-            virtual ~IdRef() {}
 
             std::string GetClassName() const;
 

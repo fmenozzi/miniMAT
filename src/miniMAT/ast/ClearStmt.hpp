@@ -13,8 +13,6 @@ namespace miniMAT {
 		public:
 			ClearStmt(std::vector<std::shared_ptr<Reference>> refs);
 
-			virtual ~ClearStmt() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

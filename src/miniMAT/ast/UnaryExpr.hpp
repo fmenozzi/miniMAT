@@ -13,8 +13,6 @@ namespace miniMAT {
             UnaryExpr(std::shared_ptr<Operator> op,
                       std::shared_ptr<Expression> expr);
 
-            virtual ~UnaryExpr() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

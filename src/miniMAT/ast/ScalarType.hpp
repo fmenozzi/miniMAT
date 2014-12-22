@@ -10,8 +10,6 @@ namespace miniMAT {
         public:
             ScalarType(TypeKind kind) : Type(kind) {}
 
-            virtual ~ScalarType() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

@@ -12,8 +12,6 @@ namespace miniMAT {
             AssignStmt(std::shared_ptr<Reference> ref,
                        std::shared_ptr<Expression> expr);
 
-            virtual ~AssignStmt() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

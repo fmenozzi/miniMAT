@@ -14,8 +14,6 @@ namespace miniMAT {
                        std::shared_ptr<Operator> op,
                        std::shared_ptr<Expression> right);
 
-            virtual ~BinaryExpr() {}
-
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

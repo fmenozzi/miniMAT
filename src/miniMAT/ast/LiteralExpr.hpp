@@ -12,8 +12,6 @@ namespace miniMAT {
         public:
             LiteralExpr(std::shared_ptr<Literal> literal);
 
-            virtual ~LiteralExpr() {}
-
             std::string              GetClassName() const;
             std::shared_ptr<Literal> GetLiteral() const;
 

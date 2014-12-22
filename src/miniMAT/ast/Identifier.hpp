@@ -10,7 +10,6 @@ namespace miniMAT {
         class Identifier : public Terminal {
         public:
             Identifier(const std::string& spelling) : Terminal(spelling) {}
-            virtual ~Identifier() {}
 
             std::string GetClassName() const;
 
