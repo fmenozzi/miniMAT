@@ -8,8 +8,6 @@ namespace miniMAT {
     namespace reporter {
         class ErrorReporter {
         public:
-            ErrorReporter();
-
             void AddLexerError(const std::string& error);
             void AddParseError(const std::string& error);
             void AddCheckError(const std::string& error);
