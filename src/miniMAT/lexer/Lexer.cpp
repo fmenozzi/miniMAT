@@ -15,6 +15,9 @@ namespace miniMAT {
                 this->stream >> std::noskipws;
 
                 keywords.insert("clear");
+                keywords.insert("who");
+                keywords.insert("whos");
+                keywords.insert("clc");
 
                 this->is_done = false;
             }
@@ -31,6 +34,9 @@ namespace miniMAT {
             this->stream >> std::noskipws;
 
             keywords.insert("clear");
+            keywords.insert("who");
+            keywords.insert("whos");
+            keywords.insert("clc");
 
             this->is_done = false;
         }

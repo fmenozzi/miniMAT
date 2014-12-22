@@ -19,6 +19,7 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/ast/AssignStmt.cpp
             src/miniMAT/ast/BinaryExpr.cpp
             src/miniMAT/ast/CallExpr.cpp
+            src/miniMAT/ast/ClcStmt.cpp
             src/miniMAT/ast/ClearStmt.cpp
             src/miniMAT/ast/ExprStmt.cpp
             src/miniMAT/ast/Identifier.cpp
@@ -31,6 +32,8 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/ast/Terminal.cpp
             src/miniMAT/ast/Type.cpp
             src/miniMAT/ast/UnaryExpr.cpp
+            src/miniMAT/ast/WhoStmt.cpp
+            src/miniMAT/ast/WhosStmt.cpp
 
             src/miniMAT/checker/Checker.cpp
 
@@ -42,8 +45,8 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
 
             src/miniMAT/reporter/ErrorReporter.cpp
 
-            src/miniMAT/util/Function.cpp
             src/miniMAT/util/Dims.cpp
+            src/miniMAT/util/PrintResult.cpp
 
             src/miniMAT/visit/Visitors.cpp
     )

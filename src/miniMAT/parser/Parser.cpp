@@ -117,7 +117,14 @@ namespace miniMAT {
                     return ParseExprStmt();
                 }
             } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_KEYWORD) {
-                return ParseClearStmt();
+                if (GetCurrentToken().GetSpelling() == "clear")
+                    return ParseClearStmt();
+                else if (GetCurrentToken().GetSpelling() == "who")
+                    return ParseWhoStmt();
+                else if (GetCurrentToken().GetSpelling() == "whos")
+                    return ParseWhosStmt();
+                else // clc
+                    return ParseClcStmt();
             } else {
                 return ParseExprStmt();
             }
@@ -151,6 +158,27 @@ namespace miniMAT {
             Accept(lexer::TokenKind::TOK_EOF);
 
             return std::make_shared<ast::ClearStmt>(refs);
+        }
+
+        std::shared_ptr<ast::WhoStmt> Parser::ParseWhoStmt() {
+            Accept(lexer::TokenKind::TOK_KEYWORD, "who");
+            Accept(lexer::TokenKind::TOK_EOF);
+
+            return std::make_shared<ast::WhoStmt>();
+        }
+
+        std::shared_ptr<ast::WhosStmt> Parser::ParseWhosStmt() {
+            Accept(lexer::TokenKind::TOK_KEYWORD, "whos");
+            Accept(lexer::TokenKind::TOK_EOF);
+
+            return std::make_shared<ast::WhosStmt>();
+        }
+
+        std::shared_ptr<ast::ClcStmt> Parser::ParseClcStmt() {
+            Accept(lexer::TokenKind::TOK_KEYWORD, "clc");
+            Accept(lexer::TokenKind::TOK_EOF);
+
+            return std::make_shared<ast::ClcStmt>();
         }
 
         std::shared_ptr<ast::AssignStmt> Parser::ParseAssignStmt() {

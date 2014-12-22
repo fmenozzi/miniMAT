@@ -14,7 +14,7 @@
 #include <miniMAT/ast/RefExpr.hpp>
 #include <miniMAT/ast/IdRef.hpp>
 
-#include <miniMAT/util/Function.hpp>
+#include <miniMAT/util/PrintResult.hpp>
 
 using namespace std;
 
@@ -24,8 +24,6 @@ int main() {
     auto vars = make_shared<map<string, Matrix>>();
     (*vars)["ans"] = Matrix::Zero(1,1);
 
-    miniMAT::util::Function::init(vars);
-
     cout << "miniMAT: It's like MATLAB, but smaller." << endl;
     cout << "Copyright (C) 2014 Federico Menozzi" << endl;
     cout << endl;
@@ -34,19 +32,11 @@ int main() {
         cout << ">> ";
 
         getline(cin, input_line);
-        if (cin.eof()) {
+        if (input_line == "quit" || input_line == "exit" || input_line == "bye!")
+            break;
+        if (cin.eof()) { // Ctrl-D to quit
             cout << endl;
             break;
-        }
-
-        // If input line is a "standard" function, call it
-        if (miniMAT::util::Function::HasFunction(input_line)) {
-            try {
-                miniMAT::util::Function::GetFunction(input_line)();
-            } catch (...) { // Catch Function::init expection
-                break;
-            }
-            continue;
         }
 
         auto reporter = make_shared<miniMAT::reporter::ErrorReporter>();
@@ -75,11 +65,11 @@ int main() {
                     auto refexpr = dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
                     auto varname = dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->GetSpelling();
 
-                    miniMAT::util::Function::PrintResult(varname, vars->at(varname), parser.SuppressedOutput());
+                    miniMAT::util::PrintResult(varname, vars->at(varname), parser.SuppressedOutput());
                 } else {
                     (*vars)["ans"] = ans;
 
-                    miniMAT::util::Function::PrintResult("ans", ans, parser.SuppressedOutput());
+                    miniMAT::util::PrintResult("ans", ans, parser.SuppressedOutput());
                 }
 
             } else if (ast->GetClassName() == "AssignStmt") {
@@ -91,7 +81,7 @@ int main() {
                     auto varname = idref->id->GetSpelling();
                     auto val     = assign_stmt->val;
 
-                    miniMAT::util::Function::PrintResult(varname, val, parser.SuppressedOutput());
+                    miniMAT::util::PrintResult(varname, val, parser.SuppressedOutput());
                 }
             }
         }

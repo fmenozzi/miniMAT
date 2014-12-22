@@ -13,6 +13,9 @@
 #include <miniMAT/ast/ExprStmt.hpp>
 #include <miniMAT/ast/AssignStmt.hpp>
 #include <miniMAT/ast/Expression.hpp>
+#include <miniMAT/ast/WhoStmt.hpp>
+#include <miniMAT/ast/WhosStmt.hpp>
+#include <miniMAT/ast/ClcStmt.hpp>
 
 namespace miniMAT {
     namespace parser {
@@ -46,6 +49,9 @@ namespace miniMAT {
             std::shared_ptr<ast::ExprStmt>   ParseExprStmt();
             std::shared_ptr<ast::AssignStmt> ParseAssignStmt();
             std::shared_ptr<ast::ClearStmt>  ParseClearStmt();
+            std::shared_ptr<ast::WhoStmt>    ParseWhoStmt();
+            std::shared_ptr<ast::WhosStmt>   ParseWhosStmt();
+            std::shared_ptr<ast::ClcStmt>    ParseClcStmt();
 
             std::shared_ptr<ast::ExprList>   ParseArgList();
 
