@@ -21,10 +21,8 @@ A small MATLAB interpreter written in C++ with minimal dependencies
       
          $ git tag | tail -n 1
         
-   To switch to the tag `t`:
+   Use `git checkout` to switch to a particular tag
    
-         $ git checkout t
-
     Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
 
          $ mkdir build
@@ -49,6 +47,7 @@ miniMAT aims to be a subset of MATLAB. Currently, that subset is small, but I'm 
   * Assignment and manipulation of matrix literals with literal fields (e.g. `[1 2; 3 4]`)
   * Read-only single-value matrix indexing (e.g. `A(2)`, `A(1,1)`)
   * `who` and `whos` to view variables in current scope
+  * `clear` to delete variables from the current scope
   * `clc` to clear the console
   * `quit` and `exit` to quit the application
   * REPL and error diagnostic output closely resembling MATLAB output
