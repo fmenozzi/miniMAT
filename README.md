@@ -19,7 +19,7 @@ A small MATLAB interpreter written in C++ with minimal dependencies
    Next, we want to make sure that we're using the latest stable release. To do so, run the following commands:
       
         $ cd miniMAT
-        $ git describe --abbrev=0 --tags | git checkout
+        $ git tag | tail -n 1 | git checkout
 
     Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
 
