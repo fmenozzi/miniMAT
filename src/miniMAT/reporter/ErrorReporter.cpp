@@ -5,12 +5,6 @@
 
 namespace miniMAT {
     namespace reporter {
-        ErrorReporter::ErrorReporter() {
-            lexer_errors = std::vector<std::string>();
-            parse_errors = std::vector<std::string>();
-            check_errors = std::vector<std::string>();
-        }
-
         void ErrorReporter::AddLexerError(const std::string& error) {
             lexer_errors.push_back(error);
         }

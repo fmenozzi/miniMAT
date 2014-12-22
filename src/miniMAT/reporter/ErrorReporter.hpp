@@ -19,9 +19,9 @@ namespace miniMAT {
             void ReportErrors();
 
         private:
-            std::vector<std::string> lexer_errors;
-            std::vector<std::string> parse_errors;
-            std::vector<std::string> check_errors;
+            std::vector<std::string> lexer_errors = std::vector<std::string>();
+            std::vector<std::string> parse_errors = std::vector<std::string>();
+            std::vector<std::string> check_errors = std::vector<std::string>();
 
             bool HasLexerErrors();
             bool HasParseErrors();
