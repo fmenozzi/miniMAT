@@ -21,9 +21,9 @@ A small MATLAB interpreter written in C++ with minimal dependencies
       
          $ git tag | tail -n 1
         
-   To switch to a particular tag:
+   To switch to the tag `t`:
    
-         $ git checkout *tag*
+         $ git checkout t
 
     Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
 
