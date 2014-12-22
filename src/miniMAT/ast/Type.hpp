@@ -7,8 +7,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Type : public AST {
-        public:
+        struct Type : public AST {
             Type(TypeKind kind);
             virtual ~Type() {}
 

@@ -8,8 +8,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class UnaryExpr : public Expression {
-        public:
+        struct UnaryExpr : public Expression {
             UnaryExpr(std::shared_ptr<Operator> op,
                       std::shared_ptr<Expression> expr);
 
@@ -20,7 +19,6 @@ namespace miniMAT {
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
-        //private:
             std::shared_ptr<Operator>   op;
             std::shared_ptr<Expression> expr;
         };

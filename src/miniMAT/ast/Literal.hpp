@@ -7,8 +7,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Literal : public Terminal {
-        public:
+        struct Literal : public Terminal {
             Literal(const std::string& spelling) : Terminal(spelling) {}
             virtual ~Literal() {}
 

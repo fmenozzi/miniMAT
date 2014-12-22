@@ -6,8 +6,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class ScalarType : public Type {
-        public:
+        struct ScalarType : public Type {
             ScalarType(TypeKind kind) : Type(kind) {}
 
             std::string GetClassName() const;

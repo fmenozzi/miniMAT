@@ -7,8 +7,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class AssignStmt : public Statement {
-        public:
+        struct AssignStmt : public Statement {
             AssignStmt(std::shared_ptr<Reference> ref,
                        std::shared_ptr<Expression> expr);
 
@@ -19,7 +18,6 @@ namespace miniMAT {
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> checker) const;
 
-        //private:
             std::shared_ptr<Reference> ref;
             std::shared_ptr<Expression> expr;
 

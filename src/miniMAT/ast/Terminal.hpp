@@ -7,8 +7,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Terminal : public AST {
-        public:
+        struct Terminal : public AST {
             Terminal(const std::string& spelling);
             virtual ~Terminal() {}
 

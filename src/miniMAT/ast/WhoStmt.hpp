@@ -5,8 +5,7 @@
 
 namespace miniMAT {
 	namespace ast {
-		class WhoStmt : public Statement {
-		public:
+		struct WhoStmt : public Statement {
 			std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

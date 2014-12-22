@@ -9,8 +9,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class ExprStmt : public Statement {
-        public:
+        struct ExprStmt : public Statement {
             ExprStmt(std::shared_ptr<Expression> expr);
 
             std::string GetClassName() const;
@@ -20,7 +19,6 @@ namespace miniMAT {
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
-        //private:
             std::shared_ptr<Expression> expr;
         };
     }

@@ -6,8 +6,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Expression : public AST {
-        public:
+        struct Expression : public AST {
             virtual ~Expression() {}
 
             virtual std::string GetClassName() const = 0;

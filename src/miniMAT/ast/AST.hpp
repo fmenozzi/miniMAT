@@ -11,8 +11,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class AST {
-        public:
+        struct AST {
             virtual ~AST() {}
 
             virtual std::string GetClassName() const = 0;

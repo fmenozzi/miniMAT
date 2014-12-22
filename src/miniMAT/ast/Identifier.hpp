@@ -7,8 +7,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Identifier : public Terminal {
-        public:
+        struct Identifier : public Terminal {
             Identifier(const std::string& spelling) : Terminal(spelling) {}
 
             std::string GetClassName() const;

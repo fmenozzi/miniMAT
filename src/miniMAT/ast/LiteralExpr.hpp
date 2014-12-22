@@ -8,8 +8,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class LiteralExpr : public Expression {
-        public:
+        struct LiteralExpr : public Expression {
             LiteralExpr(std::shared_ptr<Literal> literal);
 
             std::string              GetClassName() const;
@@ -20,7 +19,6 @@ namespace miniMAT {
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
-        //private:
             std::shared_ptr<Literal> literal;
         };
     }

@@ -6,8 +6,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Statement : public AST {
-        public:
+        struct Statement : public AST {
             virtual ~Statement() {}
 
             virtual std::string GetClassName() const = 0;

@@ -10,8 +10,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Operator : public Terminal {
-        public:
+        struct Operator : public Terminal {
             Operator(lexer::Token token) : Terminal(token.GetSpelling()) {
                 this->token = token;
             }
@@ -23,7 +22,6 @@ namespace miniMAT {
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
-        //private:
             lexer::Token token;
         };
     }

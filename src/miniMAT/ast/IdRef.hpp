@@ -8,8 +8,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class IdRef : public Reference {
-        public:
+        struct IdRef : public Reference {
             IdRef(std::shared_ptr<Identifier> id);
 
             std::string GetClassName() const;
@@ -19,7 +18,6 @@ namespace miniMAT {
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
-        //private:
             std::shared_ptr<Identifier> id;
         };
     }

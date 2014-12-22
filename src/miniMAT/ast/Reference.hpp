@@ -7,8 +7,7 @@
 
 namespace miniMAT {
     namespace ast {
-        class Reference : public AST {
-        public:
+        struct Reference : public AST {
             virtual ~Reference() {}
 
             virtual std::string GetClassName() const = 0;

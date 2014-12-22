@@ -3,7 +3,7 @@
 
 namespace miniMAT {
     namespace ast {
-        enum class TypeKind {
+        enum struct TypeKind {
             KIND_FLOATLIT
         };
     }
