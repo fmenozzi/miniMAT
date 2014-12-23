@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 namespace miniMAT {
-	namespace ast {
+    namespace ast {
         std::string ClcStmt::GetClassName() const {
             return "ClcStmt";
         }
@@ -25,17 +25,17 @@ namespace miniMAT {
         #endif
 
             int i __attribute__((unused));  // I hate warnings
-        	if (std::system(nullptr))
+            if (std::system(nullptr))
                 i = std::system(clearstr); 
             else
                 std::cout << "Could not clear screen, for some reason" << std::endl;
 
-        	return Matrix::Zero(0,0);
+            return Matrix::Zero(0,0);
         }
 
         void ClcStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
      
         }
-	}
+    }
 }

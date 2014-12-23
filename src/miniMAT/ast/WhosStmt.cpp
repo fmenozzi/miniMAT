@@ -6,7 +6,7 @@
 #include <iomanip>
 
 namespace miniMAT {
-	namespace ast {
+    namespace ast {
         std::string WhosStmt::GetClassName() const {
             return "WhosStmt";
         }
@@ -18,7 +18,7 @@ namespace miniMAT {
         }
 
         Matrix WhosStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-        	if (vars->size() != 0) {
+            if (vars->size() != 0) {
                 using namespace std;
 
                 auto max_width = max_element(vars->begin(), 
@@ -35,12 +35,12 @@ namespace miniMAT {
                 }
             }
 
-        	return Matrix::Zero(0,0);
+            return Matrix::Zero(0,0);
         }
 
         void WhosStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
      
         }
-	}
+    }
 }

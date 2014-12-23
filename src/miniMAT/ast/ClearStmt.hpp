@@ -8,9 +8,9 @@
 #include <memory>
 
 namespace miniMAT {
-	namespace ast {
-		struct ClearStmt : public Statement {
-			ClearStmt(std::vector<std::shared_ptr<Reference>> refs);
+    namespace ast {
+        struct ClearStmt : public Statement {
+            ClearStmt(std::vector<std::shared_ptr<Reference>> refs);
 
             std::string GetClassName() const;
 
@@ -20,8 +20,8 @@ namespace miniMAT {
                             std::shared_ptr<reporter::ErrorReporter> checker) const;
 
             std::vector<std::shared_ptr<Reference>> refs;
-		};
-	}
+        };
+    }
 }
 
 #endif

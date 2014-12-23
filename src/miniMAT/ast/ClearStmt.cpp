@@ -2,8 +2,8 @@
 #include <miniMAT/ast/IdRef.hpp>
 
 namespace miniMAT {
-	namespace ast {
-		ClearStmt::ClearStmt(std::vector<std::shared_ptr<Reference>> refs) {
+    namespace ast {
+        ClearStmt::ClearStmt(std::vector<std::shared_ptr<Reference>> refs) {
             this->refs = refs;
         }
 
@@ -23,20 +23,20 @@ namespace miniMAT {
             if (refs.empty()) {
             	vars->erase(vars->begin(), vars->end());
             } else {
-            	for (auto ref : refs) {
-	            	// For now, all References are IdRefs
-	            	auto refspelling = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
-	            	if (vars->find(refspelling) != vars->end())
-	            		vars->erase(refspelling);
-	            }
+                for (auto ref : refs) {
+                    // For now, all References are IdRefs
+                    auto refspelling = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
+                    if (vars->find(refspelling) != vars->end())
+                        vars->erase(refspelling);
+                }
             }
 
             return Matrix::Zero(0,0);
         }
 
         void ClearStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
-                                    std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
      
         }
-	}
+    }
 }

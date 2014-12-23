@@ -4,16 +4,16 @@
 #include <miniMAT/ast/Statement.hpp>
 
 namespace miniMAT {
-	namespace ast {
-		struct WhosStmt : public Statement {
-			std::string GetClassName() const;
+    namespace ast {
+        struct WhosStmt : public Statement {
+            std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;
             Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars);
             void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> checker) const;
-		};
-	}
+        };
+    }
 }
 
 #endif
