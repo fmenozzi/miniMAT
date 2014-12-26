@@ -291,11 +291,31 @@ namespace miniMAT {
                         auto varname = GetCurrentToken().GetSpelling();
                         if (vars->find(varname) == vars->end())
                             ParseError("Undefined function or variable \'" + varname + "\'.");
-
-                        // Get variable's value
-                        val = vars->at(varname)(0);
-
                         AcceptIt();
+
+                        // Check to see if id is part of index/call expression
+                        if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_LPAREN) {
+                            AcceptIt();
+                            auto args = std::make_shared<ast::ExprList>();
+                            if (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RPAREN)
+                                args = ParseArgList();
+                            Accept(lexer::TokenKind::TOK_RPAREN);
+
+                            auto id       = std::make_shared<ast::Identifier>(varname);
+                            auto idref    = std::make_shared<ast::IdRef>(id);
+                            auto callexpr = std::make_shared<ast::CallExpr>(idref, args);
+
+                            try {
+                                callexpr->VisitCheck(vars, reporter);  
+                            } catch (std::string& error) {
+                                ParseError(error);
+                            }
+
+                            val = callexpr->VisitEvaluate(vars)(0);
+                        } else {
+                            // Get variable's value
+                            val = vars->at(varname)(0);
+                        }
                     }
 
                     vals.push_back(val);
