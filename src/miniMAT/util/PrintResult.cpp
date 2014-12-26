@@ -2,20 +2,32 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 namespace miniMAT {
 	namespace util {
 		void PrintResult(std::string varname, Matrix m, bool suppressed) {
 			if (!suppressed) {
+                using namespace std;
+
+                int maxdigits = log10(m.maxCoeff()) + 1;    // Get number of digits of max element
+                int precision = 4;
+                int space = 1, dot = 1;
+
                 // Print a row at a time (default precision is 4)
-                std::cout << varname << " =" << std::endl << std::endl;
+                cout << varname << " =" << endl << endl;
                 for (int i = 0; i < m.rows(); i++) {
-                    std::cout << "    ";
+                    cout << "    ";
                     for (int j = 0; j < m.cols(); j++)
-                        std::cout << std::fixed << std::showpoint << std::setprecision(4) << m(i,j) << " ";
-                    std::cout << std::endl;
+                        cout << right 
+                             << fixed 
+                             << showpoint 
+                             << setprecision(precision) 
+                             << setw(maxdigits + precision + dot + space)
+                             << m(i,j);
+                    cout << endl;
                 }
-                std::cout << std::endl;
+                cout << endl;
             }
 		}
 	}
