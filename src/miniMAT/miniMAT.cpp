@@ -41,7 +41,7 @@ int main() {
 
         auto reporter = make_shared<miniMAT::reporter::ErrorReporter>();
         miniMAT::lexer::Lexer   lexer(input_line, reporter);
-        miniMAT::parser::Parser parser(lexer, reporter);
+        miniMAT::parser::Parser parser(lexer, vars, reporter);
 
         auto ast = parser.Parse();
 

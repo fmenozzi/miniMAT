@@ -17,10 +17,14 @@
 
 namespace miniMAT {
     namespace parser {
-        Parser::Parser(const lexer::Lexer& lexer, std::shared_ptr<reporter::ErrorReporter> reporter) {
+        Parser::Parser(const lexer::Lexer& lexer, 
+                       std::shared_ptr<std::map<std::string, Matrix>> vars,
+                       std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->lexer    = lexer;
-            this->tokens   = std::deque<lexer::Token>();
+            this->vars     = vars;
             this->reporter = reporter;
+
+            this->tokens   = std::deque<lexer::Token>();
         }
 
         void Parser::ParseError(const std::string& error) {
@@ -279,10 +283,20 @@ namespace miniMAT {
 
                 while (GetCurrentToken().GetKind() != lexer::TokenKind::TOK_RBRACKET) {
                     double val;
-                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_FLOATLIT)
+                    if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
                         val = std::stod(GetCurrentToken().GetSpelling());
-                    Accept(lexer::TokenKind::TOK_FLOATLIT);
+                        AcceptIt();
+                    } else if (GetCurrentToken().GetKind() == lexer::TokenKind::TOK_IDENTIFIER) {
+                        // Check if identifier exists
+                        auto varname = GetCurrentToken().GetSpelling();
+                        if (vars->find(varname) == vars->end())
+                            ParseError("Undefined function or variable \'" + varname + "\'.");
 
+                        // Get variable's value
+                        val = vars->at(varname)(0);
+
+                        AcceptIt();
+                    }
 
                     vals.push_back(val);
 

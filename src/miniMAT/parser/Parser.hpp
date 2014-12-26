@@ -25,10 +25,14 @@ namespace miniMAT {
             std::deque<lexer::Token>  tokens;
             bool                      suppressed = false;
 
+            std::shared_ptr<std::map<std::string, Matrix>> vars;
+
             std::shared_ptr<reporter::ErrorReporter> reporter;
 
         public:
-            Parser(const lexer::Lexer& lexer, std::shared_ptr<reporter::ErrorReporter> reporter);
+            Parser(const lexer::Lexer& lexer, 
+                   std::shared_ptr<std::map<std::string, Matrix>> vars,
+                   std::shared_ptr<reporter::ErrorReporter> reporter);
 
             void ParseError(const std::string& error);
 
