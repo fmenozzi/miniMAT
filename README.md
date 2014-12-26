@@ -12,18 +12,14 @@ A small MATLAB interpreter written in C++ with minimal dependencies
     
 2. Download and build miniMAT:
 
-    First, clone the repository (Depending on your network settings, you may have to use the `https` protocol instead of the `git` protocol):
+   First, clone the repository (Depending on your network settings, you may have to use the `https` protocol instead of the `git` protocol):
 
          $ git clone git://github.com/fmenozzi/miniMAT.git
          $ cd miniMAT
         
-   Next, we want to make sure that we're using the latest stable release. The latest tag number can be obtained by running the following command:
-      
-         $ git tag | tail -n 1
-        
-   Use `git checkout` to switch to a particular tag
+   Next, we want to make sure that we're using the latest stable release. Use `git tag` to get a list of releases and `git checkout` to switch to the latest tag.
    
-    Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
+   Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
 
          $ mkdir build
          $ cd build
@@ -32,7 +28,7 @@ A small MATLAB interpreter written in C++ with minimal dependencies
          
          $ export EIGEN3_INCLUDE_DIR=/usr/include/eigen3
     
-    Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, run `ccmake` instead):
+   Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, run `ccmake` instead):
     
          $ cmake ..
          $ make
@@ -40,11 +36,11 @@ A small MATLAB interpreter written in C++ with minimal dependencies
 3. From the build directory, type `./miniMAT` to launch the REPL
 
 ## Current Features
-miniMAT aims to be a subset of MATLAB. Currently, that subset is small, but I'm working on it! The features currently supported include:
+miniMAT aims to be a subset of MATLAB. The features currently supported include:
   * Evaluation of numeric expressions (using `+`, `-`, `*`, `/`, `^`, `(`, and `)`)
   * Support for floating point numbers in scientific notation (e.g. `0.314159e+1`)
   * Assignment and manipulation of scalars (including the `ans` variable)
-  * Assignment and manipulation of matrix literals with literal fields (e.g. `[1 2; 3 4]`)
+  * Assignment and manipulation of matrix literals (e.g. `[1 2 3; a, A(2), A(1,1)]`)
   * Read-only single-value matrix indexing (e.g. `A(2)`, `A(1,1)`)
   * `who` and `whos` to view variables in current scope
   * `clear` to delete variables from the current scope
@@ -58,4 +54,5 @@ miniMAT is growing rapidly. Features planned for future releases include:
   * More "standard" functions
   * Command history
   * Scripting
+  * GUI
   * And much more
