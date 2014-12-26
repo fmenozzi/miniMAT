@@ -7,7 +7,7 @@
 
 namespace miniMAT {
 	namespace util {
-		void PrintResult(std::string varname, Matrix m, bool suppressed);
+		void PrintResult(const std::string& varname, Matrix m, bool suppressed);
 	}
 }
 
