@@ -5,9 +5,9 @@
 #include <cmath>
 
 namespace miniMAT {
-	namespace util {
-		void PrintResult(std::string varname, Matrix m, bool suppressed) {
-			if (!suppressed) {
+    namespace util {
+        void PrintResult(std::string varname, Matrix m, bool suppressed) {
+            if (!suppressed) {
                 using namespace std;
 
                 int maxdigits = log10(m.maxCoeff()) + 1;    // Get number of digits of max element
@@ -29,6 +29,6 @@ namespace miniMAT {
                 }
                 cout << endl;
             }
-		}
-	}
+        }
+    }
 }
