@@ -307,7 +307,7 @@ namespace miniMAT {
 
                             try {
                                 callexpr->VisitCheck(vars, reporter);  
-                            } catch (std::string& error) {
+                            } catch (const std::string& error) {
                                 ParseError(error);
                             }
 

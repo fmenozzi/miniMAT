@@ -16,7 +16,7 @@ namespace miniMAT {
             try {
                 ast->VisitCheck(vars, reporter);
                 return ast;
-            } catch (std::string& error) {
+            } catch (const std::string& error) {
                 reporter->AddCheckError(error);
                 return nullptr;
             }
