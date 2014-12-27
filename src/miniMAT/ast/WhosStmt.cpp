@@ -21,17 +21,35 @@ namespace miniMAT {
             if (vars->size() != 0) {
                 using namespace std;
 
-                auto max_width = max_element(vars->begin(), 
-                                             vars->end(), 
-                                             [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
-                    // Compare by variable name length
-                    return p1.first.size() < p2.first.size();
-                })->first.size();
+                // Get max variable name length
+                auto maxwidth = max_element(vars->begin(), vars->end(), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                    return p1.first.size() < p2.first.size();}
+                )->first.size();
 
-                cout << endl;
+                // Get "longest" row and col dimensions
+                auto rowcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                    int firstlength  = log10(p1.second.rows()) + 1;
+                    int secondlength = log10(p2.second.rows()) + 1;
+                    return firstlength < secondlength;
+                };
+                auto colcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                    int firstlength  = log10(p1.second.cols()) + 1;
+                    int secondlength = log10(p2.second.cols()) + 1;
+                    return firstlength < secondlength;
+                };
+                int maxrows = log10(max_element(vars->begin(), vars->end(), rowcompare)->second.rows()) + 1;
+                int maxcols = log10(max_element(vars->begin(), vars->end(), colcompare)->second.cols()) + 1;
+
+                int space = 2;
+
+                cout << setw(maxwidth + space) << right << "Name" << setw(maxrows+1+maxcols + space) << right << "  Size " << endl;
+                cout << setw(maxwidth + space) << right << "====" << setw(maxrows+1+maxcols + space) << right << "  ==== " << endl;
                 for (auto var : *vars) {
-                    cout << setw(max_width);
-                    util::PrintResult(var.first, var.second, false);
+                    auto varname = var.first;
+                    auto rowstr  = to_string(var.second.rows());
+                    auto colstr  = to_string(var.second.cols());
+
+                    cout << setw(maxwidth + space) << right << varname << setw(maxrows + space) << right << rowstr << "x" << setw(maxcols + space) << left << colstr << endl;
                 }
             }
 
