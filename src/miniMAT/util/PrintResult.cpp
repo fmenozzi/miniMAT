@@ -1,4 +1,5 @@
 #include <miniMAT/util/PrintResult.hpp>
+#include <miniMAT/util/NumDigits.hpp>
 
 #include <iostream>
 #include <iomanip>
@@ -10,7 +11,7 @@ namespace miniMAT {
             if (!suppressed) {
                 using namespace std;
 
-                int maxdigits = log10(m.maxCoeff()) + 1;    // Get number of digits of max element
+                int maxdigits = NumDigits(m.maxCoeff());
                 int precision = 4;
                 int space = 1, dot = 1;
 

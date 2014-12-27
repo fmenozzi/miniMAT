@@ -1,6 +1,7 @@
 #include <miniMAT/ast/WhosStmt.hpp>
 
 #include <miniMAT/util/PrintResult.hpp>
+#include <miniMAT/util/NumDigits.hpp>
 
 #include <iostream>
 #include <iomanip>
@@ -30,24 +31,26 @@ namespace miniMAT {
 
                 // Get number of digits in "largest" row and col dimensions
                 auto rowcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
-                    int firstlength  = log10(p1.second.rows()) + 1;
-                    int secondlength = log10(p2.second.rows()) + 1;
+                    int firstlength  = util::NumDigits(p1.second.rows());
+                    int secondlength = util::NumDigits(p2.second.rows());
+
                     return firstlength < secondlength;
                 };
                 auto colcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
-                    int firstlength  = log10(p1.second.cols()) + 1;
-                    int secondlength = log10(p2.second.cols()) + 1;
+                    int firstlength  = util::NumDigits(p1.second.cols());
+                    int secondlength = util::NumDigits(p2.second.cols());
+
                     return firstlength < secondlength;
                 };
-                int maxrows = log10(max_element(vars->begin(), vars->end(), rowcompare)->second.rows()) + 1;
-                int maxcols = log10(max_element(vars->begin(), vars->end(), colcompare)->second.cols()) + 1;
+                int maxrows = util::NumDigits(max_element(vars->begin(), vars->end(), rowcompare)->second.rows());
+                int maxcols = util::NumDigits(max_element(vars->begin(), vars->end(), colcompare)->second.cols());
 
                 // Get number of digits in largest size (in bytes)
                 int doublesize  = sizeof(double);
                 auto sumcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
                     return p1.second.sum() < p2.second.sum();
                 };
-                int maxbytes = log10(max_element(vars->begin(), vars->end(), sumcompare)->second.sum() * doublesize) + 1;
+                int maxbytes = util::NumDigits(max_element(vars->begin(), vars->end(), sumcompare)->second.sum() * doublesize);
 
                 int space = 6;
 
