@@ -20,7 +20,7 @@ namespace miniMAT {
                     // Even spacing between elements in a single row
                     for (int j = 0; j < m.cols(); j++)
                         cout << right << fixed << showpoint << setprecision(precision) <<  "   " << m(0, j);
-                    cout << endl;
+                    cout << endl << endl;
                 } else {
                     // More complex formatting for multiple rows
                     for (int i = 0; i < m.rows(); i++) {
