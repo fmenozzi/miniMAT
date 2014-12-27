@@ -16,10 +16,10 @@ namespace miniMAT {
 
         Matrix WhoStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             if (vars->size() != 0) {
-                std::cout  << std::endl;
+                std::cout << std::endl << "Your variables are:" << std::endl << std::endl;
                 for (auto var : *vars)
-                    std::cout << var.first << std::endl;
-                std::cout  << std::endl;
+                    std::cout << var.first << "  ";
+                std::cout << std::endl << std::endl;
             }
 
             return Matrix::Zero(0,0);
