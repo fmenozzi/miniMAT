@@ -1,6 +1,6 @@
 # miniMAT [![Build Status](https://travis-ci.org/fmenozzi/miniMAT.svg?branch=master)](https://travis-ci.org/fmenozzi/miniMAT)
 
-A small MATLAB interpreter written in C++ with minimal dependencies
+A small MATLAB interpreter written in C++11 with minimal dependencies
 
 ## Building from Source
 1. Make sure you have installed the dependencies:
