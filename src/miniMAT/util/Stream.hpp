@@ -5,10 +5,10 @@
 
 namespace miniMAT {
     namespace util {
-        template <typename T>
+        template <typename ElementType>
         struct Stream {
             Stream() {
-                stream = std::deque<T>();
+                stream = std::deque<ElementType>();
             }
 
             template <typename Function, typename ...Args>
@@ -20,20 +20,20 @@ namespace miniMAT {
                 stream.pop_front();
             }
 
-            void PutBack(const T& t) {
+            void PutBack(const ElementType& t) {
                 stream.push_front(t);
             }
 
-            void Add(const T& t) {
+            void Add(const ElementType& t) {
                 stream.push_back(t);
             }
 
-            T Current() {
+            ElementType Current() {
                 return stream.front();
             }
 
         private:
-            std::deque<T> stream;
+            std::deque<ElementType> stream;
         };
     }
 }
