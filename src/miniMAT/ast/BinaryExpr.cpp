@@ -38,7 +38,7 @@ namespace miniMAT {
             Matrix lresult = left->VisitEvaluate(vars);
             Matrix rresult = right->VisitEvaluate(vars);
 
-            auto opstr = op->GetSpelling();
+            auto opstr = op->Spelling();
             if (opstr == "+" || opstr == "-") {
                 // Check for scalar-matrix or matrix-scalar addition/subtraction
                 if (Dims::scalar_mat(lresult, rresult))
@@ -110,7 +110,7 @@ namespace miniMAT {
                 rresult = right->VisitEvaluate(vars);
             
             // Check for dimension requirements (if present)
-            auto opstr = op->GetSpelling();
+            auto opstr = op->Spelling();
             if (opstr == "+" || opstr == "-") {
                 if (Dims::mat_mat(lresult, rresult) && ! Dims::dims_match(lresult, rresult))
                     throw std::string("Mismatched dimensions");

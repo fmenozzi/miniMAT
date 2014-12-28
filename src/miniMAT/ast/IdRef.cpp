@@ -18,12 +18,12 @@ namespace miniMAT {
         }
 
         Matrix IdRef::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
-            return vars->at(id->GetSpelling());
+            return vars->at(id->Spelling());
         }
 
         void IdRef::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
                                std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            auto varname = id->GetSpelling();
+            auto varname = id->Spelling();
             if (vars->find(varname) == vars->end())
                 throw "Undefined function or variable \'" + varname + "\'.";
         }

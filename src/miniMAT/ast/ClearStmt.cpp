@@ -25,7 +25,7 @@ namespace miniMAT {
             } else {
                 for (auto ref : refs) {
                     // For now, all References are IdRefs
-                    auto refspelling = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
+                    auto refspelling = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
                     if (vars->find(refspelling) != vars->end())
                         vars->erase(refspelling);
                 }

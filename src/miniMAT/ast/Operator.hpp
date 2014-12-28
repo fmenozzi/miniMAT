@@ -11,7 +11,7 @@
 namespace miniMAT {
     namespace ast {
         struct Operator : public Terminal {
-            Operator(lexer::Token token) : Terminal(token.GetSpelling()) {
+            Operator(lexer::Token token) : Terminal(token.Spelling()) {
                 this->token = token;
             }
 

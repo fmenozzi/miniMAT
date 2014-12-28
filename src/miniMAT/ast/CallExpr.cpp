@@ -26,7 +26,7 @@ namespace miniMAT {
         	
         	// For now, assume all call expressions are matrix indexing
 
-        	auto mat = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->GetSpelling());
+        	auto mat = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->Spelling());
         	Matrix result(1,1);
 
         	if (arglist->size() == 1) {
@@ -62,7 +62,7 @@ namespace miniMAT {
             // Make sure that indices don't go out of bounds
             for (auto e : *arglist) {
             	auto indexval = e->VisitEvaluate(vars)(0);
-            	auto mat      = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->GetSpelling());
+            	auto mat      = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->Spelling());
             	if (indexval < 1 || indexval > mat.size())
             		throw std::string("Index out of bounds");
             }

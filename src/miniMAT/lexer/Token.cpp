@@ -9,11 +9,11 @@ namespace miniMAT {
             this->spelling = spelling;
         }
 
-        TokenKind Token::GetKind() {
+        TokenKind Token::Kind() {
             return kind;
         }
 
-        std::string Token::GetSpelling() const {
+        std::string Token::Spelling() const {
             return std::string(spelling);
         }
     }

@@ -27,7 +27,7 @@ namespace miniMAT {
 
         Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             if (ref->GetClassName() == "IdRef") {
-                auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
+                auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
                 val = vars->at(varname);
             }
             return val;
@@ -38,7 +38,7 @@ namespace miniMAT {
             expr->VisitCheck(vars, reporter);
 
             if (ref->GetClassName() == "IdRef") {
-                auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->GetSpelling();
+                auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
                 (*vars)[varname] = expr->VisitEvaluate(vars);
             }
         }

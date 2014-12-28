@@ -22,7 +22,7 @@ namespace miniMAT {
 
         Matrix UnaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
             Matrix result = expr->VisitEvaluate(vars);
-            if (op->GetSpelling() == "-")
+            if (op->Spelling() == "-")
                 result *= -1;
             return result;
         }

@@ -77,7 +77,7 @@ namespace miniMAT {
 
                     cout << setw(namewidth) << right << varname << setw(maxrows+space) << right << rowstr << "x" << setw(maxcols+space) << left << colstr << setw(maxbytes) << right << bytestr << endl;
                 }
-                cout << endl << "Grand total is " << totalsize << " elements using " << totalbytes << " bytes" << endl;
+                cout << endl << "Grand total is " << totalsize << " elements using " << totalbytes << " bytes" << endl << endl;
             }
 
             return Matrix::Zero(0,0);

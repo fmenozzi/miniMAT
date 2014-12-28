@@ -29,12 +29,12 @@ namespace miniMAT {
             AcceptKind = [this](lexer::TokenKind expkind) {
                 // Check for validity of current token
                 auto token = tokens.Current();
-                if (token.GetKind() != expkind) {
-                    if (token.GetKind() == lexer::TokenKind::TOK_EOF)
+                if (token.Kind() != expkind) {
+                    if (token.Kind() == lexer::TokenKind::TOK_EOF)
                         ParseError("Error: Expression or statement is incomplete or incorrect");
                     else {
-                        auto tokspelling  = token.GetSpelling();
-                        auto kindspelling = lexer::GetTokenSpelling(token.GetKind());
+                        auto tokspelling  = token.Spelling();
+                        auto kindspelling = lexer::GetTokenSpelling(token.Kind());
                         if (std::isalpha(kindspelling[0]))
                             ParseError("Syntax error on " + kindspelling + " " + tokspelling);
                         else
@@ -46,9 +46,9 @@ namespace miniMAT {
             AcceptKindAndSpelling = [this](lexer::TokenKind expkind, const std::string& expspelling) {
                 // Check for validity of current token
                 auto token = tokens.Current();
-                if (token.GetKind() != expkind || token.GetSpelling() != expspelling) {
-                    auto tokspelling  = token.GetSpelling();
-                    auto kindspelling = lexer::GetTokenSpelling(token.GetKind());
+                if (token.Kind() != expkind || token.Spelling() != expspelling) {
+                    auto tokspelling  = token.Spelling();
+                    auto kindspelling = lexer::GetTokenSpelling(token.Kind());
                     if (std::isalpha(kindspelling[0]))
                         ParseError("Syntax error on " + kindspelling + " " + tokspelling);
                     else
@@ -57,7 +57,7 @@ namespace miniMAT {
             };
 
             AcceptIt = [this]() {
-                AcceptKindAndSpelling(tokens.Current().GetKind(), tokens.Current().GetSpelling());
+                AcceptKindAndSpelling(tokens.Current().Kind(), tokens.Current().Spelling());
             };
         }
 
@@ -73,7 +73,7 @@ namespace miniMAT {
         std::shared_ptr<ast::AST> Parser::Parse() {
             // Fill up token buffer
             auto token = lexer.GetToken();
-            while (token.GetKind() != lexer::TokenKind::TOK_EOF) {
+            while (token.Kind() != lexer::TokenKind::TOK_EOF) {
                 tokens.Add(token);
                 token = lexer.GetToken();
             }
@@ -91,7 +91,7 @@ namespace miniMAT {
         }
 
         std::shared_ptr<ast::Statement> Parser::ParseStatement() {
-            if (tokens.Current().GetKind() == lexer::TokenKind::TOK_IDENTIFIER) {
+            if (tokens.Current().Kind() == lexer::TokenKind::TOK_IDENTIFIER) {
                 auto idtok = tokens.Current();
                 tokens.Take(AcceptIt);
 
@@ -99,17 +99,17 @@ namespace miniMAT {
 
                 tokens.PutBack(idtok);
 
-                if (nexttok.GetKind() == lexer::TokenKind::TOK_ASSIGN) {
+                if (nexttok.Kind() == lexer::TokenKind::TOK_ASSIGN) {
                     return ParseAssignStmt();
                 } else {
                     return ParseExprStmt();
                 }
-            } else if (tokens.Current().GetKind() == lexer::TokenKind::TOK_KEYWORD) {
-                if (tokens.Current().GetSpelling() == "clear")
+            } else if (tokens.Current().Kind() == lexer::TokenKind::TOK_KEYWORD) {
+                if (tokens.Current().Spelling() == "clear")
                     return ParseClearStmt();
-                else if (tokens.Current().GetSpelling() == "who")
+                else if (tokens.Current().Spelling() == "who")
                     return ParseWhoStmt();
-                else if (tokens.Current().GetSpelling() == "whos")
+                else if (tokens.Current().Spelling() == "whos")
                     return ParseWhosStmt();
                 else // clc
                     return ParseClcStmt();
@@ -120,7 +120,7 @@ namespace miniMAT {
 
         std::shared_ptr<ast::ExprStmt> Parser::ParseExprStmt() {
             auto expr = ParseExpression();
-            if (tokens.Current().GetKind() == lexer::TokenKind::TOK_SEMICOL) {
+            if (tokens.Current().Kind() == lexer::TokenKind::TOK_SEMICOL) {
                 tokens.Take(AcceptIt);
                 suppressed = true;
             }
@@ -133,14 +133,14 @@ namespace miniMAT {
             std::vector<std::shared_ptr<ast::Reference>> refs;
 
             tokens.Take(AcceptKindAndSpelling, lexer::TokenKind::TOK_KEYWORD, "clear");
-            while (tokens.Current().GetKind() != lexer::TokenKind::TOK_EOF) {
+            while (tokens.Current().Kind() != lexer::TokenKind::TOK_EOF) {
                 auto reftok = tokens.Current();
 
                 tokens.Take(AcceptKind, lexer::TokenKind::TOK_IDENTIFIER);
-                if (tokens.Current().GetKind() == lexer::TokenKind::TOK_COMMA)
+                if (tokens.Current().Kind() == lexer::TokenKind::TOK_COMMA)
                     tokens.Take(AcceptIt);
                 
-                refs.push_back(std::make_shared<ast::IdRef>(std::make_shared<ast::Identifier>(reftok.GetSpelling())));
+                refs.push_back(std::make_shared<ast::IdRef>(std::make_shared<ast::Identifier>(reftok.Spelling())));
             }
 
             tokens.Take(AcceptKind, lexer::TokenKind::TOK_EOF);
@@ -170,7 +170,7 @@ namespace miniMAT {
         }
 
         std::shared_ptr<ast::AssignStmt> Parser::ParseAssignStmt() {
-            auto id   = std::make_shared<ast::Identifier>(tokens.Current().GetSpelling());
+            auto id   = std::make_shared<ast::Identifier>(tokens.Current().Spelling());
             auto ref  = std::make_shared<ast::IdRef>(id);
             tokens.Take(AcceptIt);
 
@@ -178,7 +178,7 @@ namespace miniMAT {
 
             auto expr = ParseExpression();
 
-            if (tokens.Current().GetKind() == lexer::TokenKind::TOK_SEMICOL) {
+            if (tokens.Current().Kind() == lexer::TokenKind::TOK_SEMICOL) {
                 tokens.Take(AcceptIt);
                 suppressed = true;
             }
@@ -191,7 +191,7 @@ namespace miniMAT {
         std::shared_ptr<ast::ExprList> Parser::ParseArgList() {
             auto args = std::make_shared<ast::ExprList>();
             args->push_back(ParseExpression());               
-            while (tokens.Current().GetKind() == lexer::TokenKind::TOK_COMMA) {
+            while (tokens.Current().Kind() == lexer::TokenKind::TOK_COMMA) {
                 tokens.Take(AcceptKind, lexer::TokenKind::TOK_COMMA);               
                 args->push_back(ParseExpression());            
             }
@@ -200,8 +200,8 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseExpression() {
             auto expr = ParseA();
-            while (tokens.Current().GetSpelling() == "+" ||
-                   tokens.Current().GetSpelling() == "-") {
+            while (tokens.Current().Spelling() == "+" ||
+                   tokens.Current().Spelling() == "-") {
                 auto op = std::make_shared<ast::Operator>(tokens.Current());
                 tokens.Take(AcceptIt);
                 expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseA());
@@ -211,8 +211,8 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseA() {
             auto expr = ParseB();
-            while (tokens.Current().GetSpelling() == "*" ||
-                   tokens.Current().GetSpelling() == "/") {
+            while (tokens.Current().Spelling() == "*" ||
+                   tokens.Current().Spelling() == "/") {
                 auto op = std::make_shared<ast::Operator>(tokens.Current());
                 tokens.Take(AcceptIt);
                 expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseB());
@@ -222,7 +222,7 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseB() {
             auto expr = ParseC();
-            while (tokens.Current().GetSpelling() == "^") {
+            while (tokens.Current().Spelling() == "^") {
                 auto op = std::make_shared<ast::Operator>(tokens.Current());
                 tokens.Take(AcceptIt);
                 expr = std::make_shared<ast::BinaryExpr>(expr, op, ParseC());
@@ -233,24 +233,24 @@ namespace miniMAT {
         std::shared_ptr<ast::Expression> Parser::ParseC() {
             auto token = tokens.Current();
 
-            if (token.GetSpelling() == "-") {
+            if (token.Spelling() == "-") {
                 auto op = std::make_shared<ast::Operator>(token);
                 tokens.Take(AcceptIt);
                 return std::make_shared<ast::UnaryExpr>(op, ParseC());
-            } else if (token.GetKind() == lexer::TokenKind::TOK_LPAREN) {
+            } else if (token.Kind() == lexer::TokenKind::TOK_LPAREN) {
                 tokens.Take(AcceptIt);
                 auto expr = ParseExpression();
                 tokens.Take(AcceptKind, lexer::TokenKind::TOK_RPAREN);
                 return expr;
-            } else if (token.GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
+            } else if (token.Kind() == lexer::TokenKind::TOK_FLOATLIT) {
                 Matrix matrix(1,1);
-                matrix(0) = std::stod(token.GetSpelling());
+                matrix(0) = std::stod(token.Spelling());
 
-                auto floatlit = std::make_shared<ast::MatrixLiteral>(token.GetSpelling(), matrix);
+                auto floatlit = std::make_shared<ast::MatrixLiteral>(token.Spelling(), matrix);
                 tokens.Take(AcceptKind, lexer::TokenKind::TOK_FLOATLIT);
 
                 return std::make_shared<ast::LiteralExpr>(floatlit);
-            } else if (token.GetKind() == lexer::TokenKind::TOK_LBRACKET) {
+            } else if (token.Kind() == lexer::TokenKind::TOK_LBRACKET) {
                 tokens.Take(AcceptIt);
 
                 int num_rows = 1;
@@ -265,23 +265,23 @@ namespace miniMAT {
                         ParseError("Syntax error: Dimension mismatch in matrix initialization.");
                 };
 
-                while (tokens.Current().GetKind() != lexer::TokenKind::TOK_RBRACKET) {
+                while (tokens.Current().Kind() != lexer::TokenKind::TOK_RBRACKET) {
                     double val;
-                    if (tokens.Current().GetKind() == lexer::TokenKind::TOK_FLOATLIT) {
-                        val = std::stod(tokens.Current().GetSpelling());
+                    if (tokens.Current().Kind() == lexer::TokenKind::TOK_FLOATLIT) {
+                        val = std::stod(tokens.Current().Spelling());
                         tokens.Take(AcceptIt);
-                    } else if (tokens.Current().GetKind() == lexer::TokenKind::TOK_IDENTIFIER) {
+                    } else if (tokens.Current().Kind() == lexer::TokenKind::TOK_IDENTIFIER) {
                         // Check if identifier exists
-                        auto varname = tokens.Current().GetSpelling();
+                        auto varname = tokens.Current().Spelling();
                         if (vars->find(varname) == vars->end())
                             ParseError("Undefined function or variable \'" + varname + "\'.");
                         tokens.Take(AcceptIt);
 
                         // Check to see if id is part of index/call expression
-                        if (tokens.Current().GetKind() == lexer::TokenKind::TOK_LPAREN) {
+                        if (tokens.Current().Kind() == lexer::TokenKind::TOK_LPAREN) {
                             tokens.Take(AcceptIt);
                             auto args = std::make_shared<ast::ExprList>();
-                            if (tokens.Current().GetKind() != lexer::TokenKind::TOK_RPAREN)
+                            if (tokens.Current().Kind() != lexer::TokenKind::TOK_RPAREN)
                                 args = ParseArgList();
                             tokens.Take(AcceptKind, lexer::TokenKind::TOK_RPAREN);
 
@@ -309,24 +309,24 @@ namespace miniMAT {
                         num_cols++;
 
                     // Space or comma to separate values in rows
-                    if (tokens.Current().GetKind() == lexer::TokenKind::TOK_COMMA)
+                    if (tokens.Current().Kind() == lexer::TokenKind::TOK_COMMA)
                         tokens.Take(AcceptIt);
 
-                    if (tokens.Current().GetKind() == lexer::TokenKind::TOK_SEMICOL) {
+                    if (tokens.Current().Kind() == lexer::TokenKind::TOK_SEMICOL) {
                         tokens.Take(AcceptIt);
 
                         check_for_dimension_mismatch(current_col_num, num_cols);
 
-                        if (tokens.Current().GetKind() != lexer::TokenKind::TOK_RBRACKET) {
+                        if (tokens.Current().Kind() != lexer::TokenKind::TOK_RBRACKET) {
                             first_pass_through_first_row = false;
                             num_rows++;
                         }
 
-                        if (tokens.Current().GetKind() != lexer::TokenKind::TOK_RBRACKET)
+                        if (tokens.Current().Kind() != lexer::TokenKind::TOK_RBRACKET)
                             current_col_num = 0;
                     }
 
-                    if (tokens.Current().GetKind() == lexer::TokenKind::TOK_RBRACKET)
+                    if (tokens.Current().Kind() == lexer::TokenKind::TOK_RBRACKET)
                         check_for_dimension_mismatch(current_col_num, num_cols);
                 }
 
@@ -342,15 +342,15 @@ namespace miniMAT {
 
                 return std::make_shared<ast::LiteralExpr>(matrixlit);
             } else { // id
-                auto id  = std::make_shared<ast::Identifier>(token.GetSpelling());
+                auto id  = std::make_shared<ast::Identifier>(token.Spelling());
                 tokens.Take(AcceptKind, lexer::TokenKind::TOK_IDENTIFIER);
 
                 auto idref = std::make_shared<ast::IdRef>(id);
 
-                if (tokens.Current().GetKind() == lexer::TokenKind::TOK_LPAREN) {
+                if (tokens.Current().Kind() == lexer::TokenKind::TOK_LPAREN) {
                     tokens.Take(AcceptIt);
                     auto args = std::make_shared<ast::ExprList>();
-                    if (tokens.Current().GetKind() != lexer::TokenKind::TOK_RPAREN)
+                    if (tokens.Current().Kind() != lexer::TokenKind::TOK_RPAREN)
                         args = ParseArgList();
                     tokens.Take(AcceptKind, lexer::TokenKind::TOK_RPAREN);
 

@@ -11,7 +11,7 @@ namespace miniMAT {
             Terminal(const std::string& spelling);
             virtual ~Terminal() {}
 
-            std::string GetSpelling() const;
+            std::string Spelling() const;
 
             virtual std::string GetClassName() const = 0;
 
