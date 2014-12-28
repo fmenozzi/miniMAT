@@ -32,19 +32,19 @@ namespace miniMAT {
             right->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             using namespace miniMAT::util;
 
-            Matrix lresult = left->VisitEvaluate(vars);
-            Matrix rresult = right->VisitEvaluate(vars);
+            ast::Matrix lresult = left->VisitEvaluate(vars);
+            ast::Matrix rresult = right->VisitEvaluate(vars);
 
             auto opstr = op->Spelling();
             if (opstr == "+" || opstr == "-") {
                 // Check for scalar-matrix or matrix-scalar addition/subtraction
                 if (Dims::scalar_mat(lresult, rresult))
-                    lresult = Matrix::Constant(rresult.rows(), rresult.cols(), lresult(0));
+                    lresult = ast::Matrix::Constant(rresult.rows(), rresult.cols(), lresult(0));
                 else if (Dims::mat_scalar(lresult, rresult))
-                    rresult = Matrix::Constant(lresult.rows(), lresult.cols(), rresult(0));
+                    rresult = ast::Matrix::Constant(lresult.rows(), lresult.cols(), rresult(0));
 
                 if (opstr == "+")
                     return lresult + rresult;
@@ -65,23 +65,23 @@ namespace miniMAT {
                     return lresult / rresult(0);
 
                 // Must be scalar-scalar division
-                Matrix result(1,1);
+                ast::Matrix result(1,1);
                 result << lresult(0) / rresult(0);
                 return result;
             } else { // ^
                 // Must be scalar-scalar exponentiation
-                Matrix result(1,1);
+                ast::Matrix result(1,1);
                 result << std::pow(lresult(0), rresult(0));
                 return result;
             }
         }
 
-        void BinaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void BinaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
             using namespace miniMAT::util;
 
             // Extract matrix values from expressions
-            Matrix lresult, rresult;
+            ast::Matrix lresult, rresult;
             bool left_not_initialized = true, right_not_initialized = true;
             if (left->GetClassName() == "LiteralExpr") {
                 auto lliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(left);

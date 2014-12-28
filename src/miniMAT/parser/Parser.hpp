@@ -28,7 +28,7 @@ namespace miniMAT {
             
             bool suppressed = false;
 
-            std::shared_ptr<std::map<std::string, Matrix>> vars;
+            std::shared_ptr<std::map<std::string, ast::Matrix>> vars;
 
             std::shared_ptr<reporter::ErrorReporter> reporter;
 
@@ -40,7 +40,7 @@ namespace miniMAT {
 
         public:
             Parser(const lexer::Lexer& lexer, 
-                   std::shared_ptr<std::map<std::string, Matrix>> vars,
+                   std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                    std::shared_ptr<reporter::ErrorReporter> reporter);
 
             void ParseError(const std::string& error);

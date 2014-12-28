@@ -3,10 +3,10 @@
 namespace miniMAT {
     namespace ast { 
         std::string MatrixLiteral::GetClassName() const {
-            return "MatrixLiteral";
+            return "ast::MatrixLiteral";
         }
 
-        Matrix MatrixLiteral::GetMatrix() const {
+        ast::Matrix MatrixLiteral::GetMatrix() const {
             return mat;
         }
 
@@ -19,11 +19,11 @@ namespace miniMAT {
             Show(prefix, Quote(GetClassName()) + " " + Quote(r + "x" + c));
         }
 
-        Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             return mat;
         }
 
-        void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                        std::shared_ptr<reporter::ErrorReporter> reporter) const {
         }
     }

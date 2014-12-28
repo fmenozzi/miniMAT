@@ -8,19 +8,19 @@
 namespace miniMAT {
     namespace ast {
         struct MatrixLiteral : public Literal {
-            MatrixLiteral(const std::string& spelling, Matrix mat) : Literal(spelling) {
+            MatrixLiteral(const std::string& spelling, ast::Matrix mat) : Literal(spelling) {
                 this->mat = mat;
             }
 
             std::string GetClassName() const;
-            Matrix      GetMatrix() const;
+            ast::Matrix      GetMatrix() const;
 
             void VisitDisplay(const std::string& prefix) const;
-            Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars);
-            void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+            ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);
+            void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
-            Matrix mat;
+            ast::Matrix mat;
         };
     }
 }

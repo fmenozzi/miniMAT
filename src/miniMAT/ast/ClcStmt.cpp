@@ -15,7 +15,7 @@ namespace miniMAT {
             Show(prefix, *this);
         }
 
-        Matrix ClcStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix ClcStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
         #ifdef _WIN32
             auto clearstr = "cls";
         #elif __APPLE__
@@ -30,10 +30,10 @@ namespace miniMAT {
             else
                 std::cout << "Could not clear screen, for some reason" << std::endl;
 
-            return Matrix::Zero(0,0);
+            return ast::Matrix::Zero(0,0);
         }
 
-        void ClcStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void ClcStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
      
         }

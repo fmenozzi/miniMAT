@@ -20,23 +20,23 @@ namespace miniMAT {
             Show(prefix, *this);
         }
 
-        Matrix WhosStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix WhosStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             if (vars->size() != 0) {
                 using namespace std;
 
                 // Get max variable name length
-                auto maxwidth = max_element(vars->begin(), vars->end(), [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                auto maxwidth = max_element(vars->begin(), vars->end(), [](pair<string, ast::Matrix> p1, pair<string, ast::Matrix> p2) {
                     return p1.first.size() < p2.first.size();}
                 )->first.size();
 
                 // Get number of digits in "largest" row and col dimensions
-                auto rowcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                auto rowcompare = [](pair<string, ast::Matrix> p1, pair<string, ast::Matrix> p2) {
                     int firstlength  = util::NumDigits(p1.second.rows());
                     int secondlength = util::NumDigits(p2.second.rows());
 
                     return firstlength < secondlength;
                 };
-                auto colcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                auto colcompare = [](pair<string, ast::Matrix> p1, pair<string, ast::Matrix> p2) {
                     int firstlength  = util::NumDigits(p1.second.cols());
                     int secondlength = util::NumDigits(p2.second.cols());
 
@@ -47,7 +47,7 @@ namespace miniMAT {
 
                 // Get number of digits in largest size (in bytes)
                 int doublesize  = sizeof(double);
-                auto sumcompare = [](pair<string, Matrix> p1, pair<string, Matrix> p2) {
+                auto sumcompare = [](pair<string, ast::Matrix> p1, pair<string, ast::Matrix> p2) {
                     return p1.second.sum() < p2.second.sum();
                 };
                 int maxbytes = util::NumDigits(max_element(vars->begin(), vars->end(), sumcompare)->second.sum() * doublesize);
@@ -80,10 +80,10 @@ namespace miniMAT {
                 cout << endl << "Grand total is " << totalsize << " elements using " << totalbytes << " bytes" << endl << endl;
             }
 
-            return Matrix::Zero(0,0);
+            return ast::Matrix::Zero(0,0);
         }
 
-        void WhosStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void WhosStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
      
         }

@@ -21,11 +21,11 @@ namespace miniMAT {
             literal->VisitDisplay(Indent(prefix));
         }
 
-        Matrix LiteralExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix LiteralExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             return literal->VisitEvaluate(vars);
         }
 
-        void LiteralExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void LiteralExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                      std::shared_ptr<reporter::ErrorReporter> reporter) const {
         }
     }

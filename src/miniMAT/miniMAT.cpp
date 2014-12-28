@@ -21,8 +21,8 @@ using namespace std;
 int main() {
     string input_line;
 
-    auto vars = make_shared<map<string, Matrix>>();
-    (*vars)["ans"] = Matrix::Zero(1,1);
+    auto vars = make_shared<map<string, miniMAT::ast::Matrix>>();
+    (*vars)["ans"] = miniMAT::ast::Matrix::Zero(1,1);
 
     cout << "miniMAT: It's like MATLAB, but smaller." << endl;
     cout << "Copyright (C) 2014 Federico Menozzi" << endl;
@@ -58,7 +58,7 @@ int main() {
             reporter->ReportErrors();
             cout << endl;
         } else {
-            Matrix ans = ast->VisitEvaluate(vars);
+            miniMAT::ast::Matrix ans = ast->VisitEvaluate(vars);
             if (ast->GetClassName() == "ExprStmt") {
                 auto exprstmt = dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
                 if (exprstmt->expr->GetClassName() == "RefExpr") {

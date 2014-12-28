@@ -12,12 +12,12 @@ namespace miniMAT {
             Show(prefix, Quote(GetClassName()) + " " + Quote(Spelling()));
         }
 
-        Matrix Operator::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix Operator::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             // TODO: This is really bad design
-            return Matrix::Zero(1,1);
+            return ast::Matrix::Zero(1,1);
         }
 
-        void Operator::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void Operator::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
         }
     }

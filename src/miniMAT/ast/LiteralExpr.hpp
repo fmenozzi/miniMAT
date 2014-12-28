@@ -15,8 +15,8 @@ namespace miniMAT {
             std::shared_ptr<Literal> GetLiteral() const;
 
             void VisitDisplay(const std::string& prefix) const;
-            Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars);
-            void VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+            ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);
+            void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
 
             std::shared_ptr<Literal> literal;

@@ -24,11 +24,11 @@ namespace miniMAT {
             ref->VisitDisplay(Indent(prefix));
         }
 
-        Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             return ref->VisitEvaluate(vars);
         }
 
-        void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();

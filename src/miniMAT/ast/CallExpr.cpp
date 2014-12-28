@@ -22,12 +22,12 @@ namespace miniMAT {
             	e->VisitDisplay(Indent(prefix));
         }
 
-        Matrix CallExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix CallExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
         	
         	// For now, assume all call expressions are matrix indexing
 
         	auto mat = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->Spelling());
-        	Matrix result(1,1);
+        	ast::Matrix result(1,1);
 
         	if (arglist->size() == 1) {
         		auto indexmat = arglist->at(0)->VisitEvaluate(vars);
@@ -48,7 +48,7 @@ namespace miniMAT {
         	return result;
         }
 
-        void CallExpr::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void CallExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
             functionref->VisitCheck(vars, reporter);
 

@@ -10,7 +10,7 @@ namespace miniMAT {
             this->ref  = ref;
             this->expr = expr;
 
-            this->val  = Matrix::Zero(1,1);
+            this->val  = ast::Matrix::Zero(1,1);
         }
 
         std::string AssignStmt::GetClassName() const {
@@ -25,7 +25,7 @@ namespace miniMAT {
             expr->VisitDisplay(Indent(prefix));
         }
 
-        Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix AssignStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             if (ref->GetClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
                 val = vars->at(varname);
@@ -33,7 +33,7 @@ namespace miniMAT {
             return val;
         }
 
-        void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void AssignStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                     std::shared_ptr<reporter::ErrorReporter> reporter) const {
             expr->VisitCheck(vars, reporter);
 

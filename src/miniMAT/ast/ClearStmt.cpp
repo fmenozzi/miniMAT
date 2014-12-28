@@ -19,7 +19,7 @@ namespace miniMAT {
             	ref->VisitDisplay(Indent(prefix));
         }
 
-        Matrix ClearStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, Matrix>> vars) {
+        ast::Matrix ClearStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             if (refs.empty()) {
             	vars->erase(vars->begin(), vars->end());
             } else {
@@ -31,10 +31,10 @@ namespace miniMAT {
                 }
             }
 
-            return Matrix::Zero(0,0);
+            return ast::Matrix::Zero(0,0);
         }
 
-        void ClearStmt::VisitCheck(std::shared_ptr<std::map<std::string, Matrix>> vars,
+        void ClearStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                    std::shared_ptr<reporter::ErrorReporter> reporter) const {
      
         }

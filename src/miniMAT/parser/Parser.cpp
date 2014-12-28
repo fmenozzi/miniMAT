@@ -18,7 +18,7 @@
 namespace miniMAT {
     namespace parser {
         Parser::Parser(const lexer::Lexer& lexer, 
-                       std::shared_ptr<std::map<std::string, Matrix>> vars,
+                       std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                        std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->lexer    = lexer;
             this->vars     = vars;
@@ -243,7 +243,7 @@ namespace miniMAT {
                 tokens.Take(AcceptKind, lexer::TokenKind::TOK_RPAREN);
                 return expr;
             } else if (token.Kind() == lexer::TokenKind::TOK_FLOATLIT) {
-                Matrix matrix(1,1);
+                ast::Matrix matrix(1,1);
                 matrix(0) = std::stod(token.Spelling());
 
                 auto floatlit = std::make_shared<ast::MatrixLiteral>(token.Spelling(), matrix);
@@ -334,7 +334,7 @@ namespace miniMAT {
 
                 auto spelling = std::to_string(num_rows) + " x " + std::to_string(num_cols);
 
-                Matrix matrix(num_rows, num_cols);
+                ast::Matrix matrix(num_rows, num_cols);
                 for (size_t i = 0; i < vals.size(); i++)
                     matrix(i) = vals[i];
 
