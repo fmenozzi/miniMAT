@@ -24,6 +24,14 @@ namespace miniMAT {
                 stream.push_front(t);
             }
 
+            void Add(const T& t) {
+                stream.push_back(t);
+            }
+
+            T Current() {
+                return stream.front();
+            }
+
         private:
             std::deque<T> stream;
         };

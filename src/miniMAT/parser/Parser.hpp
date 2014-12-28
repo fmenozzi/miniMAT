@@ -3,6 +3,7 @@
 
 #include <deque>
 #include <memory>
+#include <functional>
 
 #include <miniMAT/lexer/Lexer.hpp>
 
@@ -17,17 +18,25 @@
 #include <miniMAT/ast/WhosStmt.hpp>
 #include <miniMAT/ast/ClcStmt.hpp>
 
+#include <miniMAT/util/Stream.hpp>
+
 namespace miniMAT {
     namespace parser {
         class Parser {
         private:
-            lexer::Lexer              lexer;
-            std::deque<lexer::Token>  tokens;
-            bool                      suppressed = false;
+            lexer::Lexer lexer;
+            
+            bool suppressed = false;
 
             std::shared_ptr<std::map<std::string, Matrix>> vars;
 
             std::shared_ptr<reporter::ErrorReporter> reporter;
+
+            util::Stream<lexer::Token> tokens;
+
+            std::function<void(lexer::TokenKind expkind)>                                 AcceptKind;
+            std::function<void(lexer::TokenKind expkind, const std::string& expspelling)> AcceptKindAndSpelling;
+            std::function<void()>                                                         AcceptIt;
 
         public:
             Parser(const lexer::Lexer& lexer, 
@@ -37,14 +46,6 @@ namespace miniMAT {
             void ParseError(const std::string& error);
 
             bool SuppressedOutput();
-
-            void Accept(lexer::TokenKind exp_kind);
-            void Accept(lexer::TokenKind exp_kind, const std::string& exp_spelling);
-            void AcceptIt();
-
-            void PutBack(const lexer::Token& t);
-
-            lexer::Token GetCurrentToken();
 
             std::shared_ptr<ast::AST> Parse();
 
