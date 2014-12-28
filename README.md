@@ -37,7 +37,7 @@ A small MATLAB interpreter written in C++ with minimal dependencies
 
 ## Current Features
 miniMAT aims to be a subset of MATLAB. The features currently supported include:
-  * Evaluation of expressions (using `+`, `-`, `*`, `/`, `^`, `(`, and `)`)
+  * Evaluation of expressions using `+`, `-`, `*`, `/`, `^`, `(`, and `)`
   * Support for floating point numbers in scientific notation (e.g. `0.314159e+1`)
   * Assignment and manipulation of scalars (including the `ans` variable)
   * Assignment and manipulation of matrix literals (e.g. `[1 2 3; a, A(2), A(1,1)]`)
@@ -50,7 +50,7 @@ miniMAT aims to be a subset of MATLAB. The features currently supported include:
 
 ## Future Features
 miniMAT is growing rapidly. Features planned for future releases include:
-  * Additional capabilities for matrix manipulation (e.g. read-write indexing, ranges, transpose, `\` operator)
+  * Additional capabilities for matrix manipulation (e.g. transpose, `\` operator, ranges, read-write indexing, etc.)
   * More "standard" functions
   * Command history
   * Scripting
