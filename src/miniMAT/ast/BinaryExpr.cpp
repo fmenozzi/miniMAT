@@ -87,7 +87,7 @@ namespace miniMAT {
                 auto lliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(left);
                 auto lliteral       = lliteralexpr->GetLiteral();
                 auto lmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(lliteral);
-                lresult             = lmatrixliteral->GetMatrix();
+                lresult             = lmatrixliteral->Matrix();
 
                 left_not_initialized = false;
             } 
@@ -96,7 +96,7 @@ namespace miniMAT {
                 auto rliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(right);
                 auto rliteral       = rliteralexpr->GetLiteral();
                 auto rmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(rliteral);
-                rresult             = rmatrixliteral->GetMatrix();
+                rresult             = rmatrixliteral->Matrix();
 
                 right_not_initialized = false;
             } 

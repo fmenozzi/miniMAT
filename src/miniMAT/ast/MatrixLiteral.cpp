@@ -6,7 +6,7 @@ namespace miniMAT {
             return "ast::MatrixLiteral";
         }
 
-        ast::Matrix MatrixLiteral::GetMatrix() const {
+        ast::Matrix MatrixLiteral::Matrix() const {
             return mat;
         }
 
