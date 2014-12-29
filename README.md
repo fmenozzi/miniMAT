@@ -56,3 +56,6 @@ miniMAT is growing rapidly. Features planned for future releases include:
   * Scripting
   * GUI
   * And much more
+
+## License
+miniMAT is licensed under the [MIT License](http://opensource.org/licenses/MIT)
