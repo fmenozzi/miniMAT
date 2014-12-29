@@ -46,7 +46,7 @@ namespace miniMAT {
             AcceptKindAndSpelling = [this](lexer::TokenKind expkind, const std::string& expspelling) {
                 // Check for validity of current token
                 auto token = tokens.Current();
-                if (token.Kind() != expkind || token.Spelling() != expspelling) {
+                if (token.Kind() != expkind or token.Spelling() != expspelling) {
                     auto tokspelling  = token.Spelling();
                     auto kindspelling = lexer::GetTokenSpelling(token.Kind());
                     if (std::isalpha(kindspelling[0]))
@@ -200,7 +200,7 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseExpression() {
             auto expr = ParseA();
-            while (tokens.Current().Spelling() == "+" ||
+            while (tokens.Current().Spelling() == "+" or
                    tokens.Current().Spelling() == "-") {
                 auto op = std::make_shared<ast::Operator>(tokens.Current());
                 tokens.Take(AcceptIt);
@@ -211,7 +211,7 @@ namespace miniMAT {
 
         std::shared_ptr<ast::Expression> Parser::ParseA() {
             auto expr = ParseB();
-            while (tokens.Current().Spelling() == "*" ||
+            while (tokens.Current().Spelling() == "*" or
                    tokens.Current().Spelling() == "/") {
                 auto op = std::make_shared<ast::Operator>(tokens.Current());
                 tokens.Take(AcceptIt);

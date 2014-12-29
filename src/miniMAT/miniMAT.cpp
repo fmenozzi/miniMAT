@@ -32,7 +32,7 @@ int main() {
         cout << ">> ";
 
         getline(cin, input_line);
-        if (input_line == "quit" || input_line == "exit" || input_line == "bye!")
+        if (input_line == "quit" or input_line == "exit" or input_line == "bye!")
             break;
         if (cin.eof()) { // Ctrl-D to quit
             cout << endl;

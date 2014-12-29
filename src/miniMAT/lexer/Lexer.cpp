@@ -43,7 +43,7 @@ namespace miniMAT {
 
         Token Lexer::GetToken() {
            // Pass through whitespace
-            while (current_char == ' ' || current_char == '\t' || current_char == '\n')
+            while (current_char == ' ' or current_char == '\t' or current_char == '\n')
                 TakeIt();
 
             // Check for end of line
@@ -53,7 +53,7 @@ namespace miniMAT {
             // Identifiers
             if (std::isalpha(current_char)) {
                 std::string idstr;
-                while (std::isalnum(current_char) || current_char == '_') {
+                while (std::isalnum(current_char) or current_char == '_') {
                     idstr += current_char;
                     TakeIt();
                 }
@@ -77,7 +77,7 @@ namespace miniMAT {
                     TakeIt();
 
                     // Reject -- and ++
-                    if ((temp == '+' && current_char == '+') || (temp == '-' && current_char == '-')) {
+                    if ((temp == '+' and current_char == '+') or (temp == '-' and current_char == '-')) {
                         TakeIt();
                         std::string wrong_tok = std::string(1, temp) + std::string(1, temp);
                         LexerError(wrong_tok + " not allowed in miniMAT!");
@@ -134,7 +134,7 @@ namespace miniMAT {
                     if (current_char == 'e') {
                         numstr += current_char;
                         TakeIt();
-                        if (current_char == '+' || current_char == '-') {
+                        if (current_char == '+' or current_char == '-') {
                             numstr += current_char;
                             TakeIt();
                         }

@@ -53,7 +53,7 @@ namespace miniMAT {
             functionref->VisitCheck(vars, reporter);
 
         	// For now, assume all call expressions are matrix indexing (i.e. requires 1 or 2 args)
-        	if (arglist->size() < 1 || arglist->size() > 2)
+        	if (arglist->size() < 1 or arglist->size() > 2)
         		throw std::string("Incorrect number of args in matrix index");
 
             for (auto& e : *arglist)
@@ -63,7 +63,7 @@ namespace miniMAT {
             for (auto e : *arglist) {
             	auto indexval = e->VisitEvaluate(vars)(0);
             	auto mat      = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->Spelling());
-            	if (indexval < 1 || indexval > mat.size())
+            	if (indexval < 1 or indexval > mat.size())
             		throw std::string("Index out of bounds");
             }
         }

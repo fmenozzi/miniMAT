@@ -18,7 +18,7 @@ namespace miniMAT {
         }
 
         bool ErrorReporter::HasErrors() {
-            return HasLexerErrors() || HasParseErrors() || HasCheckErrors();
+            return HasLexerErrors() or HasParseErrors() or HasCheckErrors();
         }
 
         bool ErrorReporter::HasLexerErrors() {

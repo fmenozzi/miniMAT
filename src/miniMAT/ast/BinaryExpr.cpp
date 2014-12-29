@@ -39,7 +39,7 @@ namespace miniMAT {
             ast::Matrix rresult = right->VisitEvaluate(vars);
 
             auto opstr = op->Spelling();
-            if (opstr == "+" || opstr == "-") {
+            if (opstr == "+" or opstr == "-") {
                 // Check for scalar-matrix or matrix-scalar addition/subtraction
                 if (Dims::scalar_mat(lresult, rresult))
                     lresult = ast::Matrix::Constant(rresult.rows(), rresult.cols(), lresult(0));
@@ -111,17 +111,17 @@ namespace miniMAT {
             
             // Check for dimension requirements (if present)
             auto opstr = op->Spelling();
-            if (opstr == "+" || opstr == "-") {
-                if (Dims::mat_mat(lresult, rresult) && ! Dims::dims_match(lresult, rresult))
+            if (opstr == "+" or opstr == "-") {
+                if (Dims::mat_mat(lresult, rresult) and not Dims::dims_match(lresult, rresult))
                     throw std::string("Mismatched dimensions");
             } else if (opstr == "*") {
-                if (Dims::mat_mat(lresult, rresult) && ! Dims::can_multiply(lresult, rresult))
+                if (Dims::mat_mat(lresult, rresult) and not Dims::can_multiply(lresult, rresult))
                     throw std::string("Mismatched dimensions");
             } else if (opstr == "/") {
-                if (! Dims::mat_scalar(lresult, rresult) && ! Dims::scalar_scalar(lresult, rresult))
+                if (not Dims::mat_scalar(lresult, rresult) and not Dims::scalar_scalar(lresult, rresult))
                     throw std::string("Mismatched dimensions");
             } else { // ^
-                if (! Dims::scalar_scalar(lresult, rresult))
+                if (not Dims::scalar_scalar(lresult, rresult))
                     throw std::string("Mismatched dimensions");
             }
             //*/
