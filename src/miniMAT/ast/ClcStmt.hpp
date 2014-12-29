@@ -4,8 +4,8 @@
 #include <miniMAT/ast/Statement.hpp>
 
 namespace miniMAT {
-	namespace ast {
-		struct ClcStmt : public Statement {
+    namespace ast {
+        struct ClcStmt : public Statement {
             std::string GetClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;

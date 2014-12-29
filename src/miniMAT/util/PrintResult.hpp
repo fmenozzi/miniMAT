@@ -6,9 +6,9 @@
 #include <string>
 
 namespace miniMAT {
-	namespace util {
-		void PrintResult(const std::string& varname, ast::Matrix m, bool suppressed);
-	}
+    namespace util {
+        void PrintResult(const std::string& varname, ast::Matrix m, bool suppressed);
+    }
 }
 
 #endif 

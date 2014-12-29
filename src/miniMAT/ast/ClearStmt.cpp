@@ -16,12 +16,12 @@ namespace miniMAT {
 
             Show(prefix, *this);
             for (auto ref : refs)
-            	ref->VisitDisplay(Indent(prefix));
+                ref->VisitDisplay(Indent(prefix));
         }
 
         ast::Matrix ClearStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             if (refs.empty()) {
-            	vars->erase(vars->begin(), vars->end());
+                vars->erase(vars->begin(), vars->end());
             } else {
                 for (auto ref : refs) {
                     // For now, all References are IdRefs

@@ -4,9 +4,9 @@
 #include <eigen3/Eigen/Dense>
 
 namespace miniMAT {
-	namespace ast {
-		using Matrix = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
-	}
+    namespace ast {
+        using Matrix = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
+    }
 }
 
 #endif
