@@ -7,10 +7,6 @@ namespace miniMAT {
     namespace util {
         template <typename ElementType>
         struct Stream {
-            Stream() {
-                stream = std::deque<ElementType>();
-            }
-
             template <typename Function, typename ...Args>
             void Take(Function f, Args ...params) {
                 // Call user-provided function
@@ -33,7 +29,7 @@ namespace miniMAT {
             }
 
         private:
-            std::deque<ElementType> stream;
+            std::deque<ElementType> stream = std::deque<ElementType>();
         };
     }
 }
