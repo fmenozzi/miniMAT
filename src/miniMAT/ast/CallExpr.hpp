@@ -13,7 +13,7 @@ namespace miniMAT {
             CallExpr(std::shared_ptr<Reference> functionref, 
                      std::shared_ptr<ExprList> arglist);
 
-            std::string GetClassName() const;
+            std::string ClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;
             ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);

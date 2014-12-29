@@ -9,7 +9,7 @@ namespace miniMAT {
             this->ref = ref;
         }
 
-        std::string RefExpr::GetClassName() const {
+        std::string RefExpr::ClassName() const {
             return "RefExpr";
         }
 
@@ -30,7 +30,7 @@ namespace miniMAT {
 
         void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
-            if (ref->GetClassName() == "IdRef") {
+            if (ref->ClassName() == "IdRef") {
                 auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
                 if (vars->find(varname) == vars->end()) {
                     throw "Undefined function or variable \'" + varname + "\'.";

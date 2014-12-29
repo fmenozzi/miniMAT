@@ -7,7 +7,7 @@ namespace miniMAT {
             this->refs = refs;
         }
 
-        std::string ClearStmt::GetClassName() const {
+        std::string ClearStmt::ClassName() const {
             return "ClearStmt";
         }
 

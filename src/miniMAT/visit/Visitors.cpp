@@ -15,7 +15,7 @@ namespace miniMAT {
             }
 
             void Show(const std::string& prefix, const ast::AST& ast) {
-                std::cout << prefix << ast.GetClassName() << std::endl;
+                std::cout << prefix << ast.ClassName() << std::endl;
             }
 
             std::string Quote(const std::string& text) {

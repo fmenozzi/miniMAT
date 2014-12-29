@@ -2,7 +2,7 @@
 
 namespace miniMAT {
     namespace ast { 
-        std::string MatrixLiteral::GetClassName() const {
+        std::string MatrixLiteral::ClassName() const {
             return "ast::MatrixLiteral";
         }
 
@@ -16,7 +16,7 @@ namespace miniMAT {
             auto r = std::to_string(mat.rows());
             auto c = std::to_string(mat.cols());
 
-            Show(prefix, Quote(GetClassName()) + " " + Quote(r + "x" + c));
+            Show(prefix, Quote(ClassName()) + " " + Quote(r + "x" + c));
         }
 
         ast::Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {

@@ -4,7 +4,7 @@
 
 namespace miniMAT {
     namespace ast {
-        std::string WhoStmt::GetClassName() const {
+        std::string WhoStmt::ClassName() const {
             return "WhoStmt";
         }
 

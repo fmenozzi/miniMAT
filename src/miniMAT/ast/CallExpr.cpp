@@ -9,7 +9,7 @@ namespace miniMAT {
             this->arglist     = arglist;
         }
 
-        std::string CallExpr::GetClassName() const {
+        std::string CallExpr::ClassName() const {
             return "CallExpr";
         }
 

@@ -5,7 +5,7 @@
 
 namespace miniMAT {
     namespace ast {
-        std::string ClcStmt::GetClassName() const {
+        std::string ClcStmt::ClassName() const {
             return "ClcStmt";
         }
 

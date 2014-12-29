@@ -19,7 +19,7 @@ namespace miniMAT {
             this->right = right;
         }
 
-        std::string BinaryExpr::GetClassName() const {
+        std::string BinaryExpr::ClassName() const {
             return "BinaryExpr";
         }
 
@@ -83,7 +83,7 @@ namespace miniMAT {
             // Extract matrix values from expressions
             ast::Matrix lresult, rresult;
             bool left_not_initialized = true, right_not_initialized = true;
-            if (left->GetClassName() == "LiteralExpr") {
+            if (left->ClassName() == "LiteralExpr") {
                 auto lliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(left);
                 auto lliteral       = lliteralexpr->GetLiteral();
                 auto lmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(lliteral);
@@ -92,7 +92,7 @@ namespace miniMAT {
                 left_not_initialized = false;
             } 
 
-            if (right->GetClassName() == "LiteralExpr") {
+            if (right->ClassName() == "LiteralExpr") {
                 auto rliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(right);
                 auto rliteral       = rliteralexpr->GetLiteral();
                 auto rmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(rliteral);

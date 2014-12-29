@@ -12,7 +12,7 @@ namespace miniMAT {
                 this->mat = mat;
             }
 
-            std::string GetClassName() const;
+            std::string ClassName() const;
             ast::Matrix      Matrix() const;
 
             void VisitDisplay(const std::string& prefix) const;

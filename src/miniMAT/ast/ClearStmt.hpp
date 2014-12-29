@@ -12,7 +12,7 @@ namespace miniMAT {
         struct ClearStmt : public Statement {
             ClearStmt(std::vector<std::shared_ptr<Reference>> refs);
 
-            std::string GetClassName() const;
+            std::string ClassName() const;
 
             void VisitDisplay(const std::string& prefix) const;
             ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);

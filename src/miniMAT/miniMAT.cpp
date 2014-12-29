@@ -59,9 +59,9 @@ int main() {
             cout << endl;
         } else {
             miniMAT::ast::Matrix ans = ast->VisitEvaluate(vars);
-            if (ast->GetClassName() == "ExprStmt") {
+            if (ast->ClassName() == "ExprStmt") {
                 auto exprstmt = dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
-                if (exprstmt->expr->GetClassName() == "RefExpr") {
+                if (exprstmt->expr->ClassName() == "RefExpr") {
                     auto refexpr = dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
                     auto varname = dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->Spelling();
 
@@ -72,10 +72,10 @@ int main() {
                     miniMAT::util::PrintResult("ans", ans, parser.SuppressedOutput());
                 }
 
-            } else if (ast->GetClassName() == "AssignStmt") {
+            } else if (ast->ClassName() == "AssignStmt") {
                 auto assign_stmt = dynamic_pointer_cast<miniMAT::ast::AssignStmt>(ast);
 
-                if (assign_stmt->ref->GetClassName() == "IdRef") {
+                if (assign_stmt->ref->ClassName() == "IdRef") {
                     auto idref   = dynamic_pointer_cast<miniMAT::ast::IdRef>(assign_stmt->ref);
 
                     auto varname = idref->id->Spelling();

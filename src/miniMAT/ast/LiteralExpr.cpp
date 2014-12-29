@@ -6,7 +6,7 @@ namespace miniMAT {
             this->literal = literal;
         }
 
-        std::string LiteralExpr::GetClassName() const {
+        std::string LiteralExpr::ClassName() const {
             return "LiteralExpr";
         }
 

@@ -2,14 +2,14 @@
 
 namespace miniMAT {
     namespace ast {
-        std::string Identifier::GetClassName() const {
+        std::string Identifier::ClassName() const {
             return "Identifier";
         }
 
         void Identifier::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
-            Show(prefix, Quote(GetClassName()) + " " + Quote(Spelling()));
+            Show(prefix, Quote(ClassName()) + " " + Quote(Spelling()));
         }
 
         ast::Matrix Identifier::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {

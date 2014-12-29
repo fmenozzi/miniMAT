@@ -6,7 +6,7 @@ namespace miniMAT {
             this->id  = id;
         }
 
-        std::string IdRef::GetClassName() const {
+        std::string IdRef::ClassName() const {
             return "IdRef";
         }
 

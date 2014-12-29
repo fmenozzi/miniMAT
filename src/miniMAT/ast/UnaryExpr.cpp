@@ -8,7 +8,7 @@ namespace miniMAT {
             this->expr = expr;
         }
 
-        std::string UnaryExpr::GetClassName() const {
+        std::string UnaryExpr::ClassName() const {
             return "UnaryExpr";
         }
 

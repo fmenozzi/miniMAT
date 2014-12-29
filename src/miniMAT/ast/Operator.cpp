@@ -2,14 +2,14 @@
 
 namespace miniMAT {
     namespace ast {
-        std::string Operator::GetClassName() const {
+        std::string Operator::ClassName() const {
             return "Operator";
         }
 
         void Operator::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 
-            Show(prefix, Quote(GetClassName()) + " " + Quote(Spelling()));
+            Show(prefix, Quote(ClassName()) + " " + Quote(Spelling()));
         }
 
         ast::Matrix Operator::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {

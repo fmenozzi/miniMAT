@@ -11,7 +11,7 @@ namespace miniMAT {
         struct LiteralExpr : public Expression {
             LiteralExpr(std::shared_ptr<Literal> literal);
 
-            std::string              GetClassName() const;
+            std::string              ClassName() const;
             std::shared_ptr<Literal> GetLiteral() const;
 
             void VisitDisplay(const std::string& prefix) const;

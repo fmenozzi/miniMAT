@@ -11,7 +11,7 @@ namespace miniMAT {
         struct RefExpr : public Expression {
             RefExpr(std::shared_ptr<Reference> ref);
 
-            std::string                GetClassName() const;
+            std::string                ClassName() const;
             std::shared_ptr<Reference> GetReference() const;
 
             void VisitDisplay(const std::string& prefix) const;

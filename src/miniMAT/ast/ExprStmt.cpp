@@ -6,7 +6,7 @@ namespace miniMAT {
             this->expr = expr;
         }
 
-        std::string ExprStmt::GetClassName() const {
+        std::string ExprStmt::ClassName() const {
             return "ExprStmt";
         }
 
