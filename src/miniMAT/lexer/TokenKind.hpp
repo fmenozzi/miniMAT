@@ -23,7 +23,7 @@ namespace miniMAT {
             TOK_SEMICOL
         };
 
-        std::string GetTokenSpelling(TokenKind kind);
+        std::string TokenSpelling(TokenKind kind);
     }
 }
 

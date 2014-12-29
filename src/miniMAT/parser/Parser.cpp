@@ -34,7 +34,7 @@ namespace miniMAT {
                         ParseError("Error: Expression or statement is incomplete or incorrect");
                     else {
                         auto tokspelling  = token.Spelling();
-                        auto kindspelling = lexer::GetTokenSpelling(token.Kind());
+                        auto kindspelling = lexer::TokenSpelling(token.Kind());
                         if (std::isalpha(kindspelling[0]))
                             ParseError("Syntax error on " + kindspelling + " " + tokspelling);
                         else
@@ -48,7 +48,7 @@ namespace miniMAT {
                 auto token = tokens.Current();
                 if (token.Kind() != expkind or token.Spelling() != expspelling) {
                     auto tokspelling  = token.Spelling();
-                    auto kindspelling = lexer::GetTokenSpelling(token.Kind());
+                    auto kindspelling = lexer::TokenSpelling(token.Kind());
                     if (std::isalpha(kindspelling[0]))
                         ParseError("Syntax error on " + kindspelling + " " + tokspelling);
                     else

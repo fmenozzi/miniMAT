@@ -2,7 +2,7 @@
 
 namespace miniMAT {
     namespace lexer {
-        std::string GetTokenSpelling(TokenKind kind) {
+        std::string TokenSpelling(TokenKind kind) {
             switch (kind) {
                 case TokenKind::TOK_EOF:
                     return "EOF";
