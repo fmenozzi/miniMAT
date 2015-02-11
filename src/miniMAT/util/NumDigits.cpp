@@ -5,7 +5,7 @@
 namespace miniMAT {
     namespace util {
         int NumDigits(double num) {
-            return log10(num) + 1;
+            return num == 0 ? 1 : fabs(log10(num)) + 1;
         }
     }
 }
