@@ -38,6 +38,8 @@ int main() {
             cout << endl;
             break;
         }
+        if (input_line == "")
+            continue;
 
         auto reporter = make_shared<miniMAT::reporter::ErrorReporter>();
         miniMAT::lexer::Lexer   lexer(input_line, reporter);
