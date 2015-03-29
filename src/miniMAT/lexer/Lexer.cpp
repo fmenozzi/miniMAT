@@ -9,17 +9,12 @@ namespace miniMAT {
             if (this != &lexer) {
                 this->input_line   = lexer.input_line;
                 this->reporter     = lexer.reporter;
-                this->current_char = lexer.current_char;
+                this->chars        = lexer.chars;
+                this->AndDoNothing = lexer.AndDoNothing;
+                this->keywords     = keywords;
 
                 this->stream.str(input_line);
                 this->stream >> std::noskipws;
-
-                keywords.insert("clear");
-                keywords.insert("who");
-                keywords.insert("whos");
-                keywords.insert("clc");
-
-                this->is_done = false;
             }
 
             return *this;
@@ -28,7 +23,6 @@ namespace miniMAT {
         Lexer::Lexer(const std::string& input_line, std::shared_ptr<reporter::ErrorReporter> reporter) {
             this->input_line   = input_line;
             this->reporter     = reporter;
-            this->current_char = ' ';
 
             this->stream.str(input_line);
             this->stream >> std::noskipws;
@@ -38,24 +32,37 @@ namespace miniMAT {
             keywords.insert("whos");
             keywords.insert("clc");
 
-            this->is_done = false;
+            // Fill up character stream
+            chars = util::Stream<char>();
+            while (true) {
+                char temp;
+                if (stream >> temp) {
+                    chars.Add(temp);
+                } else {
+                    chars.Add('\0');
+                    break;
+                }
+            }
+
+            // Blank lambda (no additional checking necessary)
+            AndDoNothing = [](){};
         }
 
         Token Lexer::GetToken() {
            // Pass through whitespace
-            while (current_char == ' ' or current_char == '\t' or current_char == '\n')
-                TakeIt();
+            while (chars.Current() == ' ' or chars.Current() == '\t' or chars.Current() == '\n')
+                chars.Take(AndDoNothing);
 
             // Check for end of line
-            if (is_done)
+            if (chars.Current() == '\0')
                 return Token(TokenKind::TOK_EOF, "EOF");
 
             // Identifiers
-            if (std::isalpha(current_char)) {
+            if (std::isalpha(chars.Current())) {
                 std::string idstr;
-                while (std::isalnum(current_char) or current_char == '_') {
-                    idstr += current_char;
-                    TakeIt();
+                while (std::isalnum(chars.Current()) or chars.Current() == '_') {
+                    idstr += chars.Current();
+                    chars.Take(AndDoNothing);
                 }
 
                 if (keywords.find(idstr) != keywords.end())
@@ -67,18 +74,18 @@ namespace miniMAT {
             // Non-identifiers
             char temp;
             std::string numstr;
-            switch (current_char) {
+            switch (chars.Current()) {
                 case '+':
                 case '-':
                 case '*':
                 case '/':
                 case '^':
-                    temp = current_char;
-                    TakeIt();
+                    temp = chars.Current();
+                    chars.Take(AndDoNothing);
 
                     // Reject -- and ++
-                    if ((temp == '+' and current_char == '+') or (temp == '-' and current_char == '-')) {
-                        TakeIt();
+                    if ((temp == '+' and chars.Current() == '+') or (temp == '-' and chars.Current() == '-')) {
+                        chars.Take(AndDoNothing);
                         std::string wrong_tok = std::string(1, temp) + std::string(1, temp);
                         LexerError(wrong_tok + " not allowed in miniMAT!");
                         return Token(TokenKind::TOK_ERROR, wrong_tok + " not allowed in miniMAT!");
@@ -87,17 +94,17 @@ namespace miniMAT {
                     return Token(TokenKind::TOK_ARITHOP, std::string(1, temp));
 
                 case '(':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_LPAREN, "(");
                 case ')':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_RPAREN, ")");
 
                 case '[':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_LBRACKET, "[");
                 case ']':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_RBRACKET, "]");
 
                 case '0':
@@ -113,52 +120,52 @@ namespace miniMAT {
                     numstr = "";
 
                     // To the left of the decimal point
-                    while (std::isdigit(current_char)) {
-                        numstr += current_char;
-                        TakeIt();
+                    while (std::isdigit(chars.Current())) {
+                        numstr += chars.Current();
+                        chars.Take(AndDoNothing);
                     }
 
                     // The decimal point
-                    if (current_char == '.') {
-                        numstr += current_char;
-                        TakeIt();
+                    if (chars.Current() == '.') {
+                        numstr += chars.Current();
+                        chars.Take(AndDoNothing);
 
                         // To the right of the decimal point
-                        while (std::isdigit(current_char)) {
-                            numstr += current_char;
-                            TakeIt();
+                        while (std::isdigit(chars.Current())) {
+                            numstr += chars.Current();
+                            chars.Take(AndDoNothing);
                         }
                     }
 
                     // The 'e' (scientific notation)
-                    if (current_char == 'e') {
-                        numstr += current_char;
-                        TakeIt();
-                        if (current_char == '+' or current_char == '-') {
-                            numstr += current_char;
-                            TakeIt();
+                    if (chars.Current() == 'e') {
+                        numstr += chars.Current();
+                        chars.Take(AndDoNothing);
+                        if (chars.Current() == '+' or chars.Current() == '-') {
+                            numstr += chars.Current();
+                            chars.Take(AndDoNothing);
                         }
-                        if (std::isdigit(current_char)) {
+                        if (std::isdigit(chars.Current())) {
                             // To the left of the decimal point
-                            while (std::isdigit(current_char)) {
-                                numstr += current_char;
-                                TakeIt();
+                            while (std::isdigit(chars.Current())) {
+                                numstr += chars.Current();
+                                chars.Take(AndDoNothing);
                             }
 
                             // The decimal point
-                            if (current_char == '.') {
-                                numstr += current_char;
-                                TakeIt();
+                            if (chars.Current() == '.') {
+                                numstr += chars.Current();
+                                chars.Take(AndDoNothing);
 
                                 // To the right of the decimal point
-                                while (std::isdigit(current_char)) {
-                                    numstr += current_char;
-                                    TakeIt();
+                                while (std::isdigit(chars.Current())) {
+                                    numstr += chars.Current();
+                                    chars.Take(AndDoNothing);
                                 }
                             }
                         } else {
                             std::string error = "Character \'" +
-                                                std::string(1, current_char) +
+                                                std::string(1, chars.Current()) +
                                                 "\' not allowed after 'e' in scientific notation";
                             LexerError(error);
                             return Token(TokenKind::TOK_ERROR, error);
@@ -169,12 +176,12 @@ namespace miniMAT {
 
                 case '.':
                     numstr = "";
-                    numstr += current_char;
-                    TakeIt();
-                    if (std::isdigit(current_char)) {
-                        while (std::isdigit(current_char)) {
-                            numstr += current_char;
-                            TakeIt();
+                    numstr += chars.Current();
+                    chars.Take(AndDoNothing);
+                    if (std::isdigit(chars.Current())) {
+                        while (std::isdigit(chars.Current())) {
+                            numstr += chars.Current();
+                            chars.Take(AndDoNothing);
                         }
                         return Token(TokenKind::TOK_FLOATLIT, numstr);
                     } else {
@@ -184,41 +191,24 @@ namespace miniMAT {
                     }
 
                 case ',':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_COMMA, ",");
 
                 case '=':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_ASSIGN, "=");
 
                 case ';':
-                    TakeIt();
+                    chars.Take(AndDoNothing);
                     return Token(TokenKind::TOK_SEMICOL, ";");
 
                 default:
-                    temp = current_char;
-                    TakeIt();
+                    temp = chars.Current();
+                    chars.Take(AndDoNothing);
                     std::string unknownChar = std::string(1, temp);
                     LexerError("Unrecognized character '" + unknownChar + "' in input");
                     return Token(TokenKind::TOK_ERROR, "Unrecognized character '" + unknownChar + "' in input");
             }
-        }
-
-        /*
-         * Get next character from input stream
-         */
-        void Lexer::NextChar() {
-            char temp;
-            if (stream >> temp) {
-                current_char = temp;
-            } else {
-                is_done = true;
-                current_char = '\0';
-            }
-        }
-
-        void Lexer::TakeIt() {
-            NextChar();
         }
 
         void Lexer::LexerError(const std::string& error) {
