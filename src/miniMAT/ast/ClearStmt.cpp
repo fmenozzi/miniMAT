@@ -23,6 +23,13 @@ namespace miniMAT {
             if (refs.empty()) {
                 vars->erase(vars->begin(), vars->end());
             } else {
+                // Check for "clear all"
+                if (refs.size() == 1) {
+                    auto refspelling = std::dynamic_pointer_cast<IdRef>(refs[0])->id->Spelling();
+                    if (refspelling == "all")
+                        vars->erase(vars->begin(), vars->end());
+                }
+
                 for (auto ref : refs) {
                     // For now, all References are IdRefs
                     auto refspelling = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
