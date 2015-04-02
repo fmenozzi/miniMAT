@@ -23,8 +23,7 @@ namespace miniMAT {
 
             std::shared_ptr<reporter::ErrorReporter> reporter;
 
-            util::Stream<char>    chars;
-            std::function<void()> AndDoNothing;
+            util::Stream<char> chars;
 
         public:
             Lexer() {}
