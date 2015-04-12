@@ -14,6 +14,11 @@ namespace miniMAT {
 
                 this->stream.str(input_line);
                 this->stream >> std::noskipws;
+
+                keywords.insert("clear");
+                keywords.insert("who");
+                keywords.insert("whos");
+                keywords.insert("clc");
             }
 
             return *this;
