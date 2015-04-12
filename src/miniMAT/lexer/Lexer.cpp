@@ -7,13 +7,10 @@ namespace miniMAT {
     namespace lexer {
         Lexer& Lexer::operator=(const Lexer& lexer) {
             if (this != &lexer) {
-                this->input_line   = lexer.input_line;
-                this->reporter     = lexer.reporter;
-                this->chars        = lexer.chars;
-                this->keywords     = keywords;
-
-                this->stream.str(input_line);
-                this->stream >> std::noskipws;
+                this->input_line = lexer.input_line;
+                this->reporter   = lexer.reporter;
+                this->chars      = lexer.chars;
+                this->keywords   = keywords;
 
                 keywords.insert("clear");
                 keywords.insert("who");
@@ -25,11 +22,9 @@ namespace miniMAT {
         }
 
         Lexer::Lexer(const std::string& input_line, std::shared_ptr<reporter::ErrorReporter> reporter) {
-            this->input_line   = input_line;
-            this->reporter     = reporter;
+            this->input_line = input_line;
+            this->reporter   = reporter;
 
-            this->stream.str(input_line);
-            this->stream >> std::noskipws;
 
             keywords.insert("clear");
             keywords.insert("who");
@@ -38,15 +33,9 @@ namespace miniMAT {
 
             // Fill up character stream
             chars = util::Stream<char>();
-            while (true) {
-                char temp;
-                if (stream >> temp) {
-                    chars.Add(temp);
-                } else {
-                    chars.Add('\0');
-                    break;
-                }
-            }
+            for (auto c : input_line)
+                chars.Add(c);
+            chars.Add('\0');
         }
 
         Token Lexer::GetToken() {

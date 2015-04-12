@@ -16,14 +16,11 @@ namespace miniMAT {
     namespace lexer {
         class Lexer {
         private:
-            std::string       input_line;
-            std::stringstream stream;
-
+            std::string           input_line;
             std::set<std::string> keywords;
+            util::Stream<char>    chars;
 
             std::shared_ptr<reporter::ErrorReporter> reporter;
-
-            util::Stream<char> chars;
 
         public:
             Lexer() {}
