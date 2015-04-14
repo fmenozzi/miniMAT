@@ -22,7 +22,7 @@ A small MATLAB interpreter written in C++11 with minimal dependencies
 
          $ mkdir build && cd build
          $ cmake ..
-	 $ make
+         $ make
     
 3. From the build directory, type `./miniMAT` to launch the REPL
 
