@@ -50,3 +50,5 @@ miniMAT is growing rapidly. Features planned for future releases include:
 
 ## License
 miniMAT is licensed under the [MIT License](http://opensource.org/licenses/MIT)
+
+Eigen is licensed under the [Mozilla Public License](https://www.mozilla.org/MPL/2.0/)
