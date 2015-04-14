@@ -8,7 +8,6 @@ A small MATLAB interpreter written in C++11 with minimal dependencies
     * `make`
     * `cmake`
     * `git`
-    * `Eigen3` (`sudo apt-get install libeigen3-dev` will do on Linux systems. See [here](http://eigen.tuxfamily.org/index.php?title=Main_Page) for more information)
     
 2. Download and build miniMAT:
 
@@ -19,20 +18,12 @@ A small MATLAB interpreter written in C++11 with minimal dependencies
         
    Next, we want to make sure that we're using the latest stable release. Use `git tag` to get a list of releases and `git checkout` to switch to the latest tag.
    
-   Now, choose a directory to hold the build. In this example, we'll create a build directory within the repo itself:
+   Now, create a build directory. Once inside, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, run `ccmake` instead):
 
-         $ mkdir build
-         $ cd build
-   
-   Now, we need to tell CMake where to find Eigen by creating an environment variable that points to the installation directory. On Linux, this can be accomplished with the following command (assuming the default installation directory for Eigen):
-         
-         $ export EIGEN3_INCLUDE_DIR=/usr/include/eigen3
-    
-   Once inside your build directory, simply run `cmake` and `make` to build the project (If you want to do additional configuration with CMake, run `ccmake` instead):
-    
+         $ mkdir build && cd build
          $ cmake ..
-         $ make
-
+	 $ make
+    
 3. From the build directory, type `./miniMAT` to launch the REPL
 
 ## Current Features
