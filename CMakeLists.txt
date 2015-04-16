@@ -39,7 +39,6 @@ SET(SOURCES src/miniMAT/miniMAT.cpp
             src/miniMAT/reporter/ErrorReporter.cpp
 
             src/miniMAT/util/Dims.cpp
-            src/miniMAT/util/NumDigits.cpp
             src/miniMAT/util/PrintResult.cpp
 
             src/miniMAT/visit/Visitors.cpp
