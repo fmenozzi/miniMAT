@@ -1,7 +1,7 @@
 #ifndef MINIMAT_AST_MATRIX_HPP
 #define MINIMAT_AST_MATRIX_HPP
 
-#include <Dense>
+#include <Eigen/Dense>
 
 namespace miniMAT {
     namespace ast {
