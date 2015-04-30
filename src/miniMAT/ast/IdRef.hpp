@@ -13,6 +13,8 @@ namespace miniMAT {
 
             std::string ClassName() const;
 
+            const std::string& RefSpelling() const;
+
             void VisitDisplay(const std::string& prefix) const;
             ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);
             void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,

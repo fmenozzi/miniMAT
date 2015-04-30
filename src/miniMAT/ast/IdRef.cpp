@@ -10,6 +10,10 @@ namespace miniMAT {
             return "IdRef";
         }
 
+        const std::string& IdRef::RefSpelling() const {
+            return id->Spelling();
+        }
+
         void IdRef::VisitDisplay(const std::string& prefix) const {
             using namespace miniMAT::visit::display;
 

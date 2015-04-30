@@ -12,6 +12,8 @@ namespace miniMAT {
 
             virtual std::string ClassName() const = 0;
 
+            virtual const std::string& RefSpelling() const = 0;
+
             virtual void VisitDisplay(const std::string& prefix) const = 0;
             virtual ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) = 0;
             virtual void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,

@@ -25,8 +25,7 @@ namespace miniMAT {
         ast::Matrix CallExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
             
             // For now, assume all call expressions are matrix indexing
-
-            auto mat = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->Spelling());
+            auto mat = functionref->VisitEvaluate(vars);
             ast::Matrix result(1,1);
 
             if (arglist->size() == 1) {
@@ -62,7 +61,7 @@ namespace miniMAT {
             // Make sure that indices don't go out of bounds
             for (auto e : *arglist) {
                 auto indexval = e->VisitEvaluate(vars)(0);
-                auto mat      = vars->at(std::dynamic_pointer_cast<IdRef>(functionref)->id->Spelling());
+                auto mat = functionref->VisitEvaluate(vars);
                 if (indexval < 1 or indexval > mat.size())
                     throw std::string("Index out of bounds");
             }

@@ -27,7 +27,7 @@ namespace miniMAT {
         void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
             if (ref->ClassName() == "IdRef") {
-                auto varname = std::dynamic_pointer_cast<IdRef>(ref)->id->Spelling();
+                auto varname = ref->RefSpelling();
                 if (vars->find(varname) == vars->end()) {
                     throw "Undefined function or variable \'" + varname + "\'.";
                 }
