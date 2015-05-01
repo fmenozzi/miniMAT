@@ -42,7 +42,7 @@ namespace miniMAT {
     
             if (expr->ClassName() == "RefExpr") {
                 auto refexpr = std::dynamic_pointer_cast<ast::RefExpr>(expr);
-                auto varname = std::dynamic_pointer_cast<ast::IdRef>(refexpr->ref)->id->Spelling();
+                auto varname = refexpr->ref->RefSpelling();
 
                 util::PrintResult(varname, vars->at(varname), suppressed);
             } else {
