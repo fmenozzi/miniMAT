@@ -7,8 +7,13 @@
 
 namespace miniMAT {
     namespace ast {
-        struct Identifier : public Terminal {
-            Identifier(const std::string& spelling) : Terminal(spelling) {}
+        struct Identifier : public Terminal 
+        {
+            Identifier(const std::string& spelling) 
+                : Terminal(spelling) 
+            {
+
+            }
 
             std::string ClassName() const;
 
@@ -16,6 +21,10 @@ namespace miniMAT {
             ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);
             void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
+
+            void PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                             ast::Matrix ans,
+                             bool suppressed) const;
         };
     }
 }

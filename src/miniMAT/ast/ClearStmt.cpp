@@ -3,15 +3,18 @@
 
 namespace miniMAT {
     namespace ast {
-        ClearStmt::ClearStmt(std::vector<std::shared_ptr<Reference>> refs) {
+        ClearStmt::ClearStmt(std::vector<std::shared_ptr<Reference>> refs) 
+        {
             this->refs = refs;
         }
 
-        std::string ClearStmt::ClassName() const {
+        std::string ClearStmt::ClassName() const 
+        {
             return "ClearStmt";
         }
 
-        void ClearStmt::VisitDisplay(const std::string& prefix) const {
+        void ClearStmt::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
@@ -19,7 +22,8 @@ namespace miniMAT {
                 ref->VisitDisplay(Indent(prefix));
         }
 
-        ast::Matrix ClearStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
+        ast::Matrix ClearStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
             if (refs.empty()) {
                 vars->erase(vars->begin(), vars->end());
             } else {
@@ -41,8 +45,16 @@ namespace miniMAT {
         }
 
         void ClearStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                   std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                   std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
      
+        }
+
+        void ClearStmt::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                                    ast::Matrix ans,
+                                    bool suppressed) const 
+        {
+            
         }
     }
 }

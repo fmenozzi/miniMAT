@@ -7,8 +7,11 @@
 
 namespace miniMAT {
     namespace ast {
-        struct MatrixLiteral : public Literal {
-            MatrixLiteral(const std::string& spelling, ast::Matrix mat) : Literal(spelling) {
+        struct MatrixLiteral : public Literal 
+        {
+            MatrixLiteral(const std::string& spelling, ast::Matrix mat) 
+                : Literal(spelling) 
+            {
                 this->mat = mat;
             }
 
@@ -19,6 +22,10 @@ namespace miniMAT {
             ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);
             void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
+
+            void PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                             ast::Matrix ans,
+                             bool suppressed) const;
 
             ast::Matrix mat;
         };

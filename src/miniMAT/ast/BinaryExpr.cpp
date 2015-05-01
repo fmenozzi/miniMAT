@@ -13,17 +13,20 @@ namespace miniMAT {
     namespace ast {
         BinaryExpr::BinaryExpr(std::shared_ptr<Expression> left,
                                std::shared_ptr<Operator> op,
-                               std::shared_ptr<Expression> right) {
+                               std::shared_ptr<Expression> right) 
+        {
             this->left  = left;
             this->op    = op;
             this->right = right;
         }
 
-        std::string BinaryExpr::ClassName() const {
+        std::string BinaryExpr::ClassName() const 
+        {
             return "BinaryExpr";
         }
 
-        void BinaryExpr::VisitDisplay(const std::string& prefix) const {
+        void BinaryExpr::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
@@ -32,7 +35,8 @@ namespace miniMAT {
             right->VisitDisplay(Indent(Indent(prefix)));
         }
 
-        ast::Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
+        ast::Matrix BinaryExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
             using namespace miniMAT::util;
 
             ast::Matrix lresult = left->VisitEvaluate(vars);
@@ -77,7 +81,8 @@ namespace miniMAT {
         }
 
         void BinaryExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                    std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                    std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
             using namespace miniMAT::util;
 
             // Extract matrix values from expressions
@@ -124,7 +129,13 @@ namespace miniMAT {
                 if (not Dims::scalar_scalar(lresult, rresult))
                     throw std::string("Mismatched dimensions");
             }
-            //*/
+        }
+
+        void BinaryExpr::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                                     ast::Matrix ans,
+                                     bool suppressed) const 
+        {
+            
         }
     }
 }

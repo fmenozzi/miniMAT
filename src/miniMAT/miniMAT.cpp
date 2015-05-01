@@ -18,7 +18,8 @@
 
 using namespace std;
 
-int main() {
+int main() 
+{
     string input_line;
 
     auto vars = make_shared<map<string, miniMAT::ast::Matrix>>();
@@ -60,32 +61,7 @@ int main() {
             reporter->ReportErrors();
             cout << endl;
         } else {
-            miniMAT::ast::Matrix ans = ast->VisitEvaluate(vars);
-            if (ast->ClassName() == "ExprStmt") {
-                auto exprstmt = dynamic_pointer_cast<miniMAT::ast::ExprStmt>(ast);
-                if (exprstmt->expr->ClassName() == "RefExpr") {
-                    auto refexpr = dynamic_pointer_cast<miniMAT::ast::RefExpr>(exprstmt->expr);
-                    auto varname = dynamic_pointer_cast<miniMAT::ast::IdRef>(refexpr->ref)->id->Spelling();
-
-                    miniMAT::util::PrintResult(varname, vars->at(varname), parser.SuppressedOutput());
-                } else {
-                    (*vars)["ans"] = ans;
-
-                    miniMAT::util::PrintResult("ans", ans, parser.SuppressedOutput());
-                }
-
-            } else if (ast->ClassName() == "AssignStmt") {
-                auto assign_stmt = dynamic_pointer_cast<miniMAT::ast::AssignStmt>(ast);
-
-                if (assign_stmt->ref->ClassName() == "IdRef") {
-                    auto idref   = dynamic_pointer_cast<miniMAT::ast::IdRef>(assign_stmt->ref);
-
-                    auto varname = idref->id->Spelling();
-                    auto val     = assign_stmt->val;
-
-                    miniMAT::util::PrintResult(varname, val, parser.SuppressedOutput());
-                }
-            }
+            ast->PrintResult(vars, ast->VisitEvaluate(vars), parser.SuppressedOutput());
         }
     }
 

@@ -8,7 +8,7 @@
 
 namespace miniMAT {
     namespace ast {
-        typedef std::vector<std::shared_ptr<Expression>> ExprList;
+        using ExprList = std::vector<std::shared_ptr<Expression>>
     }
 }
 

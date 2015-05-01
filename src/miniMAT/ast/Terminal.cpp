@@ -2,11 +2,13 @@
 
 namespace miniMAT {
     namespace ast {
-        Terminal::Terminal(const std::string& spelling) {
+        Terminal::Terminal(const std::string& spelling) 
+        {
             this->spelling = spelling;
         }
 
-        const std::string& Terminal::Spelling() const {
+        const std::string& Terminal::Spelling() const 
+        {
             return spelling;
         }
     }

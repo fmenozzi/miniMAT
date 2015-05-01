@@ -2,15 +2,18 @@
 
 namespace miniMAT {
     namespace ast { 
-        std::string MatrixLiteral::ClassName() const {
+        std::string MatrixLiteral::ClassName() const 
+        {
             return "ast::MatrixLiteral";
         }
 
-        ast::Matrix MatrixLiteral::Matrix() const {
+        ast::Matrix MatrixLiteral::Matrix() const 
+        {
             return mat;
         }
 
-        void MatrixLiteral::VisitDisplay(const std::string& prefix) const {
+        void MatrixLiteral::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             auto r = std::to_string(mat.rows());
@@ -19,12 +22,22 @@ namespace miniMAT {
             Show(prefix, Quote(ClassName()) + " " + Quote(r + "x" + c));
         }
 
-        ast::Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
+        ast::Matrix MatrixLiteral::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
             return mat;
         }
 
         void MatrixLiteral::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                       std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                       std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
+
+        }
+
+        void MatrixLiteral::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                                        ast::Matrix ans,
+                                        bool suppressed) const 
+        {
+            
         }
     }
 }

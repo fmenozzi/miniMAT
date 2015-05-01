@@ -10,17 +10,20 @@
 
 namespace miniMAT {
     namespace ast {
-        std::string WhosStmt::ClassName() const {
+        std::string WhosStmt::ClassName() const 
+        {
             return "WhosStmt";
         }
 
-        void WhosStmt::VisitDisplay(const std::string& prefix) const {
+        void WhosStmt::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
         }
 
-        ast::Matrix WhosStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
+        ast::Matrix WhosStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
             if (vars->size() != 0) {
                 using namespace std;
 
@@ -84,8 +87,16 @@ namespace miniMAT {
         }
 
         void WhosStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                  std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
      
+        }
+
+        void WhosStmt::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                                   ast::Matrix ans,
+                                   bool suppressed) const 
+        {
+            
         }
     }
 }

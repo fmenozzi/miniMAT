@@ -5,17 +5,20 @@
 
 namespace miniMAT {
     namespace ast {
-        std::string ClcStmt::ClassName() const {
+        std::string ClcStmt::ClassName() const 
+        {
             return "ClcStmt";
         }
 
-        void ClcStmt::VisitDisplay(const std::string& prefix) const {
+        void ClcStmt::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
         }
 
-        ast::Matrix ClcStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
+        ast::Matrix ClcStmt::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
         #ifdef _WIN32
             auto clearstr = "cls";
         #elif __APPLE__
@@ -34,8 +37,16 @@ namespace miniMAT {
         }
 
         void ClcStmt::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                 std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                 std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
      
+        }
+
+        void ClcStmt::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                                  ast::Matrix ans,
+                                  bool suppressed) const 
+        {
+            
         }
     }
 }

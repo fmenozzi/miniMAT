@@ -9,7 +9,8 @@
 
 namespace miniMAT {
     namespace ast {
-        struct CallExpr : public Expression {
+        struct CallExpr : public Expression 
+        {
             CallExpr(std::shared_ptr<Reference> functionref, 
                      std::shared_ptr<ExprList> arglist);
 
@@ -19,6 +20,10 @@ namespace miniMAT {
             ast::Matrix VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars);
             void VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                             std::shared_ptr<reporter::ErrorReporter> reporter) const;
+
+            void PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                             ast::Matrix ans,
+                             bool suppressed) const;
 
             std::shared_ptr<Reference> functionref;
             std::shared_ptr<ExprList>  arglist;

@@ -5,33 +5,44 @@
 
 namespace miniMAT {
     namespace ast {
-        RefExpr::RefExpr(std::shared_ptr<Reference> ref) {
+        RefExpr::RefExpr(std::shared_ptr<Reference> ref) 
+        {
             this->ref = ref;
         }
 
-        std::string RefExpr::ClassName() const {
+        std::string RefExpr::ClassName() const 
+        {
             return "RefExpr";
         }
 
-        void RefExpr::VisitDisplay(const std::string& prefix) const {
+        void RefExpr::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
             ref->VisitDisplay(Indent(prefix));
         }
 
-        ast::Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
+        ast::Matrix RefExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
             return ref->VisitEvaluate(vars);
         }
 
         void RefExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                 std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                 std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
             if (ref->ClassName() == "IdRef") {
                 auto varname = ref->RefSpelling();
-                if (vars->find(varname) == vars->end()) {
+                if (vars->find(varname) == vars->end())
                     throw "Undefined function or variable \'" + varname + "\'.";
-                }
             }
+        }
+
+        void RefExpr::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                             ast::Matrix ans,
+                             bool suppressed) const 
+        {
+            
         }
     }
 }

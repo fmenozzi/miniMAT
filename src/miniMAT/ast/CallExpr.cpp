@@ -4,16 +4,19 @@
 namespace miniMAT {
     namespace ast {
         CallExpr::CallExpr(std::shared_ptr<Reference> functionref, 
-                           std::shared_ptr<ExprList> arglist) {
+                           std::shared_ptr<ExprList> arglist) 
+        {
             this->functionref = functionref;
             this->arglist     = arglist;
         }
 
-        std::string CallExpr::ClassName() const {
+        std::string CallExpr::ClassName() const 
+        {
             return "CallExpr";
         }
 
-        void CallExpr::VisitDisplay(const std::string& prefix) const {
+        void CallExpr::VisitDisplay(const std::string& prefix) const 
+        {
             using namespace miniMAT::visit::display;
 
             Show(prefix, *this);
@@ -22,8 +25,8 @@ namespace miniMAT {
                 e->VisitDisplay(Indent(prefix));
         }
 
-        ast::Matrix CallExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) {
-            
+        ast::Matrix CallExpr::VisitEvaluate(std::shared_ptr<std::map<std::string, ast::Matrix>> vars) 
+        {
             // For now, assume all call expressions are matrix indexing
             auto mat = functionref->VisitEvaluate(vars);
             ast::Matrix result(1,1);
@@ -48,7 +51,8 @@ namespace miniMAT {
         }
 
         void CallExpr::VisitCheck(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
-                                  std::shared_ptr<reporter::ErrorReporter> reporter) const {
+                                  std::shared_ptr<reporter::ErrorReporter> reporter) const 
+        {
             functionref->VisitCheck(vars, reporter);
 
             // For now, assume all call expressions are matrix indexing (i.e. requires 1 or 2 args)
@@ -65,6 +69,13 @@ namespace miniMAT {
                 if (indexval < 1 or indexval > mat.size())
                     throw std::string("Index out of bounds");
             }
+        }
+
+        void CallExpr::PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
+                                   ast::Matrix ans,
+                                   bool suppressed) const 
+        {
+            
         }
     }
 }
