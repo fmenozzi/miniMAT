@@ -44,5 +44,10 @@ namespace miniMAT {
         {
             
         }
+
+        const std::shared_ptr<Reference>& RefExpr::GetRefFromRefExpr() const
+        {
+            return ref;
+        }
     }
 }

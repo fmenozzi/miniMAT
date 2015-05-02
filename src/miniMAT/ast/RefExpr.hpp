@@ -23,6 +23,8 @@ namespace miniMAT {
                              ast::Matrix ans,
                              bool suppressed) const;
 
+            const std::shared_ptr<Reference>& GetRefFromRefExpr() const;
+
             std::shared_ptr<Reference> ref;
         };
     }

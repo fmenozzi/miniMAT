@@ -137,5 +137,10 @@ namespace miniMAT {
         {
             
         }
+
+        const std::shared_ptr<Reference>& BinaryExpr::GetRefFromRefExpr() const
+        {
+            return nullptr;
+        }
     }
 }

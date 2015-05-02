@@ -26,6 +26,8 @@ namespace miniMAT {
                              ast::Matrix ans,
                              bool suppressed) const;
 
+            const std::shared_ptr<Reference>& GetRefFromRefExpr() const;
+
             std::shared_ptr<Expression> left;
             std::shared_ptr<Operator>   op;
             std::shared_ptr<Expression> right;

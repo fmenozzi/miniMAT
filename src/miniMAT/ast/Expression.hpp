@@ -2,6 +2,7 @@
 #define MINIMAT_AST_EXPRESSION_HPP
 
 #include <miniMAT/ast/AST.hpp>
+#include <miniMAT/ast/Reference.hpp>
 #include <miniMAT/visit/Visitors.hpp>
 
 namespace miniMAT {
@@ -20,6 +21,8 @@ namespace miniMAT {
             virtual void PrintResult(std::shared_ptr<std::map<std::string, ast::Matrix>> vars,
                                      ast::Matrix ans,
                                      bool suppressed) const = 0;
+
+            virtual const std::shared_ptr<Reference>& GetRefFromRefExpr() const = 0;
         };
     }
 }
