@@ -27,6 +27,7 @@ namespace miniMAT {
                              bool suppressed) const;
 
             const std::shared_ptr<Reference>& GetRefFromRefExpr() const;
+            const std::shared_ptr<Literal>& GetLiteralFromLiteralExpr() const;
 
             std::shared_ptr<Expression> left;
             std::shared_ptr<Operator>   op;

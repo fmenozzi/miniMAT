@@ -49,5 +49,10 @@ namespace miniMAT {
         {
             return ref;
         }
+
+        const std::shared_ptr<Literal>& RefExpr::GetLiteralFromLiteralExpr() const
+        {
+
+        }
     }
 }

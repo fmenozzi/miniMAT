@@ -3,6 +3,7 @@
 
 #include <miniMAT/ast/AST.hpp>
 #include <miniMAT/ast/Reference.hpp>
+#include <miniMAT/ast/Literal.hpp>
 #include <miniMAT/visit/Visitors.hpp>
 
 namespace miniMAT {
@@ -23,6 +24,7 @@ namespace miniMAT {
                                      bool suppressed) const = 0;
 
             virtual const std::shared_ptr<Reference>& GetRefFromRefExpr() const = 0;
+            virtual const std::shared_ptr<Literal>& GetLiteralFromLiteralExpr() const = 0;
         };
     }
 }

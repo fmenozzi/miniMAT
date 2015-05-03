@@ -89,8 +89,7 @@ namespace miniMAT {
             ast::Matrix lresult, rresult;
             bool left_not_initialized = true, right_not_initialized = true;
             if (left->ClassName() == "LiteralExpr") {
-                auto lliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(left);
-                auto lliteral       = lliteralexpr->GetLiteral();
+                auto lliteral       = left->GetLiteralFromLiteralExpr();
                 auto lmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(lliteral);
                 lresult             = lmatrixliteral->Matrix();
 
@@ -98,8 +97,7 @@ namespace miniMAT {
             } 
 
             if (right->ClassName() == "LiteralExpr") {
-                auto rliteralexpr   = std::dynamic_pointer_cast<ast::LiteralExpr>(right);
-                auto rliteral       = rliteralexpr->GetLiteral();
+                auto rliteral       = right->GetLiteralFromLiteralExpr();
                 auto rmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(rliteral);
                 rresult             = rmatrixliteral->Matrix();
 
@@ -139,6 +137,11 @@ namespace miniMAT {
         }
 
         const std::shared_ptr<Reference>& BinaryExpr::GetRefFromRefExpr() const
+        {
+            return nullptr;
+        }
+
+        const std::shared_ptr<Literal>& BinaryExpr::GetLiteralFromLiteralExpr() const 
         {
             return nullptr;
         }
