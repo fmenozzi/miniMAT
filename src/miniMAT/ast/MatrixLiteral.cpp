@@ -7,11 +7,6 @@ namespace miniMAT {
             return "ast::MatrixLiteral";
         }
 
-        ast::Matrix MatrixLiteral::Matrix() const 
-        {
-            return mat;
-        }
-
         void MatrixLiteral::VisitDisplay(const std::string& prefix) const 
         {
             using namespace miniMAT::visit::display;

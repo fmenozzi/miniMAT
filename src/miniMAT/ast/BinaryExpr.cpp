@@ -87,20 +87,14 @@ namespace miniMAT {
 
             // Extract matrix values from expressions
             ast::Matrix lresult, rresult;
-            bool left_not_initialized = true, right_not_initialized = true;
+            bool left_not_initialized  = true; 
+            bool right_not_initialized = true;
             if (left->ClassName() == "LiteralExpr") {
-                auto lliteral       = left->GetLiteralFromLiteralExpr();
-                auto lmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(lliteral);
-                lresult             = lmatrixliteral->Matrix();
-
+                lresult              = left->GetLiteralFromLiteralExpr()->VisitEvaluate(vars);
                 left_not_initialized = false;
             } 
-
             if (right->ClassName() == "LiteralExpr") {
-                auto rliteral       = right->GetLiteralFromLiteralExpr();
-                auto rmatrixliteral = std::dynamic_pointer_cast<ast::MatrixLiteral>(rliteral);
-                rresult             = rmatrixliteral->Matrix();
-
+                rresult               = right->GetLiteralFromLiteralExpr()->VisitEvaluate(vars);
                 right_not_initialized = false;
             } 
 
